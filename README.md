@@ -56,6 +56,7 @@ git push origin tix-5
 10. look for your branch initiate a new pull request 
 11. choose the “dev” branch as the base
 12. document your changes
+13. include the ticket # in the title as well. ex. #5 "message"
 13. create the pull request 
 14. inform me so I can review the code
 
