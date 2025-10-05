@@ -23,7 +23,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen ">
+   <> 
+    <div className="min-h-screen z-10">
       {/* content container */}
       <div className="w-full flex flex-col my-10 px-4 gap-8">
         {/* logo part */}
@@ -71,6 +72,6 @@ export default function Home() {
           className="mx-auto w-100 aspect-auto"
         />
       </div>
-    </div>
+    </div></>
   );
 }
