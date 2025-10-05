@@ -23,7 +23,7 @@ const FAQsPage = () => {
         </div>
 
         {/* question rows */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 max-w-lg mx-auto">
           {QUESTIONS.map((question, index) => (
             <QuestionRow key={index} question={question}></QuestionRow>
           ))}

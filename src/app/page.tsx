@@ -1,11 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import Grid from "@/components/GridBackground";
 import Button from "@/components/Button";
 import { DiscAlbum, Download } from "lucide-react";
 import Link from "next/link";
 import { BsStars } from "react-icons/bs";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputRef.current) return;
+    const email = inputRef.current.value;
+    const newRoute = `/ids?email=${email}`;
+    console.log(newRoute);
+    router.push(newRoute);
+  };
+
   return (
     <div className="min-h-screen ">
       {/* content container */}
@@ -31,17 +47,22 @@ export default function Home() {
         </div>
 
         {/* input & button */}
-        <div className="w-full px-4 flex flex-row">
+        <form
+          className="w-full px-4 flex flex-row max-w-lg mx-auto"
+          onSubmit={handleSubmit}
+        >
           <input
-            type="text"
+            type="email"
+            ref={inputRef}
+            required
             placeholder="Enter your email"
             className="w-full py-2 px-4 border border-gray-300 rounded-l-lg"
           />
-          <Button>
+          <Button type="submit">
             <BsStars />
             <span className="ml-2 whitespace-nowrap">Search ID</span>
           </Button>
-        </div>
+        </form>
 
         {/* sparky image */}
         <img

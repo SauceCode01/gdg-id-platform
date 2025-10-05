@@ -1,8 +1,15 @@
+"use client"
+
 import Grid from "@/components/GridBackground";
 import Button from "@/components/Button";
 import { Download } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 const IDPage = () => {
+ const searchParams= useSearchParams()
+  const email = searchParams.get("email");
+
+
   return (
     <div className="min-h-screen bg-gray-50">
       <section className="relative flex h-screen items-center justify-center overflow-hidden bg-[#f6f8fa]">
@@ -12,6 +19,7 @@ const IDPage = () => {
           <h1 className="text-4xl font-bold text-slate-800">
             OFFICIAL GDG PUP DIGITAL ID
           </h1>
+          <div className="w-full text-center">email: {email || "no email entered"}</div>
           <div className="flex justify-center">
             <Button bgColor="bg-blue-600">
               <Download className="mr-2 size-5 stroke-white" />
