@@ -67,3 +67,8 @@ git push origin tix-5
 2. click “new issue” 
 3. input a title and description. then click create. 
 4. inform me so i can assign it so someone.
+
+
+## Important links 
+1. [Sharepoint](https://docs.google.com/document/d/1l0axPJebnxow9CICbYZriG0nRyFmppqw_EEhaPnGD4o/edit?tab=t.0)
+2. [Figma Design](https://www.figma.com/design/4JbaxIFjz3y6CQTddMWfUd/GDG--26?node-id=482-599&t=d5QyDTXwu3GaabX7-1&fbclid=IwY2xjawNNsE1leHRuA2FlbQIxMQABHlGkCWhfNksdYRDgKSVQ_vWkLqVjENXgqW9AiDvNp5MnKxYgAEJ5SWR875YA_aem_inwAVSvIUK7te6zvscjOTg)
