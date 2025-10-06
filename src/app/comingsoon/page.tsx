@@ -1,6 +1,9 @@
+import Grid from "@/components/GridBackground";
+
 const ComingSoonPage = () => {
   return (
      <div className="min-h-screen ">
+      <Grid />
           {/* content container */}
           <div className="w-full flex flex-col my-20 px-4">
             {/* heading part */}
