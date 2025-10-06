@@ -4,16 +4,10 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    // You can add theme logic here later
-    document.documentElement.classList.toggle("dark");
-  };
 
   return (
     <>
@@ -70,10 +64,7 @@ export default function Navbar() {
               </div>
 
               {/* Dark/Light Mode Toggle */}
-              <div className="relative w-[35px] h-[18px] flex items-center cursor-pointer justify-center scale-110">
-                <div className="w-[35px] h-[18px] absolute bg-[#ffd86d] rounded-[47.89px] shadow-[inset_0px_0px_0.5px_0.5px_rgba(0,0,0,0.03)] border-[0.3px] border-[#0d0e11]/10" />
-                <div className="w-[13.5px] h-[13.5px] left-[2.5px] absolute bg-[#fffadf] rounded-full" />
-              </div>
+              <ThemeToggle />
 
               {/* burger menu visible below md */}
               <div
