@@ -1,20 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { ButtonHTMLAttributes, useState } from "react";
 import { Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedGradientText } from "./ui/animated-gradient-text";
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode; // Button content
   onClick?: () => void; // Will trigger when button is clicked
   bgColor?: string; // Tailwind or hex background color
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 export default function Button({
   children = "Button",
   onClick,
   bgColor = "bg-blue-500",
+  type,
+  className,
+  ...rest
 }: Props) {
   const [hoverColor, setHoverColor] = useState<string | null>(null);
 
@@ -44,7 +48,9 @@ export default function Button({
       : {};
 
   return (
-    <div
+    <button
+      {...rest}
+      type={type}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleOnClick}
@@ -53,7 +59,8 @@ export default function Button({
         bgColor,
         "shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]",
         "active:translate-y-[2px]",
-        "cursor-pointer"
+        "cursor-pointer",
+        className
       )}
       style={{
         boxShadow: `inset 0 1px 1px rgba(255,255,255,0.6), 0 4px 0 ${darkShadow}`,
@@ -71,6 +78,6 @@ export default function Button({
 
       {/* Subtle gloss overlay */}
       <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-white/15 to-transparent pointer-events-none" />
-    </div>
+    </button>
   );
 }
