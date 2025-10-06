@@ -39,7 +39,7 @@ export default function Navbar() {
             {/* Navlinks & dark/light mode toogle - right side */}
             <div className="flex items-center gap-3 md:gap-8 lg:gap-15">
               {/* Navigation Links */}
-              <div className="hidden md:flex items-center gap-1.5 md:gap-8 lg:gap-15 h-full">
+              <div className="hidden md:flex items-center gap-1.5 md:gap-6 lg:gap-15 h-full">
                 <Link
                   href="/about"
                   className="text-[#1e1e1e] text-base font-normal transition-all duration-200 hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
