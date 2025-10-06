@@ -24,8 +24,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen ">
-        <Grid />
+      <div className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden">
+        {/* grid background */}
+        <div className="absolute inset-0 z-0">
+          <Grid />
+        </div>
         {/* content container */}
         <div className="w-full relative  flex flex-col my-10 px-4 gap-8">
           {/* logo part */}
