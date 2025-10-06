@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { IoMenu, IoClose } from "react-icons/io5";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(true);
   const [showBackdropBlur, setShowBackdropBlur] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (open) {
@@ -63,28 +65,48 @@ export default function Navbar() {
               <div className="hidden md:flex items-center gap-1.5 md:gap-5 lg:gap-15 h-full">
                 <Link
                   href="/about"
-                  className="text-[#1e1e1e] text-base font-normal transition-all duration-200 hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  className={cn(
+                    "text-base font-normal transition-all duration-200",
+                    pathname === "/about"
+                      ? "text-[#4285f4] [filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                      : "text-[#1e1e1e] hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  )}
                 >
                   About
                 </Link>
 
                 <Link
                   href="/faqs"
-                  className="text-[#1e1e1e] text-base font-normal transition-all duration-200 hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  className={cn(
+                    "text-base font-normal transition-all duration-200",
+                    pathname === "/faqs"
+                      ? "text-[#4285f4] [filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                      : "text-[#1e1e1e] hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  )}
                 >
                   FAQs
                 </Link>
 
                 <Link
                   href="/contacts"
-                  className="text-[#1e1e1e] text-base font-normal transition-all duration-200 hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  className={cn(
+                    "text-base font-normal transition-all duration-200",
+                    pathname === "/contacts"
+                      ? "text-[#4285f4] [filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                      : "text-[#1e1e1e] hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  )}
                 >
                   Contact
                 </Link>
 
                 <Link
                   href="/comingsoon"
-                  className="text-[#1e1e1e] text-base font-normal transition-all duration-200 hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  className={cn(
+                    "text-base font-normal transition-all duration-200",
+                    pathname === "/comingsoon"
+                      ? "text-[#4285f4] [filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                      : "text-[#1e1e1e] hover:text-[#4285f4] hover:[filter:drop-shadow(0_0_6px_rgba(174,205,253,1))]"
+                  )}
                 >
                   Coming Soon
                 </Link>
@@ -136,28 +158,40 @@ export default function Navbar() {
           <Link
             href="/about"
             onClick={() => setOpen(!open)}
-            className="w-full text-center text-[#1e2939] text-xl font-bold leading-[30px] tracking-wide"
+            className={cn(
+              "w-full text-center text-xl font-bold leading-[30px] tracking-wide",
+              pathname === "/about" ? "text-[#4285f4]" : "text-[#1e2939]"
+            )}
           >
             About
           </Link>
           <Link
             href="/faqs"
             onClick={() => setOpen(!open)}
-            className="w-full text-center text-[#1e2939] text-xl font-bold leading-[30px] tracking-wide"
+            className={cn(
+              "w-full text-center text-xl font-bold leading-[30px] tracking-wide",
+              pathname === "/faqs" ? "text-[#4285f4]" : "text-[#1e2939]"
+            )}
           >
             FAQs
           </Link>
           <Link
             href="/contacts"
             onClick={() => setOpen(!open)}
-            className="w-full text-center text-[#1e2939] text-xl font-bold leading-[30px] tracking-wide"
+            className={cn(
+              "w-full text-center text-xl font-bold leading-[30px] tracking-wide",
+              pathname === "/contacts" ? "text-[#4285f4]" : "text-[#1e2939]"
+            )}
           >
             Contact
           </Link>
           <Link
             href="/comingsoon"
             onClick={() => setOpen(!open)}
-            className="w-full text-center text-[#1e2939] text-xl font-bold leading-[30px] tracking-wide"
+            className={cn(
+              "w-full text-center text-xl font-bold leading-[30px] tracking-wide",
+              pathname === "/comingsoon" ? "text-[#4285f4]" : "text-[#1e2939]"
+            )}
           >
             Coming Soon
           </Link>
