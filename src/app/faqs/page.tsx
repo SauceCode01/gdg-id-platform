@@ -1,11 +1,13 @@
 import { FaPlus } from "react-icons/fa6";
 import { Question, QuestionRow } from "./_components/QuestionRow";
+import Grid from "@/components/GridBackground";
 
 const FAQsPage = () => {
   return (
     <div className="min-h-screen ">
+      <Grid/>
       {/* content container */}
-      <div className="w-full flex flex-col my-20 px-4">
+      <div className="w-full flex flex-col my-20 px-4 z-10 relative">
         {/* heading part */}
         <div className="flex flex-row justify-center items-center ">
           {/* sparky image */}
