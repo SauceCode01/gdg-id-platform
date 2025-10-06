@@ -9,17 +9,24 @@ import ThemeToggle from "@/components/ThemeToggle";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(true);
+  const [showBackdropBlur, setShowBackdropBlur] = useState(true);
 
   useEffect(() => {
     if (open) {
-      // Immediately remove shadow when opening
+      // Immediately remove shadow and backdrop blur when opening
       setShowShadow(false);
+      const blurTimer = setTimeout(() => {
+        setShowBackdropBlur(false);
+      }, 200); // Delay backdrop blur removal by 250ms
+      return () => clearTimeout(blurTimer);
     } else {
+      // Immediately restore backdrop blur when closing
+      setShowBackdropBlur(true);
       // Delay adding shadow back when closing (wait for animation to finish)
-      const timer = setTimeout(() => {
+      const shadowTimer = setTimeout(() => {
         setShowShadow(true);
-      }, 200); // 300ms matches the dropdown transition duration
-      return () => clearTimeout(timer);
+      }, 200);
+      return () => clearTimeout(shadowTimer);
     }
   }, [open]);
 
@@ -27,13 +34,9 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          "flex items-center justify-between sticky top-0 left-0 h-14 md:h-20 bg-white/0 md:border-[0.50px] md:border-b-[#a6a4a5]/30 overflow-hidden w-full z-100 transition-shadow",
-          showShadow
-            ? "shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] backdrop-blur-[6px] md:backdrop-blur-[6px]"
-            : "shadow-none md:shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] backdrop-blur-none md:backdrop-blur-[6px]",
-          open
-            ? "bg-white/0 backdrop-blur-none"
-            : ""
+          "flex items-center justify-between sticky top-0 left-0 h-14 md:h-20 bg-white/0 md:border-[0.50px] md:backdrop-blur-[6px] md:border-b-[#a6a4a5]/30 overflow-hidden w-full z-100 transition-all duration-300",
+          showShadow ? "shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]" : "shadow-none",
+          showBackdropBlur ? "backdrop-blur-[6px]" : "backdrop-blur-none"
         )}
       >
         <div className="max-w-7xl mx-auto w-full flex px-6 md:px-8">
