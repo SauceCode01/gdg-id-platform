@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <section className="relative flex h-screen items-center justify-center overflow-hidden bg-[#f6f8fa]">
+        <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#f6f8fa]">
           {children}
           <Grid />
 
