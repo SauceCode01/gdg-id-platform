@@ -18,7 +18,7 @@ export default function Navbar() {
       // Delay adding shadow back when closing (wait for animation to finish)
       const timer = setTimeout(() => {
         setShowShadow(true);
-      }, 100); // 300ms matches the dropdown transition duration
+      }, 200); // 300ms matches the dropdown transition duration
       return () => clearTimeout(timer);
     }
   }, [open]);
@@ -27,10 +27,13 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          "flex items-center justify-between  sticky top-0 left-0 h-14 md:h-20 md:bg-white/0 md:backdrop-blur-[6px] md:border-[0.50px] md:border-b-[#a6a4a5]/30 overflow-hidden w-full z-100 transition-shadow",
+          "flex items-center justify-between sticky top-0 left-0 h-14 md:h-20 bg-white/0 md:border-[0.50px] md:border-b-[#a6a4a5]/30 overflow-hidden w-full z-100 transition-shadow",
           showShadow
-            ? "shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:shadow-none backdrop-blur-[6px] md:backdrop-blur-none bg-white/75"
-            : "bg-none"
+            ? "shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] backdrop-blur-[6px] md:backdrop-blur-[6px]"
+            : "shadow-none md:shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] backdrop-blur-none md:backdrop-blur-[6px]",
+          open
+            ? "bg-white/0 backdrop-blur-none"
+            : ""
         )}
       >
         <div className="max-w-7xl mx-auto w-full flex px-6 md:px-8">
