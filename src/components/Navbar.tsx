@@ -37,7 +37,7 @@ export default function Navbar() {
       <nav
         className={cn(
           "flex items-center justify-between sticky top-0 left-0 h-14 md:h-20 bg-white/0 md:border-[0.50px] md:backdrop-blur-[6px] md:border-b-[#a6a4a5]/30 overflow-hidden w-full z-100 transition-all duration-300",
-          showShadow ? "shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]" : "shadow-none",
+          showShadow ? "shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:shadow-none" : "shadow-none",
           showBackdropBlur ? "backdrop-blur-[6px]" : "backdrop-blur-none"
         )}
       >
