@@ -3,6 +3,7 @@ import { FaFacebook } from "react-icons/fa";
 import Button from "@/components/Button";
 import { IoIosPin } from "react-icons/io";
 import { CiLocationArrow1 } from "react-icons/ci";
+import { GradientBorderDiv } from "@/components/GradientBorderDiv";
 const ContactsPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +23,13 @@ const ContactsPage = () => {
     <div className="min-h-screen ">
       {/* content container */}
       <div className="w-full flex flex-col my-20 px-4 gap-8">
+
+
+        {/* <GradientBorderDiv borderThickness="2px" cornerRadius="10px">
+          hell oworld
+        </GradientBorderDiv> */}
+
+
         {/* heading part */}
         <div className="flex flex-row justify-center items-center ">
           {/* sparky image */}
