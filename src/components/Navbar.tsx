@@ -44,7 +44,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto w-full flex px-6 md:px-8">
           <div className="flex justify-between items-center h-full w-full">
             {/* Logo - left side */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
               {/* Mobile logo - visible on small screens */}
               <img
                 src="/sites/navbar/logo-mobile-light.png"
@@ -141,7 +141,7 @@ export default function Navbar() {
       {/* overlay */}
       <div
         className={cn(
-          "fixed top-0 left-0 transition-all duration-200 w-[100vw] h-[100vh] md:hidden",
+          "fixed top-0 left-0 transition-all duration-200 w-[100vw] h-[100vh] md:hidden z-[49]",
           open ? "opacity-100 visible" : "opacity-0 invisible"
         )}
         onClick={() => setOpen(!open)}
