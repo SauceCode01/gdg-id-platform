@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
-import { IoMenuSharp } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex items-center justify-between bg-white/0 sticky top-0 left-0 z-50 h-14 md:h-20 outline-1 outline-offset-[1px] outline-[#a6a4a5]/30 backdrop-blur-[6px] overflow-hidden w-full ">
+      <nav className="flex items-center justify-between bg-white/0 sticky top-0 left-0 z-50 h-14 md:h-20 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:shadow-none md:outline-1 md:outline-offset-[1px] md:outline-[#a6a4a5]/30 backdrop-blur-[6px] overflow-hidden w-full ">
         <div className="max-w-7xl mx-auto w-full flex px-6 md:px-8">
           <div className="flex justify-between items-center h-full w-full">
             {/* Logo - left side */}
@@ -68,10 +68,10 @@ export default function Navbar() {
 
               {/* burger menu visible below md */}
               <div
-                className="flex md:hidden p-2 hover:bg-gray-200 cursor-pointer"
+                className="flex md:hidden hover:bg-gray-200 cursor-pointer"
                 onClick={() => setOpen(!open)}
               >
-                <IoMenuSharp className="text-3xl " />
+                <IoMenu className="text-3xl" />
               </div>
             </div>
           </div>
