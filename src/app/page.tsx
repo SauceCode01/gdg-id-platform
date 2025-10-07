@@ -29,6 +29,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <Grid />
         </div>
+
         {/* content container */}
         <div className="w-full relative  flex flex-col my-10 px-4 gap-8">
           {/* logo part */}
@@ -61,7 +62,7 @@ export default function Home() {
               ref={inputRef}
               required
               placeholder="Enter your email"
-              className="w-full py-2 px-4 border border-gray-300 rounded-l-lg"
+              className="w-full py-2 px-4 border border-gray-300 rounded-lg   bg-white text-text-muted"
             />
             <Button type="submit">
               <BsStars />
