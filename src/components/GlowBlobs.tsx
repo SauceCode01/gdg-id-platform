@@ -101,7 +101,7 @@ const GlowBlobs: React.FC<GlowBlobsProps> = ({
   const combined = [...presetBlobs, ...blobs];
 
   return (
-    <div className={clsx("absolute inset-0 pointer-events-none", className)}>
+    <div className={clsx("fixed inset-0 pointer-events-none", className)}>
       {combined.map((blob, i) => (
         <div
           key={i}
