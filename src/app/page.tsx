@@ -64,7 +64,7 @@ export default function Home() {
               cursor={true}
               speed={1}
               repeat={Infinity}
-              className="blue-cursor text-center text-[25px] md:text-[45px] lg:text-[69px] font-bold leading-[29px] sm:leading-[38px] md:leading-[52px] lg:leading-[64px] xl:leading-[70.76px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)]"
+              className="blue-cursor text-center text-[25px] md:text-[45px] lg:text-[69px] font-bold leading-[29px] sm:leading-[38px] md:leading-[52px] lg:leading-[64px] xl:leading-[70.76px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)] dark:[text-shadow:_0px_4px_15px_rgb(255_255_255_/_0.35)]"
             />
           </div>
 
@@ -115,29 +115,29 @@ export default function Home() {
             <img
               src="/sites/landing/Vector-left.svg"
               alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute -top-19 -left-40 "
+              className="hidden xl:block dark:xl:hidden absolute top-[-76px] left-[-160px] "
             />
             <img
               src="/sites/landing/Vector-right.svg"
               alt="Vector right"
-              className="hidden xl:block dark:xl:hidden absolute -right-30 -top-18"
+              className="hidden xl:block dark:xl:hidden absolute right-[-120px] top-[-72px]"
             />
             <img
               src="/sites/landing/Vector-left.svg"
               alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-20 left-18 scale-x-[1] scale-y-[-1] rotate-270 "
+              className="hidden xl:block dark:xl:hidden absolute top-20 left-[72px] scale-x-[1] scale-y-[-1] rotate-270 "
             />
             <img
               src="/sites/landing/Vector-left.svg"
               alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-20 right-15 scale-x-[1]  rotate-270 "
+              className="hidden xl:block dark:xl:hidden absolute top-20 right-[60px] scale-x-[1]  rotate-270 "
             />
 
             {/* vector design - dark mode */}
             <img
               src="/sites/landing/Vector-left-dark.svg"
               alt="Vector Left"
-              className="hidden dark:xl:block absolute -top-19 -left-40 "
+              className="hidden dark:xl:block absolute top-[-76px] left-[-160px] "
             />
             <img
               src="/sites/landing/Vector-right-dark.svg"
@@ -173,7 +173,7 @@ export default function Home() {
               className="hidden xl:flex absolute -left-55 -top-32 -translate-y-1/2 
                   w-[105px] h-[105px] items-center justify-center rounded-full bg-white/90 
                   backdrop-blur-sm 
-                  shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20 ro"
+                  shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20"
             >
               <img
                 src="/sites/about/stickerBrackets.gif"
