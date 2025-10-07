@@ -183,13 +183,12 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 
-
   /* custom */
-  --text: #DDE2EE;
-  --text-muted: #9F9FA9;
+  --text: #dde2ee;
+  --text-muted: #9f9fa9;
 
   --background: #0d0f0c;
-  --background-variant: #0F0C0C;
+  --background-variant: #0f0c0c;
 
   --outline: #666666;
   --outline-variant: #3a3a3a;
@@ -364,3 +363,9 @@
     @apply bg-background text-foreground;
   }
 } */
+
+/* Custom blue cursor for TypeAnimation */
+
+.blue-cursor::after {
+  color: #4285f4 !important;
+}
