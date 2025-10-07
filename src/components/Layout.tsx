@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useGlobalContext();
 
   return (
-    <div className={cn("  bg-background text-text", isDarkMode ? "dark" : "")}>
+    <div className={cn("bg-gradient-to-b from-background to-background-variant text-text mih-h-screen", isDarkMode ? "dark" : "")}>
       <Navbar />
       {children}
       <Footer />

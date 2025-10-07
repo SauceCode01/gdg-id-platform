@@ -64,11 +64,11 @@ const ComingSoonPage = () => {
       {/* modal */}
       <div className="absolute inset-0 flex items-center justify-center px-2 sm:px-4 z-40">
         <div
-          className="relative backdrop-blur-xl bg-white/10 sm:bg-white/20 border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl text-center w-[85%] sm:w-full max-w-xl pt-6 sm:pt-14 pb-10 sm:pb-12 px-4 sm:px-16"
+          className="relative backdrop-blur-xl bg-surface/10 sm:bg-surface/20 border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl text-center w-[85%] sm:w-full max-w-xl pt-6 sm:pt-14 pb-10 sm:pb-12 px-4 sm:px-16"
           style={{
             boxShadow:
-              "inset 0 0 20px rgba(255,255,255,0.25), 0 0 25px rgba(255,255,255,0.1)",
-          }}
+              "inset 0 0 20px rgba(255,255,255,0.25)",
+          }} // , 0 0 25px rgba(255,255,255,0.1)
         >
           <div className="-top-14 sm:-top-16 absolute left-1/2 -translate-x-1/2 z-50">
             <Image
@@ -82,19 +82,19 @@ const ComingSoonPage = () => {
           </div>
 
           {/* modal content */}
-          <h2 className="text-xl sm:text-3xl font-bold text-black mb-2">
+          <h2 className="text-xl sm:text-3xl font-bold  mb-2">
             Uh-oh! Page Not Found
           </h2>
-          <h2 className="text-xl sm:text-3xl font-bold text-black mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-3xl font-bold  mb-4 sm:mb-6">
             (But Sparky's here!)
           </h2>
 
-          <p className="text-sm sm:text-base text-black mb-3 sm:mb-4">
+          <p className="text-sm sm:text-base  mb-3 sm:mb-4">
             Looks like this page took a vacation without telling us! Don’t fret,
             even our amazing Sparky can’t find everything instantly.
           </p>
 
-          <p className="text-sm sm:text-base text-black mb-6 sm:mb-8">
+          <p className="text-sm sm:text-base  mb-6 sm:mb-8">
             In the meantime, let’s get you back to where the magic happens.
           </p>
 
