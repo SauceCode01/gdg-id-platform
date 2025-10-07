@@ -173,7 +173,7 @@ export default function Home() {
               className="hidden xl:flex absolute -left-55 -top-32 -translate-y-1/2 
                   w-[105px] h-[105px] items-center justify-center rounded-full bg-white/90 
                   backdrop-blur-sm 
-                  shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20 ro"
+                  shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20"
             >
               <img
                 src="/sites/about/stickerBrackets.gif"
