@@ -32,7 +32,7 @@ const Footer = () => {
         className="
           w-full max-w-6xl mx-auto 
           flex flex-col lg:flex-row lg:flex-wrap
-          items-center lg:items-start
+          items-center lg:items-center  
           justify-center lg:justify-between 
           mt-10 gap-6 sm:gap-8 md:gap-10 pb-6 
           text-center lg:text-left
