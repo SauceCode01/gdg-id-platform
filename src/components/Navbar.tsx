@@ -57,8 +57,12 @@ export default function Navbar() {
               />
 
               <div className="hidden md:flex flex-col gap-0">
-                <span className="text-text text-[1.3rem] leading-tight tracking-wide">Google Developer Group</span>
-                <span className=" text-[0.7rem] leading-tight tracking-wide text-gdg-blue">On Campus - Polytechnic University of the Philippines</span>
+                <span className="text-text text-[1.3rem] leading-tight tracking-wide">
+                  Google Developer Group
+                </span>
+                <span className=" text-[0.7rem] leading-tight tracking-wide text-gdg-blue">
+                  On Campus - Polytechnic University of the Philippines
+                </span>
               </div>
             </Link>
 
