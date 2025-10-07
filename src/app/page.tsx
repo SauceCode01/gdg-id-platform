@@ -64,7 +64,7 @@ export default function Home() {
               cursor={true}
               speed={1}
               repeat={Infinity}
-              className="blue-cursor text-center text-[25px] md:text-[45px] lg:text-[69px] font-bold leading-[29px] sm:leading-[38px] md:leading-[52px] lg:leading-[64px] xl:leading-[70.76px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)]"
+              className="blue-cursor text-center text-[25px] md:text-[45px] lg:text-[69px] font-bold leading-[29px] sm:leading-[38px] md:leading-[52px] lg:leading-[64px] xl:leading-[70.76px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)] dark:[text-shadow:_0px_4px_15px_rgb(255_255_255_/_0.35)]"
             />
           </div>
 
