@@ -106,7 +106,7 @@ export default function Home() {
               placeholder="Enter your email to find your Digital ID"
               className="w-full z-10 py-2 px-4 pl-8 sm:py-2.5 sm:pl-10 md:py-3 md:pl-11 border border-gray-300 bg-white rounded-[7.09px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.05),inset_0px_2px_4px_0px_rgba(0,0,0,0.25)] text-neutral-500 text-[12px] sm:text-[13px] md:text-[15px] lg:text-lg font-normal leading-[15px] sm:leading-[16px] md:leading-[18px] placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
             />
-            <Button type="submit" className="relative z-10">
+            <Button type="submit" className="relative z-10 ml-2">
               <BsStars />
               <span className="ml-2 whitespace-nowrap text-[13px] md:text-[15px] lg:text-[17px]">Search ID</span>
             </Button>
