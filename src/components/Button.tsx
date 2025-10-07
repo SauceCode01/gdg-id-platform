@@ -55,7 +55,7 @@ export default function Button({
       onMouseLeave={handleMouseLeave}
       onClick={handleOnClick}
       className={cn(
-        "group relative mx-2 flex items-center justify-center rounded-lg px-6 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden",
+        "group relative flex items-center justify-center rounded-lg px-6 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm ",
         bgColor,
         "shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]",
         "active:translate-y-[2px]",
@@ -72,7 +72,7 @@ export default function Button({
       <div className="absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.55)_0%,rgba(0,0,0,0.15)_100%)] pointer-events-none mix-blend-overlay" />
 
       {/* <Download className="mr-2 size-5 stroke-white" /> */}
-      <AnimatedGradientText className="text-sm font-semibold tracking-wide text-white flex flex-row items-center justify-center">
+      <AnimatedGradientText className="font-semibold tracking-wide text-white flex flex-row items-center justify-center">
         {children}
       </AnimatedGradientText>
 
