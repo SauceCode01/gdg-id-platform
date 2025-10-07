@@ -8,6 +8,7 @@ import Link from "next/link";
 import { BsStars } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { TypeAnimation } from "react-type-animation";
 
 export default function Home() {
   const router = useRouter();
@@ -45,8 +46,20 @@ export default function Home() {
         <div className=" relative flex flex-col my-4 px-4 gap-8">
           {/* logo part */}
           {/* heading  */}
-          <div className="w-full px-4 font-bold text-3xl text-center">
-            Bridging the gap between one two three idk
+          <div className="w-full font-bold flex justify-center min-h-[66px]">
+            <TypeAnimation
+              sequence={[
+                "B",
+                1000, // Waits 1s
+                "Bridging the gap between\ntheory and practice",
+                1000, // Waits 1s
+              ]}
+              wrapper="span"
+              cursor={true}
+              speed={1}
+              repeat={Infinity}
+              className="blue-cursor text-[#1e2939] text-center text-[25px] font-bold leading-[29px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)]"
+            />
           </div>
 
           {/* subheading/description */}
