@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useGlobalContext } from "@/providers/GlobalContextProvider";
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
+  const { isDarkMode: isDark, setIsDarkMode: setIsDark } = useGlobalContext();
 
   const toggleTheme = () => {
-    // Placeholder alert - will implement dark mode later
-    setIsDark(!isDark);
+    if (setIsDark) setIsDark(!isDark);
   };
 
   return (
