@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Grid from "@/components/GridBackground";
 import Button from "@/components/Button";
-import { DiscAlbum, Download } from "lucide-react";
+import { DiscAlbum, Download, Search } from "lucide-react";
 import Link from "next/link";
 import { BsStars } from "react-icons/bs";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ export default function Home() {
     <>
       <div className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden">
         {/* grid background */}
-        <div className="fixed inset-0 -z-1">
+        <div className="fixed inset-0">
           <Grid />
         </div>
 
@@ -43,42 +43,44 @@ export default function Home() {
         </div>
 
         {/* content container */}
-        <div className=" relative flex flex-col my-4 px-4 gap-8">
+        <div className=" relative flex flex-col my-4 px-4">
           {/* logo part */}
           {/* heading  */}
-          <div className="w-full font-bold flex justify-center min-h-[66px]">
+          <div className="w-full font-bold flex justify-center min-h-[60px] sm:min-h-0">
             <TypeAnimation
               sequence={[
                 "B",
                 1000, // Waits 1s
-                "Bridging the gap between\ntheory and practice",
+                "Bridging the gap between theory and practice.",
                 1000, // Waits 1s
               ]}
               wrapper="span"
+              preRenderFirstString={true}
               cursor={true}
               speed={1}
               repeat={Infinity}
-              className="blue-cursor text-[#1e2939] text-center text-[25px] font-bold leading-[29px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)]"
+              className="blue-cursor text-center text-[25px] font-bold leading-[29px] tracking-wide [text-shadow:_0px_4px_15px_rgb(0_0_0_/_0.35)]"
             />
           </div>
 
           {/* subheading/description */}
-          <div className="w-full px-4 text-center">
+          <div className="w-full px-4 text-center my-5 text-[13px] text-zinc-500 dark:text-zinc-400 leading-tight">
             GDG PUP helps student developers grow through real projects, events,
             and mentorship connecting classroom learning to industry practice.
           </div>
 
           {/* input & button */}
           <form
-            className="w-full px-4 flex flex-row max-w-lg mx-auto"
+            className="w-full px-4 flex flex-row max-w-lg mx-auto relative"
             onSubmit={handleSubmit}
           >
+            <Search className="absolute top-1/2 -translate-y-1/2 left-7 w-3.5 h-3.5 text-neutral-400" />
             <input
               type="email"
               ref={inputRef}
               required
               placeholder="Enter your email"
-              className="w-full py-2 px-4 border border-gray-300 rounded-lg   bg-white text-text-muted"
+              className="w-full py-2 px-4 pl-8 border border-gray-300 bg-white rounded-[7.09px] shadow-[0px_2.837470293045044px_2.837470293045044px_0px_rgba(0,0,0,0.05)] text-neutral-500 text-[10px] font-normal leading-[15px] placeholder:text-neutral-500"
             />
             <Button type="submit">
               <BsStars />
@@ -90,7 +92,7 @@ export default function Home() {
           <img
             src="/sites/landing/SparkyPose.svg"
             alt="sparky"
-            className="mx-auto w-100 aspect-auto"
+            className="mx-auto w-100 aspect-auto mt-4 mb-[100px]"
           />
         </div>
       </div>
