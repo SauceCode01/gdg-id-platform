@@ -78,7 +78,7 @@ export default function Home() {
               ref={inputRef}
               required
               placeholder="Enter your email"
-              className="w-full py-2 px-4 border border-gray-300 rounded-l-lg"
+              className="w-full py-2 px-4 border border-gray-300 rounded-lg   bg-white text-text-muted"
             />
             <Button type="submit">
               <BsStars />

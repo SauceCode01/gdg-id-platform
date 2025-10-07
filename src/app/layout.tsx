@@ -4,6 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Grid from "@/components/GridBackground";
+import {
+  GlobalContextProvider,
+  useGlobalContext,
+} from "@/providers/GlobalContextProvider";
+import { cn } from "@/lib/utils";
+import { Layout } from "@/components/Layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,17 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  bg-background`}
+        className={cn(
+          `${geistSans.variable} ${geistMono.variable} antialiased`
+        )}
       >
-        <Navbar />
-        {children}
-        {/* <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#f6f8fa]">
-          {children}
-          <Grid />
-
-        </section> */}
-        <Footer />
-
+        <GlobalContextProvider>
+          <Layout>{children}</Layout>
+        </GlobalContextProvider>
       </body>
     </html>
   );
