@@ -8,9 +8,13 @@ import Grid from "@/components/GridBackground";
 import { cn } from "@/lib/utils";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import GlowBlobs from "@/components/GlowBlobs";
+import { useBreakpoint } from "@/lib/clientUtils";
 
 const ContactsPage = () => {
   const { isDarkMode, setIsDarkMode } = useGlobalContext();
+
+  const {isMd, isXl} = useBreakpoint();
+
   return (
     <div className="min-h-screen ">
       <Grid />
@@ -64,7 +68,22 @@ const ContactsPage = () => {
           )}
         >
           {/* info */}
-          <div
+
+          <GradientBorderDiv
+            borderThickness="4px"
+            cornerRadius="32px"
+            roundedSides={isXl? "right": "top"} 
+            className={cn("xl:flex-1")}
+            innerDivClassName={cn(
+                "w-full p-8 flex flex-col gap-4 ",
+                "bg-gradient-to-b from-surface-high to-surface",
+                "xl:flex-1 h-full"
+              )}
+          >
+              <Informations />  
+          </GradientBorderDiv>
+
+          {/* <div
             className={cn(
               "w-full rounded-t-4xl border-3 border-amber-300 p-8 flex flex-col gap-4 ",
               "bg-gradient-to-b from-surface to-background-variant",
@@ -72,7 +91,7 @@ const ContactsPage = () => {
             )}
           >
             <Informations />
-          </div>
+          </div> */}
 
           {/* map  */}
           <div className="w-full aspect-4/2 flex xl:hidden">
@@ -93,7 +112,7 @@ const ContactsPage = () => {
               " rounded-b-4xl ",
               isDarkMode && "border-2 border-t-0 border-outline bg-surface-low",
               "xl:flex-2 xl:rounded-b-none xl:rounded-tl-4xl xl:rounded-bl-4xl  ",
-              !isDarkMode && "xl:backdrop-blur-xs xl:bg-none",
+              !isDarkMode && " bg-background-variant xl:backdrop-blur-sm xl:bg-background/0",
               "xl:border-2 xl:border-r-0"
             )}
           >
@@ -119,17 +138,25 @@ const ContactsPage = () => {
 const Informations = () => {
   return (
     <>
-      <div className="font-bold text-2xl hover:text-gdg-orange-light transition-all duration-200">Hi, I'm Sparky!</div>
+      <div className="font-bold text-2xl hover:text-gdg-orange-light transition-all duration-200 w-fit">
+        Hi, I'm Sparky!
+      </div>
       <div className="text-sm">
         Got a question, idea, or need help with your Digital ID? Drop me a
         message and I'll make sure the right people in our team get back to you.
       </div>
       <div className="w-full flex flex-col gap-4 ">
         {DETAILS.map((detail, index) => (
-          <div className="flex flex-rowitems-center group ">
-            <img src={detail.image} alt="sparky " className="w-5 mx-2 group-hover:scale-120 transition-all duration-200" />
+          <div className="flex flex-rowitems-center group w-fit">
+            <img
+              src={detail.image}
+              alt="sparky "
+              className="w-5 mx-2 group-hover:scale-120 transition-all duration-200"
+            />
             <span>
-              <span className="font-bold group-hover:text-gdg-orange-light transition-all duration-200">{detail.title}:</span>
+              <span className="font-bold group-hover:text-gdg-orange-light transition-all duration-200">
+                {detail.title}:
+              </span>
               <span className="ml-2">{detail.description}</span>
             </span>
           </div>
