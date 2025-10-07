@@ -115,29 +115,29 @@ export default function Home() {
             <img
               src="/sites/landing/Vector-left.svg"
               alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute -top-19 -left-40 "
+              className="hidden xl:block dark:xl:hidden absolute top-[-76px] left-[-160px] "
             />
             <img
               src="/sites/landing/Vector-right.svg"
               alt="Vector right"
-              className="hidden xl:block dark:xl:hidden absolute -right-30 -top-18"
+              className="hidden xl:block dark:xl:hidden absolute right-[-120px] top-[-72px]"
             />
             <img
               src="/sites/landing/Vector-left.svg"
               alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-20 left-18 scale-x-[1] scale-y-[-1] rotate-270 "
+              className="hidden xl:block dark:xl:hidden absolute top-20 left-[72px] scale-x-[1] scale-y-[-1] rotate-270 "
             />
             <img
               src="/sites/landing/Vector-left.svg"
               alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-20 right-15 scale-x-[1]  rotate-270 "
+              className="hidden xl:block dark:xl:hidden absolute top-20 right-[60px] scale-x-[1]  rotate-270 "
             />
 
             {/* vector design - dark mode */}
             <img
               src="/sites/landing/Vector-left-dark.svg"
               alt="Vector Left"
-              className="hidden dark:xl:block absolute -top-19 -left-40 "
+              className="hidden dark:xl:block absolute top-[-76px] left-[-160px] "
             />
             <img
               src="/sites/landing/Vector-right-dark.svg"
