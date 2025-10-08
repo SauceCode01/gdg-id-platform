@@ -131,6 +131,7 @@ export default function Navbar() {
         <div className="py-6 bg-surface/75 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] backdrop-blur-[6px] flex flex-col justify-start items-start gap-6 pt-20">
           {LINKS.map((link, index) => (
             <Link
+              key={link.href}
               href={link.href}
               onClick={() => setOpen(!open)}
               className={cn(
