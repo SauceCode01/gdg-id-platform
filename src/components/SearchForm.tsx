@@ -5,9 +5,71 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { BsStars } from "react-icons/bs";
 import Button from "./Button";
+import { cn } from "@/lib/utils";
 
 interface SearchFormProps {
   className?: string;
+}
+
+interface UserResult {
+  gdgId: string;
+  fullName: string;
+  email: string;
+  course: string;
+}
+
+// Dummy JSON database - acts as a mock database
+const DUMMY_DATABASE: UserResult[] = [
+  {
+    gdgId: "GDG-2024-001",
+    fullName: "John Dela Cruz",
+    email: "john.delacruz@example.com",
+    course: "Computer Science",
+  },
+  {
+    gdgId: "GDG-2024-002",
+    fullName: "Maria Santos",
+    email: "maria.santos@example.com",
+    course: "Information Technology",
+  },
+  {
+    gdgId: "GDG-2024-003",
+    fullName: "Pedro Reyes",
+    email: "pedro.reyes@example.com",
+    course: "Software Engineering",
+  },
+  {
+    gdgId: "GDG-2024-004",
+    fullName: "Anna Luna",
+    email: "anna.luna@example.com",
+    course: "Data Science",
+  },
+  {
+    gdgId: "GDG-2024-005",
+    fullName: "Carlos Garcia",
+    email: "carlos.garcia@example.com",
+    course: "Computer Engineering",
+  },
+];
+
+// Query function that searches the dummy database
+async function queryUserByEmail(email: string): Promise<UserResult | null> {
+  try {
+    console.log("Querying database for email:", email);
+
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Search for user in dummy database (case-insensitive)
+    const user = DUMMY_DATABASE.find(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
+
+    return user || null;
+  } catch (error) {
+    console.error("Error querying user:", error);
+    return null;
+  }
 }
 
 export default function SearchForm({ className }: SearchFormProps) {
@@ -15,15 +77,28 @@ export default function SearchForm({ className }: SearchFormProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userResult, setUserResult] = useState<UserResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputRef.current) return;
+
     const email = inputRef.current.value;
     setSearchQuery(email);
-    // const newRoute = `/ids?email=${email}`;
-    // console.log(newRoute);
-    // router.push(newRoute);
+    setIsLoading(true);
+
+    // Query the database for user information
+    const result = await queryUserByEmail(email);
+    setUserResult(result);
+    setIsLoading(false);
+  };
+
+  const goToID = () => {
+    if (userResult) {
+      const newRoute = `/ids?gdgId=${userResult.gdgId}&fullName=${userResult.fullName}&email=${userResult.email}&course=${userResult.course}`;
+      router.push(newRoute);
+    }
   };
 
   // Close search results when clicking outside
@@ -48,15 +123,47 @@ export default function SearchForm({ className }: SearchFormProps) {
   return (
     <form
       ref={formRef}
-      className={`w-full px-4 flex  max-w-sm sm:max-w-lg md:max-w-3xl mx-auto relative ${
+      className={`w-full px-4 flex max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto relative ${
         className || ""
       }`}
       onSubmit={handleSubmit}
     >
       {searchQuery && (
-        <div className="absolute px-4 left-0 top-12 md:top-14 lg:top-16 z-30">
-          <div className="w-[248px] sm:w-[361px] md:w-lg lg:w-xl h-96 p-5 bg-[#a6a4a5]/25 rounded-[10.14px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_0px_1px_1px_rgba(0,0,0,0.25)] backdrop-blur-[5px] inline-flex flex-col justify-start items-start gap-[18px] overflow-hidden">
-            <p>testinbg</p>
+        <div className="absolute px-4 left-0 top-13 md:top-15 lg:top-17 z-30">
+          <div className="w-[248px] sm:w-[361px] md:w-[497px] lg:w-xl p-5 bg-[#a6a4a5]/25 rounded-[10.14px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_0px_1px_1px_rgba(0,0,0,0.25)] backdrop-blur-[25px] inline-flex flex-col justify-start items-start gap-[18px] overflow-hidden">
+            <div className="text-[#4285f4] text-normal md:text-md lg:text-lg font-bold leading-normal">
+              Your Digital ID Result
+            </div>
+
+            <div
+              className={cn(
+                "px-[19px] w-full py-4 bg-[#fffafa] rounded-[10.14px] shadow-[0px_2px_2px_1px_rgba(0,0,0,0.25)]  outline-1 outline-offset-[-1px] outline-black/50 inline-flex flex-col justify-start items-start gap-2 overflow-hidden",
+                userResult ? "cursor-pointer hover:bg-slate-200" : ""
+              )}
+              onClick={userResult ? goToID : undefined}
+            >
+              <div className="flex-1 flex justify-start items-center gap-[18px]">
+                <img
+                  className="w-[38.88px] h-[38.88px]"
+                  src="/sites/landing/ResultSparky.svg"
+                  alt="User Avatar"
+                />
+
+                {isLoading ? (
+                  <div className="text-zinc-800 text-normal md:text-md lg:text-lg font-medium">
+                    Loading...
+                  </div>
+                ) : userResult ? (
+                  <div className="text-zinc-800 text-normal md:text-md lg:text-lg font-bold leading-normal">
+                    {userResult.fullName}
+                  </div>
+                ) : (
+                  <div className="text-zinc-800 text-normal md:text-md lg:text-lg font-medium">
+                    No user found
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}
