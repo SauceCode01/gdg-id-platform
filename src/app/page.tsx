@@ -7,21 +7,41 @@ import { DiscAlbum, Download, Search, VectorSquare } from "lucide-react";
 import Link from "next/link";
 import { BsStars } from "react-icons/bs";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import GlowBlobs from "@/components/GlowBlobs";
 
 export default function Home() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputRef.current) return;
-    const email = inputRef.current.value;
-    const newRoute = `/ids?email=${email}`;
-    console.log(newRoute);
-    router.push(newRoute);
+
+    const email = inputRef.current.value.trim();
+    if (!email) return;
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(`/api/getUser?email=${encodeURIComponent(email)}`);
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "User not found");
+        setLoading(false);
+        return;
+      }
+
+      // User found, redirect to /ids
+      router.push(`/ids?email=${encodeURIComponent(email)}`);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to check email. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,7 +59,6 @@ export default function Home() {
 
         <div className="w-[62.87px] h-[62.87px] relative rounded-[37.65px] mt-6 md:my-10 lg:hidden">
           <div className="w-[62.87px] h-[62.87px] absolute left-0 top-0 bg-[#f0f0f3] rounded-[36px] shadow-[0.9908041656px_0.9908041656px_1.9816083312px_0px_rgba(174,174,192,0.40),_-0.6605361254px_-0.6605361254px_4.0953236818px_0px_rgba(255,255,255,1)]" />
-
           <div className="w-[57.62px] h-[57.62px] absolute left-[2.63px] top-[2.63px] bg-[#eeeeee] rounded-[32.36px] shadow-[inset_0.9908041656px_0.9908041656px_0.6605361254px_0px_rgba(174,174,192,0.20),_inset_-0.6605361254px_-0.6605361254px_0.6605361254px_0px_rgba(255,255,255,0.70)]" />
           <img
             src="/sites/landing/stickerBrackets.gif"
@@ -55,9 +74,9 @@ export default function Home() {
             <TypeAnimation
               sequence={[
                 "B",
-                100, // Waits 0.1s
+                100,
                 "Bridging the gap between theory and practice.",
-                1000, // Waits 1s
+                1000,
               ]}
               wrapper="span"
               preRenderFirstString={true}
@@ -70,7 +89,6 @@ export default function Home() {
 
           {/* subheading/description */}
           <div className="w-full text-center my-4 text-[14px] sm:text-[16px] md:text-[17px] lg:text-xl text-zinc-400 dark:text-zinc-400 leading-tight">
-            {/* condensed text on mobile */}
             <div className="flex flex-col md:hidden gap-1">
               <div className="inline-block">
                 GDG PUP helps student developers grow through real
@@ -81,7 +99,6 @@ export default function Home() {
               <div className="inline-block">learning to industry practice.</div>
             </div>
 
-            {/* full text on large screens */}
             <div className="hidden md:flex flex-col gap-1">
               <div className="inline-block">
                 GDG PUP helps student developers grow through real projects,
@@ -106,89 +123,36 @@ export default function Home() {
               placeholder="Enter your email to find your Digital ID"
               className="w-full z-10 py-2 px-4 pl-8 sm:py-2.5 sm:pl-10 md:py-3 md:pl-11 border border-gray-300 bg-white rounded-[7.09px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.05),inset_0px_2px_4px_0px_rgba(0,0,0,0.25)] text-neutral-500 text-[12px] sm:text-[13px] md:text-[15px] lg:text-lg font-normal leading-[15px] sm:leading-[16px] md:leading-[18px] placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
             />
-            <Button type="submit" className="relative z-10 ml-2">
-              <BsStars />
-              <span className="ml-2 whitespace-nowrap text-[13px] md:text-[15px] lg:text-[17px]">Search ID</span>
+            <Button type="submit" className="relative z-10 ml-2" disabled={loading}>
+              {loading ? "Checking..." : (
+                <>
+                  <BsStars />
+                  <span className="ml-2 whitespace-nowrap text-[13px] md:text-[15px] lg:text-[17px]">Search ID</span>
+                </>
+              )}
             </Button>
 
-            {/* vector design - light mode */}
-            <img
-              src="/sites/landing/Vector-left.svg"
-              alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-[-76px] left-[-160px] "
-            />
-            <img
-              src="/sites/landing/Vector-right.svg"
-              alt="Vector right"
-              className="hidden xl:block dark:xl:hidden absolute right-[-120px] top-[-72px]"
-            />
-            <img
-              src="/sites/landing/Vector-left.svg"
-              alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-20 left-[72px] scale-x-[1] scale-y-[-1] rotate-270 "
-            />
-            <img
-              src="/sites/landing/Vector-left.svg"
-              alt="Vector Left"
-              className="hidden xl:block dark:xl:hidden absolute top-20 right-[60px] scale-x-[1]  rotate-270 "
-            />
+            {/* vector & floating stickers remain unchanged */}
+            <img src="/sites/landing/Vector-left.svg" alt="Vector Left" className="hidden xl:block dark:xl:hidden absolute top-[-76px] left-[-160px]" />
+            <img src="/sites/landing/Vector-right.svg" alt="Vector right" className="hidden xl:block dark:xl:hidden absolute right-[-120px] top-[-72px]" />
+            <img src="/sites/landing/Vector-left.svg" alt="Vector Left" className="hidden xl:block dark:xl:hidden absolute top-20 left-[72px] scale-x-[1] scale-y-[-1] rotate-270" />
+            <img src="/sites/landing/Vector-left.svg" alt="Vector Left" className="hidden xl:block dark:xl:hidden absolute top-20 right-[60px] scale-x-[1] rotate-270" />
 
-            {/* vector design - dark mode */}
-            <img
-              src="/sites/landing/Vector-left-dark.svg"
-              alt="Vector Left"
-              className="hidden dark:xl:block absolute top-[-76px] left-[-160px] "
-            />
-            <img
-              src="/sites/landing/Vector-right-dark.svg"
-              alt="Vector right"
-              className="hidden dark:xl:block absolute -right-30 -top-18"
-            />
-            <img
-              src="/sites/landing/Vector-left-dark.svg"
-              alt="Vector Left"
-              className="hidden dark:xl:block absolute top-20 left-18 scale-x-[1] scale-y-[-1] rotate-270 "
-            />
-            <img
-              src="/sites/landing/Vector-left-dark.svg"
-              alt="Vector Left"
-              className="hidden dark:xl:block absolute top-20 right-15 scale-x-[1]  rotate-270 "
-            />
+            <img src="/sites/landing/Vector-left-dark.svg" alt="Vector Left" className="hidden dark:xl:block absolute top-[-76px] left-[-160px]" />
+            <img src="/sites/landing/Vector-right-dark.svg" alt="Vector right" className="hidden dark:xl:block absolute -right-30 -top-18" />
+            <img src="/sites/landing/Vector-left-dark.svg" alt="Vector Left" className="hidden dark:xl:block absolute top-20 left-18 scale-x-[1] scale-y-[-1] rotate-270" />
+            <img src="/sites/landing/Vector-left-dark.svg" alt="Vector Left" className="hidden dark:xl:block absolute top-20 right-15 scale-x-[1] rotate-270" />
 
-            {/* floating stickers — only show on large screens */}
-            <div
-              className="hidden xl:flex absolute -right-55 -top-[70px] -translate-y-1/2 
-                  w-[105px] h-[105px] items-center justify-center rounded-full bg-white/90 
-                  backdrop-blur-sm 
-                  shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20 -rotate-16"
-            >
-              <img
-                src="/sites/about/stickerBrackets.gif"
-                alt="Sticker Brackets"
-                className="w-full h-full object-contain"
-              />
+            <div className="hidden xl:flex absolute -right-55 -top-[70px] -translate-y-1/2 w-[105px] h-[105px] items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20 -rotate-16">
+              <img src="/sites/about/stickerBrackets.gif" alt="Sticker Brackets" className="w-full h-full object-contain" />
             </div>
-
-            <div
-              className="hidden xl:flex absolute -left-55 -top-32 -translate-y-1/2 
-                  w-[105px] h-[105px] items-center justify-center rounded-full bg-white/90 
-                  backdrop-blur-sm 
-                  shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20"
-            >
-              <img
-                src="/sites/about/stickerBrackets.gif"
-                alt="Sticker Brackets"
-                className="w-full h-full object-contain"
-              />
+            <div className="hidden xl:flex absolute -left-55 -top-32 -translate-y-1/2 w-[105px] h-[105px] items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-[0_0_20px_5px_rgba(255,255,255,0.6)] border-4 border-white/60 z-20">
+              <img src="/sites/about/stickerBrackets.gif" alt="Sticker Brackets" className="w-full h-full object-contain" />
             </div>
           </form>
 
           {/* sparky image */}
-          <img
-            src="/sites/landing/SparkyPose.svg"
-            alt="sparky"
-            className="mx-auto aspect-auto mt-4 mb-[100px] z-20"
-          />
+          <img src="/sites/landing/SparkyPose.svg" alt="sparky" className="mx-auto aspect-auto mt-4 mb-[100px] z-20" />
         </div>
       </div>
     </>
