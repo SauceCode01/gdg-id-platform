@@ -1,6 +1,6 @@
 "use client";
 
-import Grid from "@/components/GridBackground";  
+import Grid from "@/components/GridBackground";
 import Button from "@/components/Button";
 import { Download } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -38,7 +38,7 @@ const IDPage = () => {
     stuff();
   }, [searchParams]);
 
-  const handleEdit = async () => {
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     if (!member) return;
@@ -66,7 +66,7 @@ const IDPage = () => {
       ctx.fillText(member.course, 100, 280);
       ctx.fillText(member.email, 100, 310);
     };
-  };
+  }, [member]);
 
   const handleDownload = () => {
     const canvas = canvasRef.current;
@@ -86,17 +86,8 @@ const IDPage = () => {
         {!member && <>loading member</>}
 
         <div className="flex flex-col items-center gap-4">
-          <canvas
-            ref={canvasRef}
-            className=" "
-          />
-          <div className="flex gap-3">
-            <button
-              onClick={handleEdit}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-            >
-              Render Image
-            </button>
+          <canvas ref={canvasRef} className=" " />
+          <div className="flex gap-3"> 
             <button
               onClick={handleDownload}
               className="bg-green-600 text-white px-4 py-2 rounded-lg"
