@@ -28,7 +28,7 @@ export async function GET(request: Request) {
         const user = users.find((u: { email: string }) => u.email.toLowerCase() === email.toLowerCase());
 
         if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
+            return NextResponse.json({ error: "User not found spreadsheet" }, { status: 404 });
         }
 
         return NextResponse.json(user);
