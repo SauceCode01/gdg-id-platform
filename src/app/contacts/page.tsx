@@ -9,11 +9,15 @@ import { cn } from "@/lib/utils";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import GlowBlobs from "@/components/GlowBlobs";
 import { useBreakpoint } from "@/lib/clientUtils";
+import { useCreateMessageMutation } from "@/lib/api/queries/messageQueries";
+import { Message } from "@/types/message";
 
 const ContactsPage = () => {
   const { isDarkMode, setIsDarkMode } = useGlobalContext();
 
   const {isMd, isXl} = useBreakpoint();
+
+ 
 
   return (
     <div className="min-h-screen ">
@@ -173,7 +177,9 @@ const Informations = () => {
 const Form = () => {
   const { isDarkMode, setIsDarkMode } = useGlobalContext();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const messageCreateMutation = useCreateMessageMutation();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -182,9 +188,14 @@ const Form = () => {
       email: formData.get("email"),
       subject: formData.get("subject"),
       message: formData.get("message"),
-    };
+    }  as Message;
 
-    console.log("Form submitted:", data);
+    console.log("submitting form:", data);
+
+    const result = await messageCreateMutation.mutateAsync({ message: data });
+
+    console.log("Message created:", result);
+
   };
   return (
     <form className={cn("w-full ")} onSubmit={handleSubmit}>
@@ -194,6 +205,7 @@ const Form = () => {
           <label className="mb-1 text-text  text-sm ml-2">name</label>
           <input
             type="text"
+            name="name"
             placeholder="Your Name"
             className={cn(
               "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
@@ -205,6 +217,7 @@ const Form = () => {
           <label className="mb-1 text-text  text-sm ml-2">email</label>
           <input
             type="email"
+            name="email"
             placeholder="Your Email Address"
             className={cn(
               "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
@@ -219,6 +232,7 @@ const Form = () => {
         <label className="mb-1 text-text  text-sm ml-2">subject</label>
         <input
           type="text"
+          name="subject"
           placeholder="Subject"
           className={cn(
             "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
@@ -230,9 +244,10 @@ const Form = () => {
       {/* Row 3: Message */}
 
       <div className="flex flex-col w-full">
-        <label className="mb-1 text-text  text-sm ml-2">subject</label>
+        <label className="mb-1 text-text  text-sm ml-2">message</label>
         <textarea
           placeholder="Your Message"
+          name="message"
           rows={5}
           className={cn(
             "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
