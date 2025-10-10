@@ -24,7 +24,7 @@ export async function GET(request: Request) {
         const userRes = await fetch(`${baseUrl}/api/getUser?email=${encodeURIComponent(email)}`, {
             method: "GET",});
         if (!userRes.ok) {
-            return NextResponse.json({ error: "User not found generateid" }, { status: 404 });
+            return NextResponse.json({ error: "User not found generateid", body: await userRes.json() }, { status: 404 });
         }
 
         const user = await userRes.json();
