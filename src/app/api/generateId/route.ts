@@ -48,20 +48,20 @@ export async function GET(request: Request) {
     // Centered main info
     ctx.textAlign = "center";
     ctx.fillStyle = "#1e293b";
-    ctx.font = `bold ${Math.floor(cardImage.height * 0.05)}px Arial`;
+    ctx.font = `bold ${Math.floor(cardImage.height * 0.05)}px sans-serif`;
     ctx.fillText(
       user.displayName,
       cardImage.width / 2,
       cardImage.height * 0.57
     );
 
-    ctx.font = `${Math.floor(cardImage.height * 0.028)}px Arial`;
+    ctx.font = `${Math.floor(cardImage.height * 0.028)}px sans-serif`;
     ctx.fillText(user.gdgId, cardImage.width / 2, cardImage.height * 0.62);
 
     // Bottom-left info
     ctx.textAlign = "left";
     ctx.fillStyle = "#ffffff";
-    ctx.font = `${Math.floor(cardImage.height * 0.025)}px Arial`;
+    ctx.font = `${Math.floor(cardImage.height * 0.025)}px sans-serif`;
     const startX = cardImage.width * 0.13;
     let startY = cardImage.height * 0.76;
     const lineHeight = cardImage.height * 0.045;
