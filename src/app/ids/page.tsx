@@ -191,7 +191,7 @@ const IDPage = () => {
             </h1>
 
             <Image
-              src="/GDGLogo.png"
+              src="/sites/idgenerate/GDGLogo_Light.png"
               alt="GDG Logo"
               width={500}
               height={500}
@@ -211,6 +211,7 @@ const IDPage = () => {
         </div>
       </section>
     </div>
+  
   );
 };
  
