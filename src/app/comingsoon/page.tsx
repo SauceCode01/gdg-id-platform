@@ -86,7 +86,7 @@ const ComingSoonPage = () => {
             Uh-oh! Page Not Found
           </h2>
           <h2 className="text-xl sm:text-3xl font-bold  mb-4 sm:mb-6">
-            (But Sparky's here!)
+            (But Sparky&apos;s here!)
           </h2>
 
           <p className="text-sm sm:text-base  mb-3 sm:mb-4">

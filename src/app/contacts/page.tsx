@@ -143,15 +143,15 @@ const Informations = () => {
   return (
     <>
       <div className="font-bold text-2xl hover:text-gdg-orange-light transition-all duration-200 w-fit">
-        Hi, I'm Sparky!
+        Hi, I&apos;m Sparky!
       </div>
       <div className="text-sm">
         Got a question, idea, or need help with your Digital ID? Drop me a
-        message and I'll make sure the right people in our team get back to you.
+        message and I&apos;ll make sure the right people in our team get back to you.
       </div>
       <div className="w-full flex flex-col gap-4 ">
         {DETAILS.map((detail, index) => (
-          <div className="flex flex-rowitems-center group w-fit">
+          <div key={index} className="flex flex-rowitems-center group w-fit">
             <img
               src={detail.image}
               alt="sparky "
@@ -301,7 +301,7 @@ const Form = () => {
         </Button>
         {error && (
           <div className="w-full text-red-500 mt-8 ">
-            Can't send message. Please try again.
+           {"Can't send message. Please try again."}
           </div>
         )}
 
