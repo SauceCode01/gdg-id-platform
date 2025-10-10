@@ -6,8 +6,17 @@ import Button from "@/components/Button";
 import { Download } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import GlowBlobs from "@/components/GlowBlobs";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import jsPDF from "jspdf";
+
+export default function TrueIdPageWithSuspenseBoundary() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <IDPage />
+    </Suspense>
+  );
+}
+
 
 const IDPage = () => {
   const searchParams = useSearchParams();
@@ -204,5 +213,4 @@ const IDPage = () => {
     </div>
   );
 };
-
-export default IDPage;
+ 
