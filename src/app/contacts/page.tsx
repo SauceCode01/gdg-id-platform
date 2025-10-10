@@ -301,7 +301,7 @@ const Form = () => {
         </Button>
         {error && (
           <div className="w-full text-red-500 mt-8 ">
-            Can't send message. Please try again.
+           {"Can't send message. Please try again."}
           </div>
         )}
 

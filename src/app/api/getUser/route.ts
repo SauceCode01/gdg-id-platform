@@ -17,7 +17,7 @@ export async function GET(request: Request) {
         const rows = json.table.rows;
 
         // Extract data into array of objects
-        const users = rows.map((r: any) => ({
+        const users = rows.map((r: { c: { v: string }[] }) => ({
             displayName: r.c[0]?.v || "",
             gdgId: r.c[1]?.v || "",
             name: r.c[2]?.v || "",
