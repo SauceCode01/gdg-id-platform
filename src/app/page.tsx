@@ -20,7 +20,7 @@ export default function Home() {
     e.preventDefault();
     if (!inputRef.current) return;
     const email = inputRef.current.value;
-    const newRoute = `/ids?email=${email}`;
+    const newRoute = `/testing?email=${email}`;
     console.log(newRoute);
     router.push(newRoute);
   };
