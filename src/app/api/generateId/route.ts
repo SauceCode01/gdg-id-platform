@@ -4,8 +4,11 @@ import path from "path";
 
 export async function GET(request: Request) {
     try {
+        console.log("dafsfasdfasdfashdfaksfhskjdhkshdkjhkjhk")
         const { searchParams } = new URL(request.url);
         const email = searchParams.get("email");
+
+        console.log("server", email)
 
         if (!email) {
             return NextResponse.json({ error: "Missing email parameter" }, { status: 400 });
@@ -18,9 +21,10 @@ export async function GET(request: Request) {
                 ? `https://${process.env.VERCEL_URL}`
                 : "http://localhost:3000");
 
-        const userRes = await fetch(`${baseUrl}/api/getUser?email=${encodeURIComponent(email)}`);
+        const userRes = await fetch(`/api/getUser?email=${encodeURIComponent(email)}`, {
+            method: "GET",});
         if (!userRes.ok) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
+            return NextResponse.json({ error: "User not found uwuwuwuwuwu" }, { status: 404 });
         }
 
         const user = await userRes.json();

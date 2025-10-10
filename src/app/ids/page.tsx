@@ -191,7 +191,7 @@ const IDPage = () => {
             </h1>
 
             <Image
-              src="/GDGLogo.png"
+              src="/sites/ids/gdglogobig.png"
               alt="GDG Logo"
               width={500}
               height={500}
