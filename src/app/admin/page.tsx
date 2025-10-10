@@ -15,7 +15,7 @@ const AdminPage = () => {
       <div className="w-full max-w-6xl mx-auto my-16 bg-white rounded-2xl shadow-lg p-6 md:p-10">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Admin</h1>
           <button
             onClick={logout}
             className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition"

@@ -1,5 +1,5 @@
 "use client";
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaSpinner } from "react-icons/fa";
 import Button from "@/components/Button";
 import { IoIosPin } from "react-icons/io";
 import { CiLocationArrow1 } from "react-icons/ci";
@@ -11,13 +11,12 @@ import GlowBlobs from "@/components/GlowBlobs";
 import { useBreakpoint } from "@/lib/clientUtils";
 import { useCreateMessageMutation } from "@/lib/api/queries/messageQueries";
 import { Message } from "@/types/message";
+import { useState } from "react";
 
 const ContactsPage = () => {
   const { isDarkMode, setIsDarkMode } = useGlobalContext();
 
-  const {isMd, isXl} = useBreakpoint();
-
- 
+  const { isMd, isXl } = useBreakpoint();
 
   return (
     <div className="min-h-screen ">
@@ -76,15 +75,15 @@ const ContactsPage = () => {
           <GradientBorderDiv
             borderThickness="4px"
             cornerRadius="32px"
-            roundedSides={isXl? "right": "top"} 
+            roundedSides={isXl ? "right" : "top"}
             className={cn("xl:flex-1")}
             innerDivClassName={cn(
-                "w-full p-8 flex flex-col gap-4 ",
-                "bg-gradient-to-b from-surface-high to-surface",
-                "xl:flex-1 h-full"
-              )}
+              "w-full p-8 flex flex-col gap-4 ",
+              "bg-gradient-to-b from-surface-high to-surface",
+              "xl:flex-1 h-full"
+            )}
           >
-              <Informations />  
+            <Informations />
           </GradientBorderDiv>
 
           {/* <div
@@ -116,7 +115,8 @@ const ContactsPage = () => {
               " rounded-b-4xl ",
               isDarkMode && "border-2 border-t-0 border-outline bg-surface-low",
               "xl:flex-2 xl:rounded-b-none xl:rounded-tl-4xl xl:rounded-bl-4xl  ",
-              !isDarkMode && " bg-background-variant xl:backdrop-blur-sm xl:bg-background/0",
+              !isDarkMode &&
+                " bg-background-variant xl:backdrop-blur-sm xl:bg-background/0",
               "xl:border-2 xl:border-r-0"
             )}
           >
@@ -178,103 +178,150 @@ const Form = () => {
   const { isDarkMode, setIsDarkMode } = useGlobalContext();
 
   const messageCreateMutation = useCreateMessageMutation();
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setLoading(true);
+    setError(false);
+    setSuccess(false);
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
       subject: formData.get("subject"),
       message: formData.get("message"),
-    }  as Message;
+    } as Message;
 
     console.log("submitting form:", data);
 
-    const result = await messageCreateMutation.mutateAsync({ message: data });
+    const result = await messageCreateMutation.mutateAsync(
+      { message: data },
+      {
+        onError: (err) => {
+          setTimeout(() => {
+            setError(true);
+            setMessage(err.message);
+            setLoading(false);
+          }, 1000);
+        },
+        onSuccess: (data) => {
+          setTimeout(() => {
+            setSuccess(true);
+            setLoading(false);
+          }, 1000);
+        },
+      }
+    );
 
     console.log("Message created:", result);
-
   };
   return (
-    <form className={cn("w-full ")} onSubmit={handleSubmit}>
-      {/* Row 1: Name and Email side by side */}
-      <div className="flex flex-row gap-4 w-full">
+    <>
+      <form className={cn("w-full ")} onSubmit={handleSubmit}>
+        {/* Row 1: Name and Email side by side */}
+        <div className="flex flex-row gap-4 w-full">
+          <div className="flex flex-col w-full">
+            <label className="mb-1 text-text  text-sm ml-2">name</label>
+            <input
+              type="text"
+              name="name"
+              required
+              placeholder="Your Name"
+              className={cn(
+                "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
+                "bg-surface"
+              )}
+            />
+          </div>
+          <div className="flex flex-col w-full">
+            <label className="mb-1 text-text  text-sm ml-2">email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Your Email Address"
+              className={cn(
+                "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
+                "bg-surface"
+              )}
+            />
+          </div>
+        </div>
+
+        {/* Row 2: Subject */}
         <div className="flex flex-col w-full">
-          <label className="mb-1 text-text  text-sm ml-2">name</label>
+          <label className="mb-1 text-text  text-sm ml-2">subject</label>
           <input
             type="text"
-            name="name"
-            placeholder="Your Name"
+            name="subject"
+            required
+            placeholder="Subject"
             className={cn(
               "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
               "bg-surface"
             )}
           />
         </div>
+
+        {/* Row 3: Message */}
+
         <div className="flex flex-col w-full">
-          <label className="mb-1 text-text  text-sm ml-2">email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email Address"
+          <label className="mb-1 text-text  text-sm ml-2">message</label>
+          <textarea
+            placeholder="Your Message"
+            name="message"
+            required
+            rows={5}
             className={cn(
               "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
               "bg-surface"
             )}
           />
         </div>
-      </div>
 
-      {/* Row 2: Subject */}
-      <div className="flex flex-col w-full">
-        <label className="mb-1 text-text  text-sm ml-2">subject</label>
-        <input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          className={cn(
-            "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
-            "bg-surface"
-          )}
-        />
-      </div>
+        {/* Row 4: Submit button */}
+        <Button
+          type="submit"
+          disabled={loading}
+          className="w-fit  mt-8  text-text px-4 py-2 font-medium text-lg  "
+        >
+          <div className="flex flex-row gap-2 items-center">
+            {loading ? (
+              <FaSpinner className="mr-2 animate-spin" />
+            ) : (
+              <CiLocationArrow1 />
+            )}
+            <span> {loading ? "Sending..." : "Submit"}</span>
+          </div>
+        </Button>
+        {error && (
+          <div className="w-full text-red-500 mt-8 ">
+            Can't send message. Please try again.
+          </div>
+        )}
 
-      {/* Row 3: Message */}
+        {success && (
+          <>
+            <div className="w-full text-text mt-8 ">
+              Message sent successfully
+            </div>
+          </>
+        )}
 
-      <div className="flex flex-col w-full">
-        <label className="mb-1 text-text  text-sm ml-2">message</label>
-        <textarea
-          placeholder="Your Message"
-          name="message"
-          rows={5}
-          className={cn(
-            "w-full border-2 border-outline rounded-lg px-4 py-2 focus:border-outline/0 focus:ring-2 focus:ring-blue-500",
-            "bg-surface"
-          )}
-        />
-      </div>
+        {/* last row, socials */}
 
-      {/* Row 4: Submit button */}
-      <Button
-        type="submit"
-        className="mt-8 w-fit text-text px-4 py-2 font-medium text-lg  "
-      >
-        <div className="flex flex-row gap-2 items-center">
-          <CiLocationArrow1 />
-          <span>Submit</span>
+        <br />
+
+        <div className={cn("xl:hidden w-full")}>
+          <Socials />
         </div>
-      </Button>
-
-      {/* last row, socials */}
-
-      <br />
-
-      <div className={cn("xl:hidden w-full")}>
-        <Socials />
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 
