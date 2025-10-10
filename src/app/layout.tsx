@@ -10,6 +10,7 @@ import {
 } from "@/providers/GlobalContextProvider";
 import { cn } from "@/lib/utils";
 import { Layout } from "@/components/Layout";
+import { QueryProvider } from "@/providers/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,9 +39,11 @@ export default function RootLayout({
           `${geistSans.variable} ${geistMono.variable} antialiased`
         )}
       >
-        <GlobalContextProvider>
-          <Layout>{children}</Layout>
-        </GlobalContextProvider>
+        <QueryProvider>
+          <GlobalContextProvider>
+            <Layout>{children}</Layout>
+          </GlobalContextProvider>
+        </QueryProvider>
       </body>
     </html>
   );
