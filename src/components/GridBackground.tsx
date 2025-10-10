@@ -1,31 +1,101 @@
+"use client";
+import { useBreakpoint } from "@/lib/clientUtils";
+import { useEffect, useState } from "react";
+
 export default function Grid() {
-    return (
-        <>
-            {/* Top slanted plane (tilts IN toward center) */}
-            <div className="absolute left-0 w-full origin-bottom [top:-30%] h-[60%]
-            [transform:perspective(900px)_rotateX(-60deg)]
-            [background-image:linear-gradient(to_right,rgba(0,0,0,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.11)_1px,transparent_1px)]
-            [background-size:48px_48px]
-            pointer-events-none"
-            />
+  const [transform, setTransform] = useState({ x: 0, y: 0 });
 
-            {/* Center flat grid (anchors the perspective) */}
-            <div className="absolute left-0 w-full h-[40%] top-[30%] 
-            [background-image:linear-gradient(to_right,rgba(0,0,0,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.11)_1px,transparent_1px)]
-            [background-size:48px_48px]
-            pointer-events-none"
-            />
+  const {isMd} = useBreakpoint();
 
-            {/* Bottom slanted plane (tilts IN toward center) */}
-            <div className="absolute left-0 w-full origin-top [bottom:-30%] h-[60%]
-            [transform:perspective(900px)_rotateX(60deg)]
-            [background-image:linear-gradient(to_right,rgba(0,0,0,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.09)_1px,transparent_1px)]
-            [background-size:48px_48px]
-            pointer-events-none"
-            />
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      // Normalize mouse position to range [-1, 1]
+      const x = (e.clientX / innerWidth - 0.5) * 2;
+      const y = (e.clientY / innerHeight - 0.5) * 2;
 
-            {/* subtle vertical fade to blend joins */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/75 via-transparent to-white/80" />
-        </>
-    );
+      setTransform({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Intensity controls
+  const ROTATE_INTENSITY = isMd  ? 3 : 0; // vertical tilt
+  const PAN_INTENSITY = isMd ? 5 : 0; // horizontal pan in px
+
+  // Apply both tilt (y) and horizontal pan (x)
+  const topTransform = `perspective(900px) rotateX(${
+    -60 - transform.y * ROTATE_INTENSITY
+  }deg) translateX(${-transform.x * PAN_INTENSITY}px) translateY(${
+    -transform.y * PAN_INTENSITY
+  }px)`;
+
+  const centerTransform = `translateX(${
+    -transform.x * PAN_INTENSITY
+  }px) translateY(${-transform.y * PAN_INTENSITY}px)`; // subtle parallax
+
+  const bottomTransform = `perspective(900px) rotateX(${
+    60 - transform.y * ROTATE_INTENSITY
+  }deg) translateX(${-transform.x * PAN_INTENSITY}px) translateY(${
+    -transform.y * PAN_INTENSITY
+  }px)`;
+
+  return (
+    <div
+      style={{
+        maskImage:
+          "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
+        maskMode: "alpha",
+        maskRepeat: "no-repeat",
+      }}
+      className="fixed inset-0 pointer-events-none"
+    >
+      {/* Top slanted plane */}
+      <div
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, color-mix(in srgb, var(--text) 11%, transparent) 1px, transparent 1px),
+            linear-gradient(to bottom, color-mix(in srgb, var(--text) 11%, transparent) 1px, transparent 1px)
+          `,
+          backgroundSize: "48px 48px",
+          transform: topTransform,
+          top: "-30%",
+          transition: "transform 0.3s ease-out",
+        }}
+        className="absolute left-0 w-full origin-bottom h-[60%] pointer-events-none"
+      />
+
+      {/* Center flat grid */}
+      <div
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, color-mix(in srgb, var(--text) 11%, transparent) 1px, transparent 1px),
+            linear-gradient(to bottom, color-mix(in srgb, var(--text) 11%, transparent) 1px, transparent 1px)
+          `,
+          backgroundSize: "48px 48px",
+          transform: centerTransform,
+          top: "30%",
+          transition: "transform 0.3s ease-out",
+        }}
+        className="absolute left-0 w-full h-[40%] pointer-events-none"
+      />
+
+      {/* Bottom slanted plane */}
+      <div
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, color-mix(in srgb, var(--text) 11%, transparent) 1px, transparent 1px),
+            linear-gradient(to bottom, color-mix(in srgb, var(--text) 11%, transparent) 1px, transparent 1px)
+          `,
+          backgroundSize: "48px 48px",
+          transform: bottomTransform,
+          bottom: "-30%",
+          transition: "transform 0.3s ease-out",
+        }}
+        className="absolute left-0 w-full origin-top h-[60%] pointer-events-none"
+      />
+    </div>
+  );
 }
