@@ -16,3 +16,4 @@ export const getUser = async (uid: string) : Promise<User> => {
   return data;
 };
  
+

@@ -1,8 +1,10 @@
 import { User } from "@/types/user";
 import { getAuth } from "firebase-admin/auth";
 import { NextRequest } from "next/server";
+import { customAlphabet } from "nanoid";
 import { adminAuth, adminDb } from "./firebase/firebaseAdmin";  
 
+export const generateId = (): string => customAlphabet("1234567890", 6)();
 /**
  * Checks if a user has a specific role
  */

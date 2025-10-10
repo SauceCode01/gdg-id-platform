@@ -1,9 +1,10 @@
+import { wrappedFetch } from "@/lib/utils";
 import { Message } from "@/types/message";
 
  
 
 export const createMessage = async (message: Message) : Promise<Message> => {
-  const res = await fetch(`/api/messages`, {
+  const res = await wrappedFetch(`/api/messages`, {
     method: "POST",
     body: JSON.stringify(message),
   });
@@ -17,3 +18,20 @@ export const createMessage = async (message: Message) : Promise<Message> => {
 
   return data;
 };
+
+
+
+export const getMessages = async (limit: number, lastCreatedAt?: string) => {
+  const res = await wrappedFetch(`/api/messages?limit=${limit}&last=${lastCreatedAt}`, {
+    method: "GET",
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error)
+  }
+
+  console.log(data);
+  return data;
+}
