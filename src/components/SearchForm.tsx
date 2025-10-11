@@ -63,11 +63,7 @@ export default function SearchForm({ className }: SearchFormProps) {
   const goToID = () => {
     if (userResult) {
       // User found, redirect to /ids
-<<<<<<< HEAD
-      router.push(`/ids?email=${encodeURIComponent(userResult.email)}`);
-=======
       router.push(`/testing?email=${encodeURIComponent(userResult.email)}`);
->>>>>>> 84f239b85f0c6d927fbd64dfdb009c832cc3ede1
     }
   };
 
