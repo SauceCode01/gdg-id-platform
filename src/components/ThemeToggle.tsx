@@ -15,7 +15,7 @@ export default function ThemeToggle() {
     <div
       onClick={toggleTheme}
       className={cn(
-        "relative transition-all flex justify-center items-center duration-300",
+        "relative transition-all flex justify-center items-center duration-300 cursor-pointer",
         "w-[50px] h-[30px]"
       )}
       aria-label="Toggle dark mode"

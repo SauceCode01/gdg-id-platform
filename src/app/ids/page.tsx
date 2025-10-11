@@ -17,7 +17,6 @@ export default function TrueIdPageWithSuspenseBoundary() {
   );
 }
 
-
 const IDPage = () => {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
@@ -87,16 +86,17 @@ const IDPage = () => {
         <div className="relative z-10 text-center px-6 lg:hidden">
           <h1
             className="
-    text-3xl font-bold mb-4 
-    text-slate-800 
-    drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
-    dark:text-transparent dark:bg-clip-text
-    dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
-    dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
-  "
+              text-3xl font-bold mb-4 
+              text-slate-800 
+              drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
+              dark:text-transparent dark:bg-clip-text
+              dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
+              dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
+            "
           >
             OFFICIAL GDG PUP DIGITAL ID
           </h1>
+
 
           <div className="relative flex justify-center mb-6">
             {loading ? (
@@ -144,7 +144,7 @@ const IDPage = () => {
         </div>
 
         {/* DESKTOP VIEW */}
-        <div className="hidden lg:flex relative z-10 text-center  items-center">
+        <div className="hidden lg:flex relative z-10 text-center items-center">
           <div className="h-screen relative flex justify-center w-1/2 ">
             {loading ? (
               <div className="w-[950px] h-[950px] bg-gray-200 animate-pulse rounded-lg" />
@@ -176,33 +176,46 @@ const IDPage = () => {
             )}
           </div>
 
-          <div className="h-screen  flex flex-col justify-center">
+          <div className="h-screen flex flex-col justify-center px-5">
             <h1
               className="
-    text-7xl font-bold mb-4 
-    text-slate-800 
-    drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
-    dark:text-transparent dark:bg-clip-text
-    dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
-    dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
-  "
+                text-7xl font-bold mb-4 
+                text-slate-800 
+                drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
+                dark:text-transparent dark:bg-clip-text
+                dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
+                dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
+              "
             >
-              OFFICIAL GDG PUP<br />DIGITAL ID
+              OFFICIAL GDG PUP DIGITAL ID
             </h1>
 
-            <Image
-              src="/GDGLogo.png"
-              alt="GDG Logo"
-              width={500}
-              height={500}
-              className="h-auto w-full max-w-xs object-contain mx-auto mb-4"
-            />
+            {/* GDG Logo (light/dark mode for desktop) */}
+            <div className="h-auto w-full max-w-xs mx-auto mb-4">
+              {/* Light mode logo */}
+              <Image
+                src="/sites/idgenerate/GDGLogo_Light.png"
+                alt="GDG Logo Light"
+                width={500}
+                height={500}
+                className="block h-auto w-full object-contain dark:hidden mx-auto"
+              />
+              {/* Dark mode logo */}
+              <Image
+                src="/sites/idgenerate/GDGLogo_Dark.png"
+                alt="GDG Logo Dark"
+                width={500}
+                height={500}
+                className="hidden h-auto w-full object-contain dark:block mx-auto"
+              />
+            </div>
+
             <div className="flex justify-center gap-3">
-              <Button bgColor="bg-blue-600" onClick={handleDownloadPNG}>
+              <Button bgColor="#659df8" onClick={handleDownloadPNG}>
                 <Download className="mr-2 size-5 stroke-white" />
                 <span>Download as PNG</span>
               </Button>
-              <Button bgColor="bg-green-600" onClick={handleDownloadPDF}>
+              <Button bgColor="#64d47f" onClick={handleDownloadPDF}>
                 <Download className="mr-2 size-5 stroke-white" />
                 <span>Download as PDF</span>
               </Button>
@@ -213,4 +226,3 @@ const IDPage = () => {
     </div>
   );
 };
- 
