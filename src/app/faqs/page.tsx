@@ -72,7 +72,7 @@ export const QuestionRow = ({ question }: { question: Question }) => {
         "w-full flex flex-col p-4 rounded-2xl  shadow-[inset_0_-6px_6px_rgba(0,0,0,1)] py-6 gap-4 group   transition-all duration-150",
         !isDarkMode &&
           (isOpen
-            ? "bg-gradient-to-b  from-surface-low  to-[#FED0CF]"
+            ? "bg-gradient-to-b  from-surface-low  to-[#63b1ff]"
             : "bg-gradient-to-b from-surface to-background-variant"),
         isDarkMode &&
           (isOpen
@@ -92,7 +92,7 @@ export const QuestionRow = ({ question }: { question: Question }) => {
           className={cn(
             "flex-1 font-bold w-full",
             "transition-all, duration-150",
-            " group-hover:text-gdg-blue-light"
+            !isOpen && " group-hover:text-gdg-blue-light"
           )}
         >
           {question.question}
@@ -117,7 +117,7 @@ const QUESTIONS: Question[] = [
   {
     question: "What is the GDG PUP Digital ID Platform?",
     answer:
-      "Enter your registered email address in the lookup field. If your email isin the database, your digital ID will be generated instantly.",
+      "Enter your registered email address in the lookup field. If your email is in the database, your digital ID will be generated instantly.",
   },
   {
     question: "How do I get my digital ID?",
