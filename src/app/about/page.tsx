@@ -57,18 +57,15 @@ const AboutPage = () => {
           {/* Mobile Layout — Titles above Image */}
           <div className="block lg:hidden text-center">
             <h1
-              className="font-bold text-4xl sm:text-5xl leading-none mb-1 text-[#4285F4]"
-              style={{
-                textShadow: `
-                  0 0 8px #c3ecf6,
-                  0 0 16px #c3ecf6,
-                  0 0 24px #c3ecf6
-                `,
-              }}
+              className={cn(
+                "font-bold text-4xl sm:text-5xl leading-none mb-1 text-gdg-blue",
+                "drop-shadow-[0_0_2px_var(--color-gdg-blue)]",
+              )}
+               
             >
               Project Vision
             </h1>
-            <h2 className="font-semibold text-lg sm:text-xl text-gray-700 leading-tight mb-6">
+            <h2 className="font-semibold text-lg sm:text-xl text-text leading-tight ">
               Digital ID Platform
             </h2>
           </div>
@@ -86,16 +83,9 @@ const AboutPage = () => {
           {/* Right: text & CTA */}
           <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 text-center lg:text-left relative z-10 mt-6 lg:mt-0">
             {/* (hidden on mobile) */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:block group">
               <h1
-                className="font-bold text-5xl lg:text-6xl leading-none mb-0 text-[#4285F4]"
-                // style={{
-                //   textShadow: `
-                //     0 0 8px #c3ecf6,
-                //     0 0 16px #c3ecf6,
-                //     0 0 24px #c3ecf6
-                //   `,
-                // }}
+                className="font-bold text-5xl lg:text-6xl leading-none mb-0 text-[#4285F4] group-hover:scale-x-105 transition-all duration-200 text-center"
               >
                 Project Vision
               </h1>
