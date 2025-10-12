@@ -180,13 +180,20 @@ const IDPage = () => {
           </div>
 
           <div className="flex justify-center gap-3">
-            <Button bgColor="bg-blue-600" onClick={handleDownloadPNG}>
-              <Download className="mr-2 size-5 stroke-white" />
-              <span>Download as PNG</span>
+            <Button
+              onClick={handleDownloadPNG}
+              icon={<Download className="size-4 sm:size-5 md:size-6 stroke-white" />}
+              className="px-4 py-2.5"
+            >
+              <span className="text-[10px] sm:text-[12px] md:text-[14px] flex justify-center">Download as PNG</span>
             </Button>
-            <Button bgColor="bg-green-600" onClick={handleDownloadPDF}>
-              <Download className="mr-2 size-5 stroke-white" />
-              <span>Download as PDF</span>
+            <Button
+              onClick={handleDownloadPDF}
+              icon={<Download className="size-4 sm:size-5 md:size-6 stroke-white" />}
+              variant="green"
+              className="px-4 py-2.5"
+            >
+              <span className="text-[10px] sm:text-[12px] md:text-[14px] flex justify-center">Download as PDF</span>
             </Button>
           </div>
         </div>
@@ -261,13 +268,20 @@ const IDPage = () => {
                 />
               </div>
 
-              <div className="flex justify-center gap-3">
-                <Button bgColor="#659df8" onClick={handleDownloadPNG}>
-                  <Download className="mr-2 size-5 stroke-white" />
+              <div className="flex justify-center gap-5 mt-4">
+                <Button
+                  onClick={handleDownloadPNG}
+                  icon={<Download className="size-5 stroke-white" />}
+                  className="transition"
+                >
                   <span>Download as PNG</span>
                 </Button>
-                <Button bgColor="#64d47f" onClick={handleDownloadPDF}>
-                  <Download className="mr-2 size-5 stroke-white" />
+                <Button
+                  onClick={handleDownloadPDF}
+                  icon={<Download className="size-5 stroke-white" />}
+                  variant="green"
+                  className="transition"
+                >
                   <span>Download as PDF</span>
                 </Button>
               </div>

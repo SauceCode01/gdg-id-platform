@@ -141,9 +141,15 @@ export default function SearchForm({ className }: SearchFormProps) {
         placeholder="Enter your email to find your Digital ID"
         className="w-sm sm:w-md md:w-lg lg:w-xl z-10 py-2 px-4 pl-8 sm:py-2.5 sm:pl-10 md:py-3 md:pl-11 border border-gray-300 bg-white rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.05),inset_0px_2px_4px_0px_rgba(0,0,0,0.25)] text-neutral-500 text-[12px] sm:text-[13px] md:text-[15px] lg:text-lg font-normal leading-[15px] sm:leading-[16px] md:leading-[18px] placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
       />
-      <Button type="submit" className="relative z-10 ml-2">
-        <BsStars />
-        <span className="ml-2 whitespace-nowrap text-[13px] md:text-[15px] lg:text-[17px]">
+      <Button
+        htmlType="submit"
+        variant="blue"
+        icon={
+          <img src="/sites/landing/Star.svg" alt="Star" className="size-3 sm:size-5 " />
+        }
+        className="relative z-10 ml-2 px-4"
+      >
+        <span className="whitespace-nowrap text-[12px] md:text-[16px] lg:text-[17px]">
           Search ID
         </span>
       </Button>
