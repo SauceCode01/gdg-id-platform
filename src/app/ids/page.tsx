@@ -10,6 +10,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import jsPDF from "jspdf";
 import { getMember } from "@/lib/api/endpoints/membersEndpoints";
 import { Member } from "@/types/member";
+import { cn } from "@/lib/utils";
 
 export default function TrueIdPageWithSuspenseBoundary() {
   return (
@@ -124,14 +125,14 @@ const IDPage = () => {
 
   return (
     <div className="min-h-screen">
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <section className="relative flex lg:min-h-screen items-start lg:items-center justify-center overflow-hidden">
         <Grid />
         <div className="hidden lg:block">
           <GlowBlobs layout="home" />
         </div>
 
         {/* MOBILE VIEW */}
-        <div className="relative z-10 text-center px-6 lg:hidden">
+        <div className="relative z-10 text-center px-6 lg:hidden mt-16">
           <h1
             className="
               text-3xl font-bold mb-4 
@@ -144,7 +145,6 @@ const IDPage = () => {
           >
             OFFICIAL GDG PUP DIGITAL ID
           </h1>
-
 
           <div className="relative flex justify-center mb-6">
             {loading ? (
@@ -193,14 +193,16 @@ const IDPage = () => {
 
         {/* DESKTOP VIEW */}
         <div className="hidden lg:flex relative z-10 text-center items-center">
-          <div className="h-screen relative flex justify-center w-1/2 ">
+          <div className="h-screen relative flex justify-center w-full items-center">
+            {/* id part */}
+
             {loading ? (
               <div className="w-[950px] h-[950px] bg-gray-200 animate-pulse rounded-lg" />
             ) : error ? (
               <p className="text-red-500 italic">{error}</p>
             ) : (
               imageUrl && (
-                <div className="relative w-[950px] h-[950px] flex justify-center items-center">
+                <div className="relative w-[550px] h-[950px] flex justify-center items-center">
                   <div className="relative w-[300px] h-[300px]">
                     {/* BACK IMAGE */}
                     <Image
@@ -208,7 +210,7 @@ const IDPage = () => {
                       alt="GDG ID Back"
                       width={520}
                       height={520}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain  scale-150"
                     />
                     {/* FRONT (GENERATED) IMAGE */}
                     <Image
@@ -216,61 +218,62 @@ const IDPage = () => {
                       alt="Generated GDG ID"
                       width={500}
                       height={500}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain scale-150"
                     />
                   </div>
                 </div>
               )
             )}
-          </div>
 
-          <div className="h-screen flex flex-col justify-center px-5">
-            <h1
-              className="
-                text-7xl font-bold mb-4 
+            {/* gdg pup right part */}
+
+            <div className="h-screen w-1/2 flex flex-col justify-center px-5">
+              <h1
+                className="
+                text-7xl font-bold  
                 text-slate-800 
                 drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
                 dark:text-transparent dark:bg-clip-text
                 dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
                 dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
               "
-            >
-              OFFICIAL GDG PUP DIGITAL ID
-            </h1>
+              >
+                OFFICIAL GDG PUP DIGITAL ID
+              </h1>
 
-            {/* GDG Logo (light/dark mode for desktop) */}
-            <div className="h-auto w-full max-w-xs mx-auto mb-4">
-              {/* Light mode logo */}
-              <Image
-                src="/sites/idgenerate/GDGLogo_Light.png"
-                alt="GDG Logo Light"
-                width={500}
-                height={500}
-                className="block h-auto w-full object-contain dark:hidden mx-auto"
-              />
-              {/* Dark mode logo */}
-              <Image
-                src="/sites/idgenerate/GDGLogo_Dark.png"
-                alt="GDG Logo Dark"
-                width={500}
-                height={500}
-                className="hidden h-auto w-full object-contain dark:block mx-auto"
-              />
-            </div>
+              {/* GDG Logo (light/dark mode for desktop) */}
+              <div className="h-auto w-full max-w-sm scale-130 mx-auto ">
+                {/* Light mode logo */}
+                <Image
+                  src="/sites/idgenerate/GDGLogo_Light.png"
+                  alt="GDG Logo Light"
+                  width={600}
+                  height={600}
+                  className="block h-auto w-full object-contain dark:hidden mx-auto"
+                />
+                {/* Dark mode logo */}
+                <Image
+                  src="/sites/idgenerate/GDGLogo_Dark.png"
+                  alt="GDG Logo Dark"
+                  width={600}
+                  height={600}
+                  className="hidden h-auto w-full object-contain dark:block mx-auto"
+                />
+              </div>
 
-            <div className="flex justify-center gap-3">
-              <Button bgColor="#659df8" onClick={handleDownloadPNG}>
-                <Download className="mr-2 size-5 stroke-white" />
-                <span>Download as PNG</span>
-              </Button>
-              <Button bgColor="#64d47f" onClick={handleDownloadPDF}>
-                <Download className="mr-2 size-5 stroke-white" />
-                <span>Download as PDF</span>
-              </Button>
+              <div className="flex justify-center gap-3">
+                <Button bgColor="#659df8" onClick={handleDownloadPNG}>
+                  <Download className="mr-2 size-5 stroke-white" />
+                  <span>Download as PNG</span>
+                </Button>
+                <Button bgColor="#64d47f" onClick={handleDownloadPDF}>
+                  <Download className="mr-2 size-5 stroke-white" />
+                  <span>Download as PDF</span>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
- 
 
         {/* Hidden canvas for generation */}
         <canvas ref={canvasRef} className="hidden" />
