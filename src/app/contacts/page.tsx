@@ -39,17 +39,15 @@ const ContactsPage = () => {
         <div className="flex flex-row justify-center items-center w-full mx-auto  relative max-w-lg my-8 group gap-4">
           {/* sparky image */}
           <img
-            src="/sites/contacts/sparkyOnCircle.png"
+            src="/sites/contacts/sparky.svg"
             alt="sparky "
-            className="w-20 xl:w-30 group-hover:rotate-3 transition-all duration-200 max-w-50 aspect-auto group-hover:scale-110"
+            className="w-20 xl:w-25 group-hover:rotate-3 transition-all duration-200 max-w-50 aspect-auto group-hover:scale-110"
           />
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             <h1
               className={cn(
-                "text-4xl  xl:text-5xl font-bold leading-none",
-                // gradient text
+                "text-4xl xl:text-5xl font-bold leading-none pb-2", // ← add pb-1
                 "bg-gradient-to-br from-gdg-orange-light to-gdg-orange-dark bg-clip-text text-transparent",
-                // glow effect using drop-shadow
                 "drop-shadow-[0_0_5px_var(--color-gdg-orange-light)]",
                 "group-hover:tracking-wide transition-all duration-200"
               )}
@@ -57,7 +55,8 @@ const ContactsPage = () => {
               Stay Connected
             </h1>
 
-            <p className=" text-base xl:text-xl ">
+            <p className={cn(" text-base xl:text-xl -translate-y-3", 
+                "group-hover:tracking-wide transition-all duration-200")}>
               Got a question? Let Sparky help.
             </p>
           </div>
@@ -78,7 +77,7 @@ const ContactsPage = () => {
             roundedSides={isXl ? "right" : "top"}
             className={cn("xl:flex-1")}
             innerDivClassName={cn(
-              "w-full p-8 flex flex-col gap-4 ",
+              "w-full p-8 flex flex-col gap-2 ",
               "bg-gradient-to-b from-surface-high to-surface",
               "xl:flex-1 h-full"
             )}
@@ -142,26 +141,27 @@ const ContactsPage = () => {
 const Informations = () => {
   return (
     <>
-      <div className="font-bold text-2xl hover:text-gdg-orange-light transition-all duration-200 w-fit">
+      <div className="font-bold text-3xl hover:text-gdg-orange-light transition-all duration-200 w-fit">
         Hi, I&apos;m Sparky!
       </div>
       <div className="text-sm">
         Got a question, idea, or need help with your Digital ID? Drop me a
-        message and I&apos;ll make sure the right people in our team get back to you.
+        message and I&apos;ll make sure the right people in our team get back to
+        you.
       </div>
-      <div className="w-full flex flex-col gap-4 ">
+      <div className="w-full flex flex-col gap-4 mt-4">
         {DETAILS.map((detail, index) => (
-          <div key={index} className="flex flex-rowitems-center group w-fit">
+          <div key={index} className="flex flex-row items-start group w-fit">
             <img
               src={detail.image}
               alt="sparky "
               className="w-5 mx-2 group-hover:scale-120 transition-all duration-200"
             />
-            <span>
-              <span className="font-bold group-hover:text-gdg-orange-light transition-all duration-200">
+            <span className="flex flex-row items-start">
+              <div className="font-bold group-hover:text-gdg-orange-light transition-all duration-200">
                 {detail.title}:
-              </span>
-              <span className="ml-2">{detail.description}</span>
+              </div>
+              <div className="ml-2">{detail.description}</div>
             </span>
           </div>
         ))}
@@ -222,11 +222,11 @@ const Form = () => {
   };
   return (
     <>
-      <form className={cn("w-full ")} onSubmit={handleSubmit}>
+      <form className={cn("w-full flex flex-col gap-4")} onSubmit={handleSubmit}>
         {/* Row 1: Name and Email side by side */}
         <div className="flex flex-row gap-4 w-full">
           <div className="flex flex-col w-full">
-            <label className="mb-1 text-text  text-sm ml-2">name</label>
+            <label className="text-text  text-sm ml-2">NAME</label>
             <input
               type="text"
               name="name"
@@ -239,7 +239,7 @@ const Form = () => {
             />
           </div>
           <div className="flex flex-col w-full">
-            <label className="mb-1 text-text  text-sm ml-2">email</label>
+            <label className="text-text  text-sm ml-2">EMAIL</label>
             <input
               type="email"
               name="email"
@@ -255,7 +255,7 @@ const Form = () => {
 
         {/* Row 2: Subject */}
         <div className="flex flex-col w-full">
-          <label className="mb-1 text-text  text-sm ml-2">subject</label>
+          <label className="text-text  text-sm ml-2">SUBJECT</label>
           <input
             type="text"
             name="subject"
@@ -271,7 +271,7 @@ const Form = () => {
         {/* Row 3: Message */}
 
         <div className="flex flex-col w-full">
-          <label className="mb-1 text-text  text-sm ml-2">message</label>
+          <label className=" text-text  text-sm ml-2">MESSAGE</label>
           <textarea
             placeholder="Your Message"
             name="message"
@@ -288,7 +288,10 @@ const Form = () => {
         <Button
           type="submit"
           disabled={loading}
-          className="w-fit  mt-8  text-text px-4 py-2 font-medium text-lg  "
+          className={cn(
+            "w-fit    text-text px-4 py-2 font-medium text-lg  ",
+            loading && "cursor-not-allowed"
+          )}
         >
           <div className="flex flex-row gap-2 items-center">
             {loading ? (
@@ -300,14 +303,14 @@ const Form = () => {
           </div>
         </Button>
         {error && (
-          <div className="w-full text-red-500 mt-8 ">
-           {"Can't send message. Please try again."}
+          <div className="w-full text-red-500 ">
+            {"Can't send message. Please try again."}
           </div>
         )}
 
         {success && (
           <>
-            <div className="w-full text-text mt-8 ">
+            <div className="w-full text-text ">
               Message sent successfully
             </div>
           </>
@@ -333,7 +336,7 @@ const Socials = ({ direction = "row" }: { direction?: "col" | "row" }) => {
         direction === "row" ? "flex-row  items-center" : "flex-col items-left"
       )}
     >
-      <span>Follow us</span>
+      <span className="font-bold">Follow us</span>
       <div className="flex flex-row gap-2">
         {SOCIALS.map((social, index) => (
           <a
@@ -341,7 +344,7 @@ const Socials = ({ direction = "row" }: { direction?: "col" | "row" }) => {
             key={index}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:rotate-360 transition-all duration-200"
+            className="hover:scale-110 transition-all duration-200"
           >
             <img
               src={social.image}

@@ -1,51 +1,82 @@
 "use client";
 
-import { ButtonHTMLAttributes, useState } from "react";
-import { Download } from "lucide-react";
+import { ButtonHTMLAttributes, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedGradientText } from "./ui/animated-gradient-text";
 
+// Utility to darken a hex color slightly (for shadow)
+function darkenColor(hex: string, amount: number = 20): string {
+  let usePound = false;
+
+  if (hex[0] === "#") {
+    hex = hex.slice(1);
+    usePound = true;
+  }
+
+  const num = parseInt(hex, 16);
+  let r = (num >> 16) - amount;
+  let g = ((num >> 8) & 0x00ff) - amount;
+  let b = (num & 0x0000ff) - amount;
+
+  r = r < 0 ? 0 : r;
+  g = g < 0 ? 0 : g;
+  b = b < 0 ? 0 : b;
+
+  return (
+    (usePound ? "#" : "") +
+    r.toString(16).padStart(2, "0") +
+    g.toString(16).padStart(2, "0") +
+    b.toString(16).padStart(2, "0")
+  );
+}
+
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode; // Button content
-  onClick?: () => void; // Will trigger when button is clicked
-  bgColor?: string; // Tailwind or hex background color
+  children?: React.ReactNode;
+  onClick?: () => void;
+  bgColor?: string; // Can be Tailwind, hex, or CSS variable
   type?: "button" | "submit" | "reset" | undefined;
 }
 
 export default function Button({
   children = "Button",
   onClick,
-  bgColor = "bg-blue-500",
+  bgColor = "#3b82f6", // default Tailwind blue-500 equivalent
   type,
   className,
   ...rest
 }: Props) {
-  const [hoverColor, setHoverColor] = useState<string | null>(null);
-
-  // Determine if bgColor is a hex or Tailwind color
-  const isHex = bgColor.startsWith("#");
-  const darkShadow = isHex ? `${bgColor}80` : "rgba(0,0,0,0.3)";
+  const [baseColor, setBaseColor] = useState<string>(bgColor);
+  const [shadowColor, setShadowColor] = useState<string>(
+    bgColor.startsWith("#") ? darkenColor(bgColor, 35) : "black"
+  );
 
   const handleMouseEnter = () => {
-    const random = Math.random() > 0.5 ? "red" : "yellow";
-    setHoverColor(random);
+    // Example hover logic: slightly lightens or changes color
+    const hover =
+      Math.random() > 0.5 ? "#ef4444" /* red-500 */ : "#facc15" /* yellow-400 */;
+    setBaseColor(hover);
   };
 
   const handleMouseLeave = () => {
-    setHoverColor(null);
+    setBaseColor(bgColor);
   };
+
+  useEffect(() => {
+    // When base color changes, update shadow accordingly
+    if (baseColor.startsWith("#")) {
+      setShadowColor(darkenColor(baseColor, 35));
+    } else {
+      // For Tailwind or CSS variable colors, use a solid fallback shadow
+      setShadowColor("rgba(0,0,0,0.2)");
+    }
+  }, [baseColor]);
 
   const handleOnClick = () => {
     if (onClick) onClick();
   };
 
-  // Compute dynamic hover background color
-  const hoverStyle =
-    hoverColor === "red"
-      ? { backgroundColor: "#ef4444" } // Tailwind red-500
-      : hoverColor === "yellow"
-      ? { backgroundColor: "#facc15" } // Tailwind yellow-400
-      : {};
+  const isHex = baseColor.startsWith("#");
+  const isTailwind = baseColor.startsWith("bg-") || baseColor.startsWith("bg[");
 
   return (
     <button
@@ -55,29 +86,25 @@ export default function Button({
       onMouseLeave={handleMouseLeave}
       onClick={handleOnClick}
       className={cn(
-        "group relative flex items-center justify-center rounded-lg px-6 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm ",
-        bgColor,
-        "shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]",
-        "active:translate-y-[2px]",
-        "cursor-pointer",
+        "group relative flex items-center justify-center rounded-[8px] px-6 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
+        isTailwind ? baseColor : "",
         className
       )}
       style={{
-        boxShadow: `inset 0 1px 1px rgba(255,255,255,0.6), 0 4px 0 ${darkShadow}`,
-        ...hoverStyle,
-        transition: "background-color 0.4s ease",
+        backgroundColor: isHex ? baseColor : undefined,
+        boxShadow: `inset 0 1px 1px #ffffff, 0 4px 0 ${shadowColor}`, // solid shadow preserved
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease",
       }}
     >
-      {/* Radial sheen, 0.55 */}
-      <div className="absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.55)_0%,rgba(0,0,0,0.15)_100%)] pointer-events-none mix-blend-overlay" />
+      {/* Radial sheen */}
+      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.55)_0%,rgba(0,0,0,0.15)_100%)] pointer-events-none mix-blend-overlay" />
 
-      {/* <Download className="mr-2 size-5 stroke-white" /> */}
       <AnimatedGradientText className="font-semibold tracking-wide text-white flex flex-row items-center justify-center">
         {children}
       </AnimatedGradientText>
 
-      {/* Subtle gloss overlay */}
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-white/15 to-transparent pointer-events-none" />
+      {/* Gloss overlay */}
+      <div className="absolute inset-0 rounded-[8px] bg-gradient-to-b from-white/15 to-transparent pointer-events-none" />
     </button>
   );
 }
