@@ -70,10 +70,11 @@ export default function Button({
       }}
     >
       {/* Icon */}
-      {icon}
 
-      {/* Text */}
-      <div className="text-neutral-50 text-base font-medium leading-normal">
+      {icon && <span className="flex items-center justify-center">{icon}</span>}
+
+      {/* Children */}
+      <div className="text-neutral-50 text-base font-medium leading-normal flex items-center justify-center">
         {children}
       </div>
     </button>
