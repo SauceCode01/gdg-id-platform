@@ -147,7 +147,7 @@ export default function SearchForm({ className }: SearchFormProps) {
         icon={
           <img src="/sites/landing/Star.svg" alt="Star" className="size-3 sm:size-5 " />
         }
-        className="relative z-10 ml-1 sm:ml-2 p-1 sm:p-2"
+        className="relative z-10 ml-1 sm:ml-2 p-1 sm:p-2 md:px-5 md:py-3"
       >
         <span className="whitespace-nowrap text-[10px] sm:text-base md:text-[16px] lg:text-[17px]">
           Search ID
