@@ -74,7 +74,7 @@ export default function Button({
       {icon && <span className="flex items-center justify-center">{icon}</span>}
 
       {/* Children */}
-      <div className="text-neutral-50 text-base font-medium leading-normal flex items-center justify-center">
+      <div className="text-neutral-50 text-base leading-normal flex items-center justify-center">
         {children}
       </div>
     </button>
