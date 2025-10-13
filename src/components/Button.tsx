@@ -82,25 +82,25 @@ export default function Button({
       onMouseLeave={handleMouseLeave}
       onClick={handleOnClick}
       className={cn(
-        "group relative flex items-center justify-center rounded-[8px] px-6 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
+        "group relative flex items-center justify-center rounded-[8px] px-4 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
         className
       )}
       style={{
         backgroundColor: baseColor,
-        boxShadow: `  inset 0px 1px 0px 0px rgba(255,255,255,0.40), inset 0px -3px 0px 0px rgba(0,0,0,0.20), inset 0px 4px 4px 0px rgba(0,0,0,0.15)`,
+        boxShadow: `  inset 0px 1px 0px 0px rgba(255,255,255,0.40), inset 0px -3px 0px 0px rgba(0,0,0,0.20), inset 0px 4px 4px 0px rgba(0,0,0,0.05)`,
         transition: "background-color 0.3s ease, box-shadow 0.3s ease",
       }}
  
     >
       {/* Radial sheen */}
-      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.55)_0%,rgba(0,0,0,0.15)_100%)] pointer-events-none mix-blend-overlay" />
+      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.45)_0%,rgba(0,0,0,0.10)_100%)] pointer-events-none mix-blend-overlay" />
 
       <AnimatedGradientText className="font-semibold tracking-wide text-white flex flex-row items-center justify-center">
         {children}
       </AnimatedGradientText>
 
       {/* Gloss overlay */}
-      <div className="absolute inset-0 rounded-[8px] bg-gradient-to-b from-white/15 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 rounded-[8px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
     </button>
   );
 }
