@@ -93,7 +93,7 @@ export default function Button({
  
     >
       {/* Radial sheen */}
-      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.45)_0%,rgba(0,0,0,0.10)_100%)] pointer-events-none mix-blend-overlay" />
+      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.30)_0%,rgba(0,0,0,0.10)_100%)] pointer-events-none mix-blend-overlay" />
 
       <AnimatedGradientText className="  text-neutral-50  text-base leading-normal flex flex-row items-center justify-center">
         {children}
