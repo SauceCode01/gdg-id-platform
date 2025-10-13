@@ -53,11 +53,12 @@ const Footer = () => {
         {/* footer links */}
         <div
           className="
-            flex flex-wrap justify-center lg:justify-center 
-            items-center gap-4 sm:gap-8 lg:gap-14 
+            flex flex-col sm:flex-col md:flex-row 
+            justify-center lg:justify-center 
+            items-center gap-3 sm:gap-4 md:gap-8 lg:gap-14 
             text-[var(--foreground)] 
             text-sm sm:text-base font-normal 
-            w-full lg:w-auto mt-2 lg:mt-0
+            w-full lg:w-auto mt-4 lg:mt-0
           "
         >
           <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Privacy</a>
@@ -70,7 +71,7 @@ const Footer = () => {
         {/* partner button */}
         <div className="w-full lg:w-auto flex justify-center lg:justify-end mt-3 lg:mt-0">
           <Button
-            bgColor="#64d47f"
+            bgColor="bg-green-600"
             className="!text-white text-xs sm:text-sm px-5 py-2 sm:px-6 sm:py-2.5 hover:opacity-90 transition"
           >
             Partner with Us
@@ -89,17 +90,23 @@ const Footer = () => {
         className="
           w-full max-w-6xl mx-auto 
           flex flex-col sm:flex-row 
-          items-center justify-between 
+          items-center sm:items-center justify-between 
           gap-3 pb-6 text-center sm:text-left
         "
       >
         {/* copyright */}
-        <p className="text-xs sm:text-sm text-[var(--foreground)] order-2 sm:order-1">
+        <p className="text-xs sm:text-sm text-[var(--foreground)] order-1 sm:order-1">
           © 2025 GDG PUP | All Rights Reserved.
         </p>
 
         {/* social icons */}
-        <div className="flex justify-center sm:justify-end items-center gap-4 sm:gap-3 order-1 sm:order-2">
+        <div
+          className="
+            flex justify-center sm:justify-end items-center 
+            gap-4 sm:gap-3 mt-3 sm:mt-0
+            order-2 sm:order-2
+          "
+        >
           <a href="https://www.facebook.com/gdg.pupmnl" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
             <img
               src="/sites/footer/f-facebook.svg"
@@ -121,7 +128,12 @@ const Footer = () => {
               className="h-5 w-5 object-contain hover:opacity-80 transition"
             />
           </a>
-          <a href="https://www.linkedin.com/company/gdgpup/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a
+            href="https://www.linkedin.com/company/gdgpup/posts/?feedView=all"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
             <img
               src="/sites/footer/f-linkedin.svg"
               alt="LinkedIn"
