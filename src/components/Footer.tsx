@@ -70,8 +70,8 @@ const Footer = () => {
 
         {/* partner button */}
         <div className="w-full lg:w-auto flex justify-center lg:justify-end mt-3 lg:mt-0">
-          <Button
-            bgColor="bg-green-600"
+          <Button 
+          variant="green"
             className="!text-white text-xs sm:text-sm px-5 py-2 sm:px-6 sm:py-2.5 hover:opacity-90 transition"
           >
             Partner with Us
