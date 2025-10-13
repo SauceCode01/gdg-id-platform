@@ -10,7 +10,7 @@ const ComingSoonPage = () => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push("/");  
+    router.push("/");
   };
 
   return (
@@ -25,21 +25,22 @@ const ComingSoonPage = () => {
         <GlowBlobs
           layout="custom"
           blobs={[
-            { top: "60px", left: "20px", color: "rgba(52,168,83,0.9)" },  
-            { top: "40px", right: "5px", color: "rgba(234,67,53,0.95)" },  
-            { bottom: "40px", left: "160px", color: "rgba(255,191,0,0.9)" },  
-            { bottom: "0px", right: "120px", color: "rgba(66,133,244,0.9)" },  
+            { top: "60px", left: "20px", color: "rgba(52,168,83,0.9)" },
+            { top: "40px", right: "5px", color: "rgba(234,67,53,0.95)" },
+            { bottom: "40px", left: "160px", color: "rgba(255,191,0,0.9)" },
+            { bottom: "0px", right: "120px", color: "rgba(66,133,244,0.9)" },
           ]}
         />
       </div>
 
-      {/* 404 text  */}
+      {/* 404 text */}
       <div className="relative z-20 flex items-center justify-center w-full -translate-y-48 sm:-translate-y-48">
         <h1
-          className="text-[180px] sm:text-[300px] md:text-[420px] font-extrabold leading-none text-transparent"
+          className="text-[150px] sm:text-[240px] md:text-[360px] font-extrabold leading-none text-transparent"
           style={{
             WebkitTextStroke: "8px transparent",
-            backgroundImage: "linear-gradient(to bottom right, #1888F8, #1752A1)",
+            backgroundImage:
+              "linear-gradient(to bottom right, #1888F8, #1752A1)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             WebkitTextStrokeColor: "url(#gradient)",
@@ -49,14 +50,14 @@ const ComingSoonPage = () => {
         </h1>
       </div>
 
-      {/* thinking sparky image */}
-      <div className="absolute z-30 bottom-[90px] sm:bottom-[-400px] flex justify-center w-full overflow-hidden pointer-events-none">
+      {/* thinking sparky image (moved upward) */}
+      <div className="absolute z-30 bottom-[140px] sm:bottom-[-260px] flex justify-center w-full overflow-hidden pointer-events-none">
         <Image
           src="/sites/comingsoon/thinkingSparky.svg"
           alt="Thinking Sparky"
           width={1000}
           height={1000}
-          className="object-contain opacity-100 w-[340px] sm:w-[560px] md:w-[700px]"
+          className="object-contain opacity-100 w-[260px] sm:w-[420px] md:w-[520px]"
           priority
         />
       </div>
@@ -64,11 +65,10 @@ const ComingSoonPage = () => {
       {/* modal */}
       <div className="absolute inset-0 flex items-center justify-center px-2 sm:px-4 z-40">
         <div
-          className="relative backdrop-blur-xl bg-surface/10 sm:bg-surface/20 border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl text-center w-[85%] sm:w-full max-w-xl pt-6 sm:pt-14 pb-10 sm:pb-12 px-4 sm:px-16"
+          className="relative backdrop-blur-sm bg-surface/10 sm:bg-surface/20 border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl text-center w-[85%] sm:w-full max-w-xl pt-4 sm:pt-10 pb-8 sm:pb-10 px-3 sm:px-8"
           style={{
-            boxShadow:
-              "inset 0 0 20px rgba(255,255,255,0.25)",
-          }} // , 0 0 25px rgba(255,255,255,0.1)
+            boxShadow: "inset 0 0 20px rgba(255,255,255,0.25)",
+          }}
         >
           <div className="-top-14 sm:-top-16 absolute left-1/2 -translate-x-1/2 z-50">
             <Image
@@ -82,19 +82,19 @@ const ComingSoonPage = () => {
           </div>
 
           {/* modal content */}
-          <h2 className="text-xl sm:text-3xl font-bold  mb-2">
+          <h2 className="text-xl sm:text-3xl font-bold mb-2">
             Uh-oh! Page Not Found
           </h2>
-          <h2 className="text-xl sm:text-3xl font-bold  mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-3xl font-bold mb-4 sm:mb-5">
             (But Sparky&apos;s here!)
           </h2>
 
-          <p className="text-sm sm:text-base  mb-3 sm:mb-4">
+          <p className="text-sm sm:text-base mb-3 sm:mb-4">
             Looks like this page took a vacation without telling us! Don’t fret,
             even our amazing Sparky can’t find everything instantly.
           </p>
 
-          <p className="text-sm sm:text-base  mb-6 sm:mb-8">
+          <p className="text-sm sm:text-base mb-6 sm:mb-8 whitespace-nowrap">
             In the meantime, let’s get you back to where the magic happens.
           </p>
 
