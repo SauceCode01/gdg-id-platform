@@ -82,7 +82,7 @@ export default function Button({
       onMouseLeave={handleMouseLeave}
       onClick={handleOnClick}
       className={cn(
-        "group relative flex items-center justify-center rounded-[8px] px-4 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
+        "group relative flex items-center justify-center rounded-[8px] px-4 py-2.5 text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
         className
       )}
       style={{
