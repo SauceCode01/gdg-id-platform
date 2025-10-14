@@ -2,9 +2,12 @@
 
 import Button from "@/components/Button";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const { isDarkMode } = useGlobalContext();
+  const router = useRouter();
 
   return (
     <footer
@@ -38,7 +41,7 @@ const Footer = () => {
           text-center lg:text-left
         "
       >
-        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto">
+        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto cursor-pointer" onClick={()=>router.push("/")}>
           <img
             src={
               isDarkMode
@@ -65,7 +68,7 @@ const Footer = () => {
           {
             LINKS.map((link, index) => (
               
-          <a href={link.href} key={index} className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">{link.name}</a>
+          <Link href={link.href} key={index} className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">{link.name}</Link>
             ))
           } 
         </div>

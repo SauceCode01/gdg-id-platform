@@ -114,13 +114,13 @@ const IDPage = () => {
       ctx.font = "16px Arial";
 
       // Full name
-      ctx.fillText(`Name:`, 60, 590);
+      ctx.fillText(`Name:`, 70, 590);
 
       // Email
-      ctx.fillText(`Email:`, 60, 620);
+      ctx.fillText(`Email:`, 70, 620);
 
       // Course
-      ctx.fillText(`Course:`, 60, 650);
+      ctx.fillText(`Course:`, 70, 650);
 
 
 
@@ -130,13 +130,13 @@ const IDPage = () => {
       ctx.font = "bold 16px Arial";
 
       // Full name
-      ctx.fillText(`Name: ${member.name || ""}`, 130, 590);
+      ctx.fillText(`${member.name || ""}`, 140, 590);
 
       // Email
-      ctx.fillText(`Email: ${member.email || ""}`, 130, 620);
+      ctx.fillText(`${member.email || ""}`, 140, 620);
 
       // Course
-      ctx.fillText(`Course: ${member.course || ""}`, 130, 650);
+      ctx.fillText(`${member.course || ""}`, 140, 650);
 
 
 
@@ -182,7 +182,7 @@ const IDPage = () => {
         {/* MOBILE VIEW */}
 
         {/* DESKTOP VIEW */}
-        <div className=" flex flex-col lg:flex-row relative z-10 text-center items-center">
+        <div className=" flex flex-col lg:flex-row relative z-10 text-center items-center px-8">
           <h1
             className="
                 font-bold  
@@ -199,7 +199,7 @@ const IDPage = () => {
           </h1>
 
           <div className="flex-1">
-            <div className="w-[17rem] xs:w-sm lg:w-lg ">
+            <div className="w-[17rem] xs:w-sm sm:w-md xl:w-lg ">
               <CardImage imageUrl={imageUrl} loading={loading} error={error} />
             </div>
           </div>
