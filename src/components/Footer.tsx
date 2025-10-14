@@ -2,9 +2,12 @@
 
 import Button from "@/components/Button";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const { isDarkMode } = useGlobalContext();
+  const router = useRouter();
 
   return (
     <footer
@@ -31,14 +34,14 @@ const Footer = () => {
       <div
         className="
           w-full max-w-6xl mx-auto 
-          flex flex-col lg:flex-row lg:flex-wrap
+          flex flex-col lg:flex-row 
           items-center lg:items-center  
           justify-center lg:justify-between 
           mt-10 gap-6 sm:gap-8 md:gap-10 pb-6 
           text-center lg:text-left
         "
       >
-        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto">
+        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto cursor-pointer" onClick={()=>router.push("/")}>
           <img
             src={
               isDarkMode
@@ -53,19 +56,21 @@ const Footer = () => {
         {/* footer links */}
         <div
           className="
-            flex flex-col sm:flex-col md:flex-row 
-            justify-center lg:justify-center 
-            items-center gap-3 sm:gap-4 md:gap-8 lg:gap-14 
+            flex-1
+            flex-col sm:flex-row
+            flex flex-wrap sm:justify-around 
+            items-center gap-2   
             text-[var(--foreground)] 
             text-sm sm:text-base font-normal 
             w-full lg:w-auto mt-4 lg:mt-0
           "
         >
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Privacy</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Terms</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">About Event</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Code of Conduct</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Contact Us</a>
+          {
+            LINKS.map((link, index) => (
+              
+          <Link href={link.href} key={index} className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">{link.name}</Link>
+            ))
+          } 
         </div>
 
         {/* partner button */}
@@ -88,6 +93,7 @@ const Footer = () => {
       {/* bottom section */}
       <div
         className="
+        flex-1
           w-full max-w-6xl mx-auto 
           flex flex-col sm:flex-row 
           items-center sm:items-center justify-between 
@@ -147,3 +153,23 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+const LINKS = [
+  {
+    name: "About",
+    href: "/about",
+  },
+  {
+    name: "FAQs",
+    href: "/faqs",
+  },
+  {
+    name: "Contact",
+    href: "/contacts",
+  },
+  {
+    name: "Coming Soon",
+    href: "/comingsoon",
+  }
+]

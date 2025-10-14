@@ -15,7 +15,7 @@ const AboutPage = () => {
   const {isDarkMode} = useGlobalContext();
 
   return (
-    <div className="relative min-h-screen overflow-hidden font-[var(--font-google-sans)]">
+    <div className="relative overflow-hidden ">
       {/* background grid */}
       <Grid />
 
@@ -52,13 +52,13 @@ const AboutPage = () => {
       </div>
 
       {/* content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-10 pt-10 pb-10 -translate-y-4 lg:-translate-y-10">
-        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-0 relative">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-10 pt-10 pb-10 -translate-y-4 lg:-translate-y-10">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-0 relative lg:my-16">
           {/* Mobile Layout — Titles above Image */}
           <div className="block lg:hidden text-center">
             <h1
               className={cn(
-                "font-bold text-4xl sm:text-5xl leading-none mb-1 text-gdg-blue",
+                "font-bold  text-4xl xs:text-5xl sm:text-6xl leading-none mb-1 text-gdg-blue mt-8",
                 "drop-shadow-[0_0_2px_var(--color-gdg-blue)]",
               )}
                
@@ -85,7 +85,10 @@ const AboutPage = () => {
             {/* (hidden on mobile) */}
             <div className="hidden lg:block group">
               <h1
-                className="font-bold text-5xl lg:text-6xl leading-none mb-0 text-[#4285F4] group-hover:scale-x-105 transition-all duration-200 text-center"
+                className={cn(
+                  "font-bold text-6xl leading-none mb-0 text-[#4285F4] hover:scale-x-105 transition-all duration-200 text-center",
+                "drop-shadow-[0_0_2px_var(--color-gdg-blue)]",
+                )}
               >
                 Project Vision
               </h1>
