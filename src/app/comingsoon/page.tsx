@@ -51,14 +51,14 @@ const ComingSoonPage = () => {
         </div>
 
         {/* modal */}
-        <div className="  inset-0 flex items-center justify-center px-2 sm:px-4 z-40 -translate-y-16 sm:-translate-y-32 md:-translate-y-48">
+        <div className=" group inset-0 flex items-center justify-center px-2 sm:px-4 z-40 -translate-y-16 sm:-translate-y-32 md:-translate-y-48">
           <div
             className="relative backdrop-blur-sm bg-surface/10 sm:bg-surface/20 border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl text-center w-[85%] sm:w-full max-w-xl pt-6 sm:pt-14 pb-10 sm:pb-12 px-4 sm:px-16"
             style={{
               boxShadow: "inset 0 0 20px rgba(255,255,255,0.25)",
             }} // , 0 0 25px rgba(255,255,255,0.1)
           >
-            <div className="-top-14 sm:-top-16 absolute left-1/2 -translate-x-1/2 z-50">
+            <div className="-top-14 sm:-top-16 absolute left-1/2 -translate-x-1/2 z-50 group-hover:scale-105 group-hover:rotate-2 transition-all duration-200">
               <Image
                 src="/sites/comingsoon/restingSparky.svg"
                 alt="Resting Sparky"
