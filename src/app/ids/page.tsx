@@ -12,6 +12,7 @@ import { getMember } from "@/lib/api/endpoints/membersEndpoints";
 import { Member } from "@/types/member";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 export default function TrueIdPageWithSuspenseBoundary() {
   return (
@@ -214,9 +215,9 @@ const IDPage = () => {
                 dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
                 hidden lg:flex
               "
-            >
-              OFFICIAL GDG PUP DIGITAL ID
-            </h1>
+              >
+                OFFICIAL GDG PUP DIGITAL ID
+              </h1>
 
             {/* GDG Logo (light/dark mode for desktop) */}
             <div className="h-auto w-full max-w-sm scale-140 mx-auto hidden lg:flex">
@@ -233,11 +234,11 @@ const IDPage = () => {
             </div>
 
             <div className="flex justify-center gap-3 mt-16 lg:mt-0 flex-col xs:flex-row">
-              <Button bgColor="#659df8" onClick={handleDownloadPNG}>
+              <Button variant="blue" onClick={handleDownloadPNG}>
                 <Download className="mr-2 size-5 stroke-white" />
                 <span>Download as PNG</span>
               </Button>
-              <Button bgColor="#64d47f" onClick={handleDownloadPDF}>
+              <Button variant="green" onClick={handleDownloadPDF}>
                 <Download className="mr-2 size-5 stroke-white" />
                 <span>Download as PDF</span>
               </Button>

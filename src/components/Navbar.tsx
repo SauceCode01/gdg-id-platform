@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { IoMenu, IoClose } from "react-icons/io5";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useGlobalContext } from "@/providers/GlobalContextProvider"; 
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -13,24 +14,25 @@ export default function Navbar() {
   const [showBackdropBlur, setShowBackdropBlur] = useState(true);
   const pathname = usePathname();
 
+  const { isDarkMode: isDark } = useGlobalContext();
+
   useEffect(() => {
     if (open) {
-      // Immediately remove shadow and backdrop blur when opening
       setShowShadow(false);
-      const blurTimer = setTimeout(() => {
-        setShowBackdropBlur(false);
-      }, 200); // Delay backdrop blur removal by 250ms
+      const blurTimer = setTimeout(() => setShowBackdropBlur(false), 200);
       return () => clearTimeout(blurTimer);
     } else {
-      // Immediately restore backdrop blur when closing
       setShowBackdropBlur(true);
-      // Delay adding shadow back when closing (wait for animation to finish)
-      const shadowTimer = setTimeout(() => {
-        setShowShadow(true);
-      }, 200);
+      const shadowTimer = setTimeout(() => setShowShadow(true), 200);
       return () => clearTimeout(shadowTimer);
     }
   }, [open]);
+
+  const desktopLogo = isDark
+    ? "/sites/navbar/gdg-logo-dark.svg"
+    : "/sites/navbar/gdg-logo.svg";
+
+  const mobileLogo = "/sites/navbar/mobile-logo.svg";
 
   return (
     <>
@@ -43,32 +45,29 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto w-full flex px-6 md:px-8">
           <div className="flex justify-between items-center h-full w-full">
-            {/* Logo - left side */}
+            {/* Logo */}
             <Link
               href="/"
               className="flex items-center flex-row justify-start gap-2"
               onClick={() => setOpen(false)}
             >
-              {/* Mobile logo - visible on small screens */}
+              {/* Mobile logo (same for both modes) */}
               <img
-                src="/sites/navbar/GDGLogoPlain.svg"
-                alt="GDG PUP Logo"
-                className="block"
+                src={mobileLogo}
+                alt="GDG Mobile Logo"
+                className="block md:hidden w-auto h-8"
               />
 
-              <div className="hidden md:flex flex-col gap-0">
-                <span className="text-text text-[1.3rem] leading-tight tracking-wide">
-                  Google Developer Group
-                </span>
-                <span className=" text-[0.7rem] leading-tight tracking-wide text-gdg-blue">
-                  On Campus - Polytechnic University of the Philippines
-                </span>
-              </div>
+              {/* Desktop logo (switches by theme) */}
+              <img
+                src={desktopLogo}
+                alt="GDG Logo"
+                className="hidden md:block w-auto h-10 transition-opacity duration-300"
+              />
             </Link>
 
-            {/* Navlinks & dark/light mode toogle - right side */}
+            {/* Right side: links + theme toggle */}
             <div className="flex items-center gap-3 md:gap-5 lg:gap-15 text-text">
-              {/* Navigation Links */}
               <div className="hidden md:flex items-center gap-1.5 md:gap-5 lg:gap-15 h-full">
                 {LINKS.map((link, index) => (
                   <Link
@@ -89,7 +88,7 @@ export default function Navbar() {
               {/* Dark/Light Mode Toggle */}
               <ThemeToggle />
 
-              {/* burger menu visible below md */}
+              {/* Burger menu (below md) */}
               <div
                 className="flex md:hidden hover:bg-gray-200 cursor-pointer"
                 onClick={() => setOpen(!open)}
@@ -121,7 +120,7 @@ export default function Navbar() {
         onClick={() => setOpen(!open)}
       />
 
-      {/* dropdown  */}
+      {/* dropdown */}
       <div
         className={cn(
           open ? "translate-y-0" : "translate-y-[-150%]",
@@ -129,7 +128,7 @@ export default function Navbar() {
         )}
       >
         <div className="py-6 bg-surface/75 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] backdrop-blur-[6px] flex flex-col justify-start items-start gap-6 pt-20">
-          {LINKS.map((link, index) => (
+          {LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}

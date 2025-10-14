@@ -89,7 +89,7 @@ const ComingSoonPage = () => {
             <div className="flex justify-center">
               <Button
                 onClick={handleBackClick}
-                bgColor="bg-gradient-to-r from-[#1888F8] to-[#1752A1]"
+                variant="blue"
                 className="text-white font-semibold text-sm sm:text-base px-5 sm:px-8 py-2 sm:py-3"
               >
                 Back
