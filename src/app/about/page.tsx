@@ -55,7 +55,7 @@ const AboutPage = () => {
 
       {/* content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-10 pt-10 pb-10 -translate-y-4 lg:-translate-y-10">
-        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-0 relative lg:my-32">
+        <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-7xl gap-0 relative lg:my-24">
           {/* Mobile Layout — Titles above Image */}
           <div className="block lg:hidden text-center">
             <h1
