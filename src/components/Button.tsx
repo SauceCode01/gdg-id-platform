@@ -30,81 +30,77 @@ function darkenColor(hex: string, amount: number = 20): string {
   );
 }
 
+const buttonVariants = {
+  blue: {
+    base: "#4285f4",
+    hover: "#298843", 
+  },
+  green: {
+    base: "#298843",
+    hover: "#F9AB00", 
+  },
+} as const;
+
+type ButtonVariant = keyof typeof buttonVariants;
+
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   onClick?: () => void;
-  bgColor?: string; // Can be Tailwind, hex, or CSS variable
-  type?: "button" | "submit" | "reset" | undefined;
+  variant?: ButtonVariant;
+  icon?: React.ReactNode;
+  htmlType?: "button" | "submit" | "reset" | undefined;
 }
 
 export default function Button({
   children = "Button",
   onClick,
-  bgColor = "#3b82f6", // default Tailwind blue-500 equivalent
-  type,
+  variant = "blue",
+  icon,
+  htmlType = "button",
   className,
   ...rest
 }: Props) {
-  const [baseColor, setBaseColor] = useState<string>(bgColor);
-  const [shadowColor, setShadowColor] = useState<string>(
-    bgColor.startsWith("#") ? darkenColor(bgColor, 35) : "black"
-  );
+  const [baseColor, setBaseColor] = useState<string>(buttonVariants[variant].base);
+ 
 
-  const handleMouseEnter = () => {
-    // Example hover logic: slightly lightens or changes color
-    const hover =
-      Math.random() > 0.5 ? "#ef4444" /* red-500 */ : "#facc15" /* yellow-400 */;
-    setBaseColor(hover);
+  const handleMouseEnter = () => { 
+    setBaseColor(buttonVariants[variant].hover);
   };
-
   const handleMouseLeave = () => {
-    setBaseColor(bgColor);
+    setBaseColor(buttonVariants[variant].base);
   };
-
-  useEffect(() => {
-    // When base color changes, update shadow accordingly
-    if (baseColor.startsWith("#")) {
-      setShadowColor(darkenColor(baseColor, 35));
-    } else {
-      // For Tailwind or CSS variable colors, use a solid fallback shadow
-      setShadowColor("rgba(0,0,0,0.2)");
-    }
-  }, [baseColor]);
 
   const handleOnClick = () => {
     if (onClick) onClick();
   };
 
-  const isHex = baseColor.startsWith("#");
-  const isTailwind = baseColor.startsWith("bg-") || baseColor.startsWith("bg[");
-
   return (
     <button
       {...rest}
-      type={type}
+      type={htmlType}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleOnClick}
       className={cn(
-        "group relative flex items-center justify-center rounded-[8px] px-6 py-2.5 font-medium text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
-        isTailwind ? baseColor : "",
+        "group relative flex items-center justify-center rounded-[8px] px-4 py-2.5 text-white transition-all duration-300 ease-out select-none overflow-hidden text-sm cursor-pointer",
         className
       )}
       style={{
-        backgroundColor: isHex ? baseColor : undefined,
-        boxShadow: `inset 0 1px 1px #ffffff, 0 4px 0 ${shadowColor}`, // solid shadow preserved
+        backgroundColor: baseColor,
+        boxShadow: `  inset 0px 1px 0px 0px rgba(255,255,255,0.40), inset 0px -3px 0px 0px rgba(0,0,0,0.20), inset 0px 4px 4px 0px rgba(0,0,0,0.05)`,
         transition: "background-color 0.3s ease, box-shadow 0.3s ease",
       }}
+ 
     >
       {/* Radial sheen */}
-      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.55)_0%,rgba(0,0,0,0.15)_100%)] pointer-events-none mix-blend-overlay" />
+      <div className="absolute inset-0 rounded-[8px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.30)_0%,rgba(0,0,0,0.10)_100%)] pointer-events-none mix-blend-overlay" />
 
-      <AnimatedGradientText className="font-semibold tracking-wide text-white flex flex-row items-center justify-center">
+      <AnimatedGradientText className="  text-neutral-50  text-base leading-normal flex flex-row items-center justify-center">
         {children}
       </AnimatedGradientText>
 
       {/* Gloss overlay */}
-      <div className="absolute inset-0 rounded-[8px] bg-gradient-to-b from-white/15 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 rounded-[8px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
     </button>
   );
 }

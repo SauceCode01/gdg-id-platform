@@ -2,9 +2,12 @@
 
 import Button from "@/components/Button";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const { isDarkMode } = useGlobalContext();
+  const router = useRouter();
 
   return (
     <footer
@@ -31,14 +34,14 @@ const Footer = () => {
       <div
         className="
           w-full max-w-6xl mx-auto 
-          flex flex-col lg:flex-row lg:flex-wrap
+          flex flex-col lg:flex-row 
           items-center lg:items-center  
           justify-center lg:justify-between 
           mt-10 gap-6 sm:gap-8 md:gap-10 pb-6 
           text-center lg:text-left
         "
       >
-        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto">
+        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto cursor-pointer" onClick={()=>router.push("/")}>
           <img
             src={
               isDarkMode
@@ -53,24 +56,27 @@ const Footer = () => {
         {/* footer links */}
         <div
           className="
-            flex flex-wrap justify-center lg:justify-center 
-            items-center gap-4 sm:gap-8 lg:gap-14 
+            flex-1
+            flex-col sm:flex-row
+            flex flex-wrap sm:justify-around 
+            items-center gap-2   
             text-[var(--foreground)] 
             text-sm sm:text-base font-normal 
-            w-full lg:w-auto mt-2 lg:mt-0
+            w-full lg:w-auto mt-4 lg:mt-0
           "
         >
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Privacy</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Terms</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">About Event</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Code of Conduct</a>
-          <a href="#" className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">Contact Us</a>
+          {
+            LINKS.map((link, index) => (
+              
+          <Link href={link.href} key={index} className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">{link.name}</Link>
+            ))
+          } 
         </div>
 
         {/* partner button */}
         <div className="w-full lg:w-auto flex justify-center lg:justify-end mt-3 lg:mt-0">
-          <Button
-            bgColor="#64d47f"
+          <Button 
+          variant="green"
             className="!text-white text-xs sm:text-sm px-5 py-2 sm:px-6 sm:py-2.5 hover:opacity-90 transition"
           >
             Partner with Us
@@ -87,19 +93,26 @@ const Footer = () => {
       {/* bottom section */}
       <div
         className="
+        flex-1
           w-full max-w-6xl mx-auto 
           flex flex-col sm:flex-row 
-          items-center justify-between 
+          items-center sm:items-center justify-between 
           gap-3 pb-6 text-center sm:text-left
         "
       >
         {/* copyright */}
-        <p className="text-xs sm:text-sm text-[var(--foreground)] order-2 sm:order-1">
+        <p className="text-xs sm:text-sm text-[var(--foreground)] order-1 sm:order-1">
           © 2025 GDG PUP | All Rights Reserved.
         </p>
 
         {/* social icons */}
-        <div className="flex justify-center sm:justify-end items-center gap-4 sm:gap-3 order-1 sm:order-2">
+        <div
+          className="
+            flex justify-center sm:justify-end items-center 
+            gap-4 sm:gap-3 mt-3 sm:mt-0
+            order-2 sm:order-2
+          "
+        >
           <a href="https://www.facebook.com/gdg.pupmnl" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
             <img
               src="/sites/footer/f-facebook.svg"
@@ -121,7 +134,12 @@ const Footer = () => {
               className="h-5 w-5 object-contain hover:opacity-80 transition"
             />
           </a>
-          <a href="https://www.linkedin.com/company/gdgpup/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a
+            href="https://www.linkedin.com/company/gdgpup/posts/?feedView=all"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
             <img
               src="/sites/footer/f-linkedin.svg"
               alt="LinkedIn"
@@ -135,3 +153,23 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+const LINKS = [
+  {
+    name: "About",
+    href: "/about",
+  },
+  {
+    name: "FAQs",
+    href: "/faqs",
+  },
+  {
+    name: "Contact",
+    href: "/contacts",
+  },
+  {
+    name: "Coming Soon",
+    href: "/comingsoon",
+  }
+]
