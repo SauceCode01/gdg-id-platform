@@ -75,27 +75,71 @@ const IDPage = () => {
       ctx.textAlign = "center";
       ctx.fillStyle = "#1a1a1a";
 
-      // Display name (Arky)
-      ctx.font = "bold 26px Arial";
-      ctx.fillText(member.displayName || "", canvas.width / 2, 330);
+      // // Display name (Arky)
+      // ctx.font = "bold 26px Arial";
+      // ctx.fillText(member.displayName || "", canvas.width / 2, 330);
+
+      // // GDG ID
+      // ctx.font = "12px Arial";
+      // ctx.fillText(member.gdgId || "", canvas.width / 2, 350);
+
+      // // Bottom section
+      // ctx.textAlign = "left";
+      // ctx.fillStyle = "#ffffff";
+      // ctx.font = "12px Arial";
+
+      // // Full name
+      // ctx.fillText(`Name: ${member.name || ""}`, 50, 410);
+
+      // // Email
+      // ctx.fillText(`Email: ${member.email || ""}`, 50, 440);
+
+      // // Course
+      // ctx.fillText(`Course: ${member.course || ""}`, 50, 470);
+
+
+
+       // Display name (Arky)
+      ctx.font = "bold 32px Arial";
+      ctx.fillText(member.displayName || "", canvas.width / 2, 465);
 
       // GDG ID
-      ctx.font = "12px Arial";
-      ctx.fillText(member.gdgId || "", canvas.width / 2, 350);
+      ctx.font = "20px Arial";
+      ctx.fillText(member.gdgId || "", canvas.width / 2, 495);
 
       // Bottom section
       ctx.textAlign = "left";
       ctx.fillStyle = "#ffffff";
-      ctx.font = "12px Arial";
+      ctx.font = "16px Arial";
 
       // Full name
-      ctx.fillText(`Name: ${member.name || ""}`, 50, 410);
+      ctx.fillText(`Name:`, 60, 590);
 
       // Email
-      ctx.fillText(`Email: ${member.email || ""}`, 50, 440);
+      ctx.fillText(`Email:`, 60, 620);
 
       // Course
-      ctx.fillText(`Course: ${member.course || ""}`, 50, 470);
+      ctx.fillText(`Course:`, 60, 650);
+
+
+
+       // Bottom section
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 16px Arial";
+
+      // Full name
+      ctx.fillText(`Name: ${member.name || ""}`, 130, 590);
+
+      // Email
+      ctx.fillText(`Email: ${member.email || ""}`, 130, 620);
+
+      // Course
+      ctx.fillText(`Course: ${member.course || ""}`, 130, 650);
+
+
+
+
 
       // Export preview image
       setImageUrl(canvas.toDataURL("image/png"));
