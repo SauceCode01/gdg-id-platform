@@ -25,6 +25,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GDG PUP Digital ID Platform",
   description: "The official Digital ID Platform of GDG PUP, built to streamline member identity, event participation, and community engagement. Designed as the foundation for future NFC-enabled IDs and gamified experiences for the 2026 cohort and beyond.",
+    openGraph: {
+    title: "My Awesome Web Dev Agency",
+    description: "We build fast, beautiful, and modern websites.",
+    url: "https://gdg-id-platform.vercel.app/",
+    siteName: "GDG PUP Digital ID Platform",
+    images: [
+      {
+        url: "/gdgprofile.jpg",  
+        width: 1200,
+        height: 630,
+        alt: "GDG PUP Digital ID Platform",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
