@@ -101,7 +101,7 @@ const AboutPage = () => {
             {/* about card */}
             <div
               className={cn(
-                "p-5 lg:p-6 rounded-2xl bg-surface backdrop-blur-sm  max-w-md lg:max-w-lg mt-4 mb-3 text-base sm:text-lg lg:text-xl leading-[1.6]  text-justify tracking-[0.01em]  shadow-[0_4px_20px_rgba(0,0,0,0.08),_0_8px_30px_rgba(0,0,0,0.05)] lg:-translate-x-12 ",
+                "z-100 relative p-5 lg:p-6 rounded-2xl bg-gradient-to-b from-surface-high to-surface backdrop-blur-sm  max-w-md lg:max-w-lg mt-4 mb-3 text-base sm:text-lg lg:text-xl leading-[1.6]  text-justify tracking-[0.01em]  shadow-[0_4px_20px_rgba(0,0,0,0.08),_0_8px_30px_rgba(0,0,0,0.05)] lg:-translate-x-12 ",
                 isDarkMode && "border-outline border-2"
               )}
             >
