@@ -76,6 +76,10 @@
   --color-gdg-blue-light: var(--gdg-blue-light);
   --color-gdg-blue-dark: var(--gdg-blue-dark);
 
+
+  /* custom breakpoints */
+  --breakpoint-xs: 30rem;
+
   /* shadcn animations */
   @keyframes gradient {
     to {
