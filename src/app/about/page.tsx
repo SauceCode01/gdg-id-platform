@@ -142,30 +142,35 @@ const AboutPage = () => {
 
         {/* per team section */}
         <div className="flex flex-col w-full gap-16">
-          {CONTRIBUTORS.map((team) => (
-            <>
-              <div className="flex flex-col w-full gap-2 md:gap-4">
-                {/* team header */}
-                <div
-                  className={cn(
-                    "font-bold  text-2xl xs:text-2xl sm:text-3xl leading-none",
-                    "w-full text-center",
-                    team.textColor === "blue" && "text-gdg-blue drop-shadow-[0_0_2px_var(--color-gdg-blue)]",
-                    team.textColor === "orange" && "text-gdg-orange drop-shadow-[0_0_2px_var(--color-gdg-orange)]",
-                    team.textColor === "green" && "text-gdg-green drop-shadow-[0_0_2px_var(--color-gdg-green)]",
-                    team.textColor === "red" && "text-gdg-red drop-shadow-[0_0_2px_var(--color-gdg-red)]"
-                  )}
-                >
-                  {team.group}
-                </div>
-                {/* team members */}
-                <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:justify-center lg:grid-cols-none  gap-0">
-                  {team.members.map((member, index) => (
-                    <MemberCard key={index} member={member} />
-                  ))}
-                </div>
+          {CONTRIBUTORS.map((team, index) => (
+            <div
+              key={`team-${index}`}
+              className="flex flex-col w-full gap-2 md:gap-4"
+            >
+              {/* team header */}
+              <div
+                className={cn(
+                  "font-bold  text-2xl xs:text-2xl sm:text-3xl leading-none",
+                  "w-full text-center",
+                  team.textColor === "blue" &&
+                    "text-gdg-blue drop-shadow-[0_0_2px_var(--color-gdg-blue)]",
+                  team.textColor === "orange" &&
+                    "text-gdg-orange drop-shadow-[0_0_2px_var(--color-gdg-orange)]",
+                  team.textColor === "green" &&
+                    "text-gdg-green drop-shadow-[0_0_2px_var(--color-gdg-green)]",
+                  team.textColor === "red" &&
+                    "text-gdg-red drop-shadow-[0_0_2px_var(--color-gdg-red)]"
+                )}
+              >
+                {team.group}
               </div>
-            </>
+              {/* team members */}
+              <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:justify-center lg:grid-cols-none  gap-0">
+                {team.members.map((member, index) => (
+                  <MemberCard key={index} member={member} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -176,8 +181,7 @@ const AboutPage = () => {
 export default AboutPage;
 
 const MemberCard = ({ member }: { member: MemberType }) => {
-
-   const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(0);
 
   const handleMouseEnter = () => {
     const randomDeg = Math.random() * 2 - 1; // random between -20° and +20°
@@ -188,14 +192,13 @@ const MemberCard = ({ member }: { member: MemberType }) => {
     setRotation(0); // reset when hover ends
   };
 
-
   return (
     <div
       className="w-full flex-1  max-w-none lg:max-w-xs relative hover:scale-105 transition-all duration-200 "
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: `rotate(${rotation}deg)`, 
+        transform: `rotate(${rotation}deg)`,
       }}
     >
       {/* card template */}
