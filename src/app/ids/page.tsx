@@ -10,6 +10,8 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import jsPDF from "jspdf";
 import { getMember } from "@/lib/api/endpoints/membersEndpoints";
 import { Member } from "@/types/member";
+import { useGlobalContext } from "@/providers/GlobalContextProvider";
+import { Card } from "@/components/ui/card";
 
 export default function TrueIdPageWithSuspenseBoundary() {
   return (
@@ -122,143 +124,71 @@ const IDPage = () => {
     pdf.save(`${member?.displayName || "GDG_PUP"}_ID.pdf`);
   };
 
+  const { isDarkMode } = useGlobalContext();
+
   return (
     <div className="min-h-screen">
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <section className="relative flex flex-row min-h-screen items-center justify-center overflow-hidden">
         <Grid />
         <div className="hidden lg:block">
           <GlowBlobs layout="home" />
         </div>
 
         {/* MOBILE VIEW */}
-        <div className="relative z-10 text-center px-6 lg:hidden">
-          <h1
-            className="
-              text-3xl font-bold mb-4 
-              text-slate-800 
-              drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
-              dark:text-transparent dark:bg-clip-text
-              dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
-              dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
-            "
-          >
-            OFFICIAL GDG PUP DIGITAL ID
-          </h1>
-
-
-          <div className="relative flex justify-center mb-6">
-            {loading ? (
-              <div className="w-80 h-[500px] bg-gray-200 animate-pulse rounded-lg" />
-            ) : error ? (
-              <p className="text-red-500 italic">{error}</p>
-            ) : (
-              imageUrl && (
-                <div className="relative w-80 h-[500px] flex justify-center items-center">
-                  <div className="relative w-[300px] h-[300px]">
-                    {/* BACK IMAGE */}
-                    <Image
-                      src="/cards/back.png"
-                      alt="GDG ID Back"
-                      width={300}
-                      height={300}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
-                      unoptimized
-                    />
-                    {/* FRONT (GENERATED) IMAGE */}
-                    <Image
-                      src={imageUrl}
-                      alt="Generated GDG ID"
-                      width={300}
-                      height={300}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
-                      unoptimized
-                    />
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-
-          <div className="flex justify-center gap-3">
-            <Button bgColor="bg-blue-600" onClick={handleDownloadPNG}>
-              <Download className="mr-2 size-5 stroke-white" />
-              <span>Download as PNG</span>
-            </Button>
-            <Button bgColor="bg-green-600" onClick={handleDownloadPDF}>
-              <Download className="mr-2 size-5 stroke-white" />
-              <span>Download as PDF</span>
-            </Button>
-          </div>
-        </div>
 
         {/* DESKTOP VIEW */}
-        <div className="hidden lg:flex relative z-10 text-center items-center">
-          <div className="h-screen relative flex justify-center w-1/2 ">
-            {loading ? (
-              <div className="w-[950px] h-[950px] bg-gray-200 animate-pulse rounded-lg" />
-            ) : error ? (
-              <p className="text-red-500 italic">{error}</p>
-            ) : (
-              imageUrl && (
-                <div className="relative w-[950px] h-[950px] flex justify-center items-center">
-                  <div className="relative w-[300px] h-[300px]">
-                    {/* BACK IMAGE */}
-                    <Image
-                      src="/cards/back.png"
-                      alt="GDG ID Back"
-                      width={520}
-                      height={520}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
-                    />
-                    {/* FRONT (GENERATED) IMAGE */}
-                    <Image
-                      src={imageUrl}
-                      alt="Generated GDG ID"
-                      width={500}
-                      height={500}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
-                    />
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-
-          <div className="h-screen flex flex-col justify-center px-5">
-            <h1
-              className="
-                text-7xl font-bold mb-4 
+        <div className=" flex flex-col lg:flex-row relative z-10 text-center items-center">
+          <h1
+            className="
+                font-bold  
                 text-slate-800 
                 drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
                 dark:text-transparent dark:bg-clip-text
                 dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
                 dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
+                lg:hidden
+                my-8 text-4xl
+              "
+          >
+            OFFICIAL GDG PUP DIGITAL ID
+          </h1>
+
+          <div className="flex-1">
+            <div className="w-[17rem] xs:w-sm lg:w-lg ">
+              <CardImage imageUrl={imageUrl} loading={loading} error={error} />
+            </div>
+          </div>
+
+          <div className="flex flex-1 flex-col items-center px-5 max-w-2xl ">
+            <h1
+              className="
+                text-7xl font-bold  
+                text-slate-800 
+                drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
+                dark:text-transparent dark:bg-clip-text
+                dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
+                dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
+                hidden lg:flex
               "
             >
               OFFICIAL GDG PUP DIGITAL ID
             </h1>
 
             {/* GDG Logo (light/dark mode for desktop) */}
-            <div className="h-auto w-full max-w-xs mx-auto mb-4">
+            <div className="h-auto w-full max-w-sm scale-140 mx-auto hidden lg:flex">
               {/* Light mode logo */}
-              <Image
-                src="/sites/idgenerate/GDGLogo_Light.png"
+              <img
+                src={
+                  isDarkMode
+                    ? "/sites/idgenerate/GDGLogo_Dark.png"
+                    : "/sites/idgenerate/GDGLogo_Light.png"
+                }
                 alt="GDG Logo Light"
-                width={500}
-                height={500}
-                className="block h-auto w-full object-contain dark:hidden mx-auto"
-              />
-              {/* Dark mode logo */}
-              <Image
-                src="/sites/idgenerate/GDGLogo_Dark.png"
-                alt="GDG Logo Dark"
-                width={500}
-                height={500}
-                className="hidden h-auto w-full object-contain dark:block mx-auto"
+                className="  h-auto w-full object-contain mx-auto"
               />
             </div>
 
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-3 mt-16 lg:mt-0 flex-col xs:flex-row">
               <Button bgColor="#659df8" onClick={handleDownloadPNG}>
                 <Download className="mr-2 size-5 stroke-white" />
                 <span>Download as PNG</span>
@@ -270,11 +200,51 @@ const IDPage = () => {
             </div>
           </div>
         </div>
- 
 
         {/* Hidden canvas for generation */}
         <canvas ref={canvasRef} className="hidden" />
       </section>
     </div>
+  );
+};
+
+const CardImage = ({
+  imageUrl,
+  loading,
+  error,
+}: {
+  imageUrl?: string | null;
+  loading?: boolean;
+  error?: string | null;
+}) => {
+  return (
+    <>
+      {imageUrl && (
+        <div className="relative flex items-center overflow-visible z-0 w-full">
+          <div className="relative w-full overflow-visible">
+            {loading ? (
+              <div className="w-[950px] h-[950px] bg-gray-200 animate-pulse rounded-lg" />
+            ) : error ? (
+              <p className="text-red-500 italic">{error}</p>
+            ) : (
+              <>
+                {/* BACK IMAGE */}
+                <img
+                  src="/backcard.png"
+                  alt="GDG ID Back"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-110 -z-10"
+                />
+                {/* FRONT (GENERATED) IMAGE */}
+                <img
+                  src={imageUrl}
+                  alt="Generated GDG ID"
+                  className="w-full h-auto "
+                />
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
