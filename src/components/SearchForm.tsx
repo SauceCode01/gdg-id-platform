@@ -6,6 +6,8 @@ import { Search } from "lucide-react";
 import { BsStars } from "react-icons/bs";
 import Button from "./Button";
 import { cn } from "@/lib/utils";
+import { getMember } from "@/lib/api/endpoints/membersEndpoints";
+import { error } from "console";
 
 interface SearchFormProps {
   className?: string;
@@ -27,6 +29,8 @@ export default function SearchForm({ className }: SearchFormProps) {
   const [userResult, setUserResult] = useState<UserResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [inputWidth, setInputWidth] = useState(0);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Update input width when component mounts or window resizes
   useEffect(() => {
@@ -52,23 +56,17 @@ export default function SearchForm({ className }: SearchFormProps) {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        `/api/getUser?email=${encodeURIComponent(email)}`
-      );
-      if (!res.ok) {
-        const errorData = await res.json();
-        console.error("User not found:", errorData);
-        setUserResult(null);
-        setLoading(false);
-        return;
-      }
-
       // User found, set the result
-      const user = await res.json();
+      const user = await getMember(email);
       setUserResult(user);
       console.log("User found:", user);
     } catch (err) {
       console.error("Error querying user:", err);
+      if (err instanceof Error) {
+        console.log("message", err.message);
+        setErrorMessage(err.message);
+      }
+
       setUserResult(null);
     } finally {
       setLoading(false);
@@ -134,7 +132,31 @@ export default function SearchForm({ className }: SearchFormProps) {
                   alt="User Avatar"
                 />
 
-                {loading ? (
+                {loading && (
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
+                    Loading...
+                  </div>
+                )}
+
+                {!loading && errorMessage && (
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
+                    {errorMessage}
+                  </div>
+                )}
+
+                {!loading && !errorMessage && userResult && (
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-bold leading-normal">
+                    {userResult.name}
+                  </div>
+                )}
+
+                {!loading && !errorMessage && !userResult && (
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
+                    No user found
+                  </div>
+                )}
+
+                {/* {loading ? (
                   <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
                     Loading...
                   </div>
@@ -146,7 +168,7 @@ export default function SearchForm({ className }: SearchFormProps) {
                   <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
                     No user found
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>

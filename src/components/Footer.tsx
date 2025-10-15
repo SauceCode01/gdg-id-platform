@@ -127,13 +127,13 @@ const Footer = () => {
               className="h-5 w-5 object-contain hover:opacity-80 transition"
             />
           </a>
-          <a href="#" aria-label="Discord">
+          {/* <a href="#" aria-label="Discord">
             <img
               src="/sites/footer/f-discord.svg"
               alt="Discord"
               className="h-5 w-5 object-contain hover:opacity-80 transition"
             />
-          </a>
+          </a> */}
           <a
             href="https://www.linkedin.com/company/gdgpup/posts/?feedView=all"
             target="_blank"
@@ -173,3 +173,22 @@ const LINKS = [
     href: "/comingsoon",
   }
 ]
+
+
+const SOCIALS: {
+  image: string;
+  link: string;
+}[] = [
+  {
+    image: "/sites/footer/f-facebook.svg",
+    link: "https://www.facebook.com/gdg.pupmnl",
+  },
+  {
+    image: "/sites/footer/f-instagram.svg",
+    link: "https://www.linkedin.com/company/gdgpup",
+  },
+  {
+    image: "/sites/contacts/ig.svg",
+    link: "https://www.instagram.com/gdg.pupmnl",
+  }, 
+];
