@@ -391,20 +391,16 @@ const SOCIALS: {
 }[] = [
   {
     image: "/sites/contacts/facebook.svg",
-    link: "#",
+    link: "https://www.facebook.com/gdg.pupmnl",
   },
   {
     image: "/sites/contacts/linkedin.svg",
-    link: "#",
+    link: "https://www.linkedin.com/company/gdgpup",
   },
   {
-    image: "/sites/contacts/tiktok.svg",
-    link: "#",
-  },
-  {
-    image: "/sites/contacts/youtube.svg",
-    link: "#",
-  },
+    image: "/sites/contacts/ig.svg",
+    link: "https://www.instagram.com/gdg.pupmnl",
+  }, 
 ];
 
 export default ContactsPage;
