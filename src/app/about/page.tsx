@@ -167,7 +167,7 @@ const AboutPage = () => {
               {/* team members */}
               {index === 2 && (
                 <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap lg:justify-center lg:grid-cols-none  gap-0">
-                  {team.members.map((member, index) => (<div className=" lg:min-w-sm items-center flex justify-center">
+                  {team.members.map((member, index) => (<div key={`helloworld${index}`} className=" lg:min-w-sm items-center flex justify-center">
                     <MemberCard key={index} member={member} /></div>
                   ))}
                 </div>
