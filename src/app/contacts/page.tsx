@@ -55,8 +55,12 @@ const ContactsPage = () => {
               Stay Connected
             </h1>
 
-            <p className={cn(" text-base xl:text-xl -translate-y-3", 
-                "group-hover:tracking-wide transition-all duration-200")}>
+            <p
+              className={cn(
+                " text-base xl:text-xl -translate-y-3",
+                "group-hover:tracking-wide transition-all duration-200"
+              )}
+            >
               Got a question? Let Sparky help.
             </p>
           </div>
@@ -151,18 +155,18 @@ const Informations = () => {
       </div>
       <div className="w-full flex flex-col gap-4 mt-4">
         {DETAILS.map((detail, index) => (
-          <div key={index} className="flex flex-row items-start group w-fit">
-            <img
-              src={detail.image}
-              alt="sparky "
-              className="w-5 mx-2 group-hover:scale-120 transition-all duration-200"
-            />
-            <span className="flex flex-row items-start">
-              <div className="font-bold group-hover:text-gdg-orange-light transition-all duration-200">
-                {detail.title}:
+          <div key={index} className="flex flex-row items-start group ">
+            <div className="font-bold group-hover:text-gdg-orange-light transition-all duration-200 flex flex-row items-center gap-2">
+              <div className="w-5 aspect-square">
+                <img
+                  src={detail.image}
+                  alt="sparky "
+                  className="w-full h-auto object-cover group-hover:scale-120 transition-all duration-200"
+                />
               </div>
-              <div className="ml-2">{detail.description}</div>
-            </span>
+              <span>{detail.title}:</span>
+            </div>
+            <div className="ml-2">{detail.description}</div>
           </div>
         ))}
       </div>
@@ -222,10 +226,13 @@ const Form = () => {
   };
   return (
     <>
-      <form className={cn("w-full flex flex-col gap-4")} onSubmit={handleSubmit}>
+      <form
+        className={cn("w-full flex flex-col gap-4")}
+        onSubmit={handleSubmit}
+      >
         {/* Row 1: Name and Email side by side */}
         <div className="flex flex-row gap-4 w-full">
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full gap-2">
             <label className="text-text  text-sm ml-2">NAME</label>
             <input
               type="text"
@@ -238,7 +245,7 @@ const Form = () => {
               )}
             />
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full gap-2">
             <label className="text-text  text-sm ml-2">EMAIL</label>
             <input
               type="email"
@@ -254,7 +261,7 @@ const Form = () => {
         </div>
 
         {/* Row 2: Subject */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full gap-2">
           <label className="text-text  text-sm ml-2">SUBJECT</label>
           <input
             type="text"
@@ -270,7 +277,7 @@ const Form = () => {
 
         {/* Row 3: Message */}
 
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full gap-2">
           <label className=" text-text  text-sm ml-2">MESSAGE</label>
           <textarea
             placeholder="Your Message"
@@ -310,9 +317,7 @@ const Form = () => {
 
         {success && (
           <>
-            <div className="w-full text-text ">
-              Message sent successfully
-            </div>
+            <div className="w-full text-text ">Message sent successfully</div>
           </>
         )}
 

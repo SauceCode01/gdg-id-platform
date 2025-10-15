@@ -165,11 +165,21 @@ const AboutPage = () => {
                 {team.group}
               </div>
               {/* team members */}
-              <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:justify-center lg:grid-cols-none  gap-0">
-                {team.members.map((member, index) => (
-                  <MemberCard key={index} member={member} />
-                ))}
-              </div>
+              {index === 2 && (
+                <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap lg:justify-center lg:grid-cols-none  gap-0">
+                  {team.members.map((member, index) => (<div key={`helloworld${index}`} className=" lg:min-w-sm items-center flex justify-center">
+                    <MemberCard key={index} member={member} /></div>
+                  ))}
+                </div>
+              )}
+
+              {index !== 2 && (
+                <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:justify-center lg:grid-cols-none  gap-0">
+                  {team.members.map((member, index) => (
+                    <MemberCard key={index} member={member} />
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -343,9 +353,17 @@ const CONTRIBUTORS: TeamType[] = [
     ],
   },
   {
-    group: "Technology Officers",
+    group: "Executive Technology Team",
     textColor: "green",
     members: [
+      {
+        name: "Carlos Jerico Dela Torre",
+        image: "/contributors/cards/jerico.png",
+        role: "Chief Technology Officer",
+        fb: "https://www.facebook.com/2iLiTE/",
+        ig: "https://www.instagram.com/__rikin__/",
+        linkedin: "https://www.linkedin.com/in/delatorrecj/",
+      },
       {
         name: "Nyzel Cayat",
         image: "/contributors/cards/nyzel.png",
@@ -357,12 +375,20 @@ const CONTRIBUTORS: TeamType[] = [
         role: "Deputy Chief Technology Officer",
       },
       {
-        name: "Carlos Jerico Dela Torre",
-        image: "/contributors/cards/jerico.png",
-        role: "Chief Technology Officer",
-        fb: "https://www.facebook.com/2iLiTE/",
-        ig: "https://www.instagram.com/__rikin__/",
-        linkedin: "https://www.linkedin.com/in/delatorrecj/",
+        name: "Randy Carlo Lorenzo",
+        image: "/contributors/cards/randy.png",
+        role: "Chapter Lead & President",
+        fb: "https://www.facebook.com/randycarlo.lorenzo",
+        ig: "https://www.instagram.com/randy_lrnz/",
+        linkedin: "https://www.linkedin.com/in/randycarlolorenzo/ ",
+      },
+      {
+        name: "Shunrenn Locaylocay",
+        image: "/contributors/cards/shunrenn.png",
+        role: "Chief Executive Officer",
+        fb: "https://www.facebook.com/shun.locs ",
+        ig: "https://www.instagram.com/shun_locs/ ",
+        linkedin: "https://ph.linkedin.com/in/shunrenn-locaylocay/",
       },
     ],
   },
