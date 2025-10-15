@@ -3,6 +3,12 @@ import { adminAuth, adminDb } from "@/lib/firebase/firebaseAdmin";
 import { User } from "@/types/user";
 import { extractUid, getUserData, getUserDataWithUid } from "@/lib/serverUtils";
 
+
+
+
+
+
+
 export async function GET(
   req: NextRequest,
   context: { params: Promise<{ uid: string }> }

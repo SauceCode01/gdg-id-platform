@@ -293,7 +293,7 @@ const Form = () => {
 
         {/* Row 4: Submit button */}
         <Button
-          type="submit"
+          htmlType="submit"
           disabled={loading}
           className={cn(
             "w-fit    text-text px-4 py-2 font-medium text-lg  ",
