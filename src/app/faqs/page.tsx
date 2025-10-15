@@ -117,32 +117,32 @@ const QUESTIONS: Question[] = [
   {
     question: "What is the GDG PUP Digital ID Platform?",
     answer:
-      "Enter your registered email address in the lookup field. If your email is in the database, your digital ID will be generated instantly.",
+      "The GDG PUP Digital ID Platform is a system that provides members with secure, branded digital IDs featuring scannable QR codes for event tracking. It strengthens community identity and lays the foundation for future features like gamification and NFC integration.",
   },
   {
     question: "How do I get my digital ID?",
     answer:
-      "Enter your registered email address in the lookup field. If you email is in the database, your digital ID will be generated instantly.",
+      "You can get your digital ID by entering your registered email on the platform. Once your profile is found, your digital ID will be displayed, and you can download it as a PNG and PDF file.",
   },
   {
     question: "What information appears on the Digital ID?",
     answer:
-      "Your name, GDG ID number, college & program, and a QR code linked to your member record.",
+      "The Digital ID displays your name, GDG PUP ID number, college and program, and a scannable QR code linked to your profile.",
   },
   {
     question: "Can I download my Digital ID?",
     answer:
-      "Yes, you can download it as a PNG image or PDF file directly from the platform.",
+      "Yes, you can easily download your Digital ID as a PNG and PDF file directly from the platform after viewing it.",
   },
   {
     question: "Will more features be added in the future?",
     answer:
-      "Some features may require internet, but you can still open your Digital ID if it has already been saved on your device.",
+      "Yes! Future updates will include event tracking, points and leaderboards, and NFC-enabled physical cards for an enhanced experience.",
   },
   {
     question: "What should I do if I encounter problems using the site?",
     answer:
-      "Yes! Future updates may include event-based QR/NFC scanning, real-time leaderboards, and NFC-enabled physical cards.",
+      "If you encounter any issues, please contact the GDG PUP admin team for support or report the problem through the platform’s help/contact section.",
   },
 ];
 
