@@ -401,6 +401,14 @@ const SOCIALS: {
     image: "/sites/contacts/ig.svg",
     link: "https://www.instagram.com/gdg.pupmnl",
   }, 
+  {
+    image: "/sites/contacts/tiktok.svg",
+    link: "https://www.tiktok.com/@gdg.pupmnl",
+  }, 
+  {
+    image: "/sites/footer/f-github.svg",
+    link: "https://github.com/gdgpupmnl",
+  },
 ];
 
 export default ContactsPage;
