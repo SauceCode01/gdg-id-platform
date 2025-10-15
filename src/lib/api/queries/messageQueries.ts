@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createMessage, getMessages } from "../endpoints/messageEndpoints";
 import { Message } from "@/types/message";
+import { useMemo } from "react";
 
 export function useCreateMessageMutation() {
   const queryClient = useQueryClient();
@@ -34,7 +35,10 @@ export function useInfiniteMessageQuery() {
     },
   });
 
-  const messages: Message[] = data?.pages.flatMap((page) => page) ?? [];
+  const messages = useMemo(
+    () => data?.pages.flatMap((page) => page) ?? [],
+    [data]
+  );
 
   return { messages, ...rest };
 }

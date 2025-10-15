@@ -1,6 +1,7 @@
 import { adminDb } from "@/lib/firebase/firebaseAdmin";
-import { generateId } from "@/lib/serverUtils";
+import { generateId, getUserData, isAdmin, isRole } from "@/lib/serverUtils";
 import { Message } from "@/types/message";
+import { User } from "@/types/user";
 import { FieldValue } from "firebase-admin/firestore";
 import { customAlphabet } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
@@ -52,6 +53,12 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    const authorized = await isAdmin(req);
+
+    if (!authorized) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
 
     // Read query params

@@ -6,7 +6,7 @@ import { extractUid, getUserData, getUserDataWithUid } from "@/lib/serverUtils";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 
 const rateLimiter = new RateLimiterMemory({
-  points: 2, // 5 requests
+  points: 10, // 5 requests
   duration: 60, // per 60 seconds by IP
 });
 
