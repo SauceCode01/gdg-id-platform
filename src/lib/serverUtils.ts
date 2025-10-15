@@ -2,7 +2,7 @@ import { User } from "@/types/user";
 import { getAuth } from "firebase-admin/auth";
 import { NextRequest } from "next/server";
 import { customAlphabet } from "nanoid";
-import { adminAuth, adminDb } from "./firebase/firebaseAdmin";  
+import { adminAuth, adminDb } from "./firebase/firebaseAdmin";
 
 export const generateId = (): string => customAlphabet("1234567890", 6)();
 /**
@@ -34,7 +34,7 @@ export async function extractUid(req: NextRequest): Promise<string | null> {
 /**
  * Fetches a user with a specific uid
  */
-export async function getUserDataWithUid(uid: string): Promise<User > {
+export async function getUserDataWithUid(uid: string): Promise<User> {
   const userRef = adminDb.collection("users").doc(uid);
   const userSnap = await userRef.get();
 
@@ -49,7 +49,7 @@ export async function getUserDataWithUid(uid: string): Promise<User > {
   return user;
 }
 
-/** 
+/**
  * Gets the user data directly from the header token
  */
 export async function getUserData(req: NextRequest): Promise<User | null> {
@@ -73,8 +73,13 @@ export async function getUserData(req: NextRequest): Promise<User | null> {
 /**
  * Fetches a user with a specific email
  */
-export async function getUserDataWithEmail(email: string): Promise<User | null> {
-  const userRef = adminDb.collection("users").where("email", "==", email).limit(1);
+export async function getUserDataWithEmail(
+  email: string
+): Promise<User | null> {
+  const userRef = adminDb
+    .collection("users")
+    .where("email", "==", email)
+    .limit(1);
   const userSnap = await userRef.get();
 
   if (!userSnap.empty) {
@@ -83,12 +88,11 @@ export async function getUserDataWithEmail(email: string): Promise<User | null> 
 
   return null;
 }
- 
 
 export const initializeUserData = async (uid: string) => {
   try {
-    const user = { 
-      uid: uid, 
+    const user = {
+      uid: uid,
       roles: ["user"],
     } as User;
 
@@ -100,7 +104,26 @@ export const initializeUserData = async (uid: string) => {
   }
 };
 
+/**
+ * guard admin only routes
+ */
 
+export const isAdmin = async (req: NextRequest): Promise<false | User> => {
+  const userData = (await getUserData(req)) as User | null;
 
+  if (!userData) {
+    return false;
+  }
 
+  const isAdmin = await isRole(userData, "admin");
 
+  if (!isAdmin) {
+    return false;
+  }
+
+  if (userData && isAdmin) {
+    return userData;
+  }
+
+  return false;
+};

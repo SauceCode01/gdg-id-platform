@@ -7,4 +7,5 @@ export type Message = {
   createdAt?: number;
   privateNote?: string;
   done?: boolean;
+  doneBy?: string;
 };

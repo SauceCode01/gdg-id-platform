@@ -187,11 +187,11 @@ const SOCIALS: {
     link: "https://www.instagram.com/gdg.pupmnl",
   },
   {
-    image: "/sites/footer/f-instagram.svg",
+    image: "/sites/footer/f-tiktok.svg",
     link: "https://www.tiktok.com/@gdg.pupmnl",
   },
   {
-    image: "/sites/footer/f-instagram.svg",
+    image: "/sites/footer/f-github.svg",
     link: "https://github.com/gdgpupmnl",
   },
 ];
