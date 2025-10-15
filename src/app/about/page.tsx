@@ -396,6 +396,22 @@ const CONTRIBUTORS: TeamType[] = [
         ig: "https://www.instagram.com/shun_locs/ ",
         linkedin: "https://ph.linkedin.com/in/shunrenn-locaylocay/",
       },
+      {
+        name: "Randy Carlo Lorenzo",
+        image: "/contributors/cards/randy.png",
+        role: "Chapter Lead & President",
+        fb: "https://www.facebook.com/randycarlo.lorenzo",
+        ig: "https://www.instagram.com/randy_lrnz/",
+        linkedin: "https://www.linkedin.com/in/randycarlolorenzo/ ",
+      },
+      {
+        name: "Shunrenn Locaylocay",
+        image: "/contributors/cards/shunrenn.png",
+        role: "Chief Executive Officer",
+        fb: "https://www.facebook.com/shun.locs ",
+        ig: "https://www.instagram.com/shun_locs/ ",
+        linkedin: "https://ph.linkedin.com/in/shunrenn-locaylocay/",
+      },
     ],
   },
 ];
