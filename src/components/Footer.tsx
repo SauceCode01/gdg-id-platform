@@ -48,8 +48,8 @@ const Footer = () => {
           <img
             src={
               isDarkMode
-                ? "/sites/footer/darkGdgFooter.svg"
-                : "/sites/footer/gdgFooter.svg"
+                ? "/sites/footer/gdgnewnewlogo.png"
+                : "/sites/footer/gdgnewlogo.png"
             }
             alt="GDG Footer Logo"
             className="h-6 w-auto object-contain"
@@ -92,7 +92,9 @@ const Footer = () => {
               )
             }
           >
-            Partner with Us
+            <div className="w-full h-full flex flex-row items-center justify-center">
+              Partner with Us
+            </div>
           </Button>
         </div>
       </div>
@@ -126,49 +128,21 @@ const Footer = () => {
             order-2 sm:order-2
           "
         >
-          <a
-            href="https://www.facebook.com/gdg.pupmnl"
-            aria-label="Facebook"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/sites/footer/f-facebook.svg"
-              alt="Facebook"
-              className="h-5 w-5 object-contain hover:opacity-80 transition"
-            />
-          </a>
-          <a
-            href="https://www.instagram.com/gdg.pupmnl/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <img
-              src="/sites/footer/f-instagram.svg"
-              alt="Instagram"
-              className="h-5 w-5 object-contain hover:opacity-80 transition"
-            />
-          </a>
-          {/* <a href="#" aria-label="Discord">
-            <img
-              src="/sites/footer/f-discord.svg"
-              alt="Discord"
-              className="h-5 w-5 object-contain hover:opacity-80 transition"
-            />
-          </a> */}
-          <a
-            href="https://www.linkedin.com/company/gdgpup/posts/?feedView=all"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <img
-              src="/sites/footer/f-linkedin.svg"
-              alt="LinkedIn"
-              className="h-5 w-5 object-contain hover:opacity-80 transition"
-            />
-          </a>
+          {SOCIALS.map((social, index) => (
+            <a
+              href={social.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              key={index}
+            >
+              <img
+                src={social.image}
+                alt="LinkedIn"
+                className="h-5 w-5 object-contain hover:opacity-80 transition"
+              />
+            </a>
+          ))}
         </div>
       </div>
     </footer>
@@ -205,11 +179,19 @@ const SOCIALS: {
     link: "https://www.facebook.com/gdg.pupmnl",
   },
   {
-    image: "/sites/footer/f-instagram.svg",
+    image: "/sites/footer/f-linkedin.svg",
     link: "https://www.linkedin.com/company/gdgpup",
   },
   {
-    image: "/sites/contacts/ig.svg",
+    image: "/sites/footer/f-instagram.svg",
     link: "https://www.instagram.com/gdg.pupmnl",
+  },
+  {
+    image: "/sites/footer/f-instagram.svg",
+    link: "https://www.tiktok.com/@gdg.pupmnl",
+  },
+  {
+    image: "/sites/footer/f-instagram.svg",
+    link: "https://github.com/gdgpupmnl",
   },
 ];
