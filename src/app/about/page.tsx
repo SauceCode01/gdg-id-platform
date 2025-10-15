@@ -368,11 +368,17 @@ const CONTRIBUTORS: TeamType[] = [
         name: "Nyzel Cayat",
         image: "/contributors/cards/nyzel.png",
         role: "Deputy Chief Technology Officer",
+        fb: "https://www.facebook.com/chiaki.wme",
+        ig: "https://www.instagram.com/chiaki.wme",
+        linkedin: "https://www.linkedin.com/in/nyzel-cayat-665749284",
       },
       {
         name: "Aurold John Sadullo",
         image: "/contributors/cards/aj.png",
         role: "Deputy Chief Technology Officer",
+        fb: "https://www.facebook.com/2iLiTE/",
+        ig: "https://www.instagram.com/__rikin__/",
+        linkedin: "https://www.linkedin.com/in/delatorrecj/",
       },
       {
         name: "Randy Carlo Lorenzo",
