@@ -376,9 +376,9 @@ const CONTRIBUTORS: TeamType[] = [
         name: "Aurold John Sadullo",
         image: "/contributors/cards/aj.png",
         role: "Deputy Chief Technology Officer",
-        fb: "https://www.facebook.com/2iLiTE/",
-        ig: "https://www.instagram.com/__rikin__/",
-        linkedin: "https://www.linkedin.com/in/delatorrecj/",
+        fb: "https://www.facebook.com/ajsadullo",
+        ig: "https://www.instagram.com/ajsdllo/",
+        linkedin: "https://www.linkedin.com/in/ajsadullo/",
       },
       {
         name: "Randy Carlo Lorenzo",
