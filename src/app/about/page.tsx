@@ -167,8 +167,13 @@ const AboutPage = () => {
               {/* team members */}
               {index === 2 && (
                 <div className="  w-full  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap lg:justify-center lg:grid-cols-none  gap-0">
-                  {team.members.map((member, index) => (<div key={`helloworld${index}`} className=" lg:min-w-sm items-center flex justify-center">
-                    <MemberCard key={index} member={member} /></div>
+                  {team.members.map((member, index) => (
+                    <div
+                      key={`helloworld${index}`}
+                      className=" lg:min-w-sm items-center flex justify-center"
+                    >
+                      <MemberCard key={index} member={member} />
+                    </div>
                   ))}
                 </div>
               )}
@@ -223,6 +228,7 @@ const MemberCard = ({ member }: { member: MemberType }) => {
           <Link
             className=" w-[6%] aspect-square hover:scale-105 hover:drop-shadow-sm hover:drop-shadow-gdg-orange/20 transition-all duration-200 "
             href={member.fb}
+            target="_blank"
           >
             <img
               src="/contributors/fb.svg"
@@ -235,6 +241,7 @@ const MemberCard = ({ member }: { member: MemberType }) => {
           <Link
             className=" w-[6%] aspect-square hover:scale-105 hover:drop-shadow-sm hover:drop-shadow-gdg-orange/20 transition-all duration-200 "
             href={member.ig}
+            target="_blank"
           >
             <img
               src="/contributors/ig.svg"
@@ -247,6 +254,7 @@ const MemberCard = ({ member }: { member: MemberType }) => {
           <Link
             className=" w-[6%] aspect-square hover:scale-105 hover:drop-shadow-sm hover:drop-shadow-gdg-orange/20 transition-all duration-200 "
             href={member.linkedin}
+            target="_blank"
           >
             <img
               src="/contributors/linkedin.svg"

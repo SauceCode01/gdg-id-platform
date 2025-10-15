@@ -41,7 +41,10 @@ const Footer = () => {
           text-center lg:text-left
         "
       >
-        <div className="flex items-center justify-center lg:justify-start w-full lg:w-auto cursor-pointer" onClick={()=>router.push("/")}>
+        <div
+          className="flex items-center justify-center lg:justify-start w-full lg:w-auto cursor-pointer"
+          onClick={() => router.push("/")}
+        >
           <img
             src={
               isDarkMode
@@ -65,19 +68,29 @@ const Footer = () => {
             w-full lg:w-auto mt-4 lg:mt-0
           "
         >
-          {
-            LINKS.map((link, index) => (
-              
-          <Link href={link.href} key={index} className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200">{link.name}</Link>
-            ))
-          } 
+          {LINKS.map((link, index) => (
+            <Link
+              href={link.href}
+              key={index}
+              className="hover:text-[var(--color-gdg-blue-light)] transition-colors duration-200"
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
 
         {/* partner button */}
         <div className="w-full lg:w-auto flex justify-center lg:justify-end mt-3 lg:mt-0">
-          <Button 
-          variant="green"
+          <Button
+            variant="green"
             className="!text-white text-xs sm:text-sm px-5 py-2 sm:px-6 sm:py-2.5 hover:opacity-90 transition"
+            onClick={() =>
+              window.open(
+                "https://docs.google.com/forms/d/e/1FAIpQLSe9KuQFnKNJ2XvN8lWX0YcTBL2e9HAmtL-e9cOtanV09ukG9g/viewform",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
           >
             Partner with Us
           </Button>
@@ -113,14 +126,24 @@ const Footer = () => {
             order-2 sm:order-2
           "
         >
-          <a href="https://www.facebook.com/gdg.pupmnl" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.facebook.com/gdg.pupmnl"
+            aria-label="Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src="/sites/footer/f-facebook.svg"
               alt="Facebook"
               className="h-5 w-5 object-contain hover:opacity-80 transition"
             />
           </a>
-          <a href="https://www.instagram.com/gdg.pupmnl/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <a
+            href="https://www.instagram.com/gdg.pupmnl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
             <img
               src="/sites/footer/f-instagram.svg"
               alt="Instagram"
@@ -154,7 +177,6 @@ const Footer = () => {
 
 export default Footer;
 
-
 const LINKS = [
   {
     name: "About",
@@ -171,9 +193,8 @@ const LINKS = [
   {
     name: "Coming Soon",
     href: "/comingsoon",
-  }
-]
-
+  },
+];
 
 const SOCIALS: {
   image: string;
@@ -190,5 +211,5 @@ const SOCIALS: {
   {
     image: "/sites/contacts/ig.svg",
     link: "https://www.instagram.com/gdg.pupmnl",
-  }, 
+  },
 ];
