@@ -4,7 +4,7 @@ import { isAdmin } from "@/lib/serverUtils";
 
 export async function PUT(
   req: NextRequest,
-  context: { params: { id: string } } // 👈 use id, not uid
+  context: { params: Promise<{ id: string }> } // 👈 updated type
 ) {
   try {
     const authorized = await isAdmin(req);
@@ -13,12 +13,13 @@ export async function PUT(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = context.params; // e.g. message ID from /message/[id]/done
+    // ✅ await the params first
+    const { id } = await context.params;
 
     // Update Firestore doc
     await adminDb.collection("messages").doc(id).update({
       done: true,
-      doneAt: Date.now(), // optional: track when it was marked done
+      doneAt: Date.now(),
       doneBy: authorized.uid,
     });
 
