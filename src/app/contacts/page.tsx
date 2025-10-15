@@ -209,7 +209,11 @@ const Form = () => {
         onError: (err) => {
           setTimeout(() => {
             setError(true);
-            setMessage(err.message);
+            if (err.message === "Too many requests. Try again later.") {
+              setMessage("Too many requests. Try again later.");
+            } else {
+              setMessage("Can't send message. Please try again.");
+            }
             setLoading(false);
           }, 1000);
         },
@@ -293,7 +297,7 @@ const Form = () => {
 
         {/* Row 4: Submit button */}
         <Button
-          type="submit"
+          htmlType="submit"
           disabled={loading}
           className={cn(
             "w-fit    text-text px-4 py-2 font-medium text-lg  ",
@@ -309,11 +313,7 @@ const Form = () => {
             <span> {loading ? "Sending..." : "Submit"}</span>
           </div>
         </Button>
-        {error && (
-          <div className="w-full text-red-500 ">
-            {"Can't send message. Please try again."}
-          </div>
-        )}
+        {error && <div className="w-full text-red-500 ">{message}</div>}
 
         {success && (
           <>
@@ -391,20 +391,16 @@ const SOCIALS: {
 }[] = [
   {
     image: "/sites/contacts/facebook.svg",
-    link: "#",
+    link: "https://www.facebook.com/gdg.pupmnl",
   },
   {
     image: "/sites/contacts/linkedin.svg",
-    link: "#",
+    link: "https://www.linkedin.com/company/gdgpup",
   },
   {
-    image: "/sites/contacts/tiktok.svg",
-    link: "#",
-  },
-  {
-    image: "/sites/contacts/youtube.svg",
-    link: "#",
-  },
+    image: "/sites/contacts/ig.svg",
+    link: "https://www.instagram.com/gdg.pupmnl",
+  }, 
 ];
 
 export default ContactsPage;
