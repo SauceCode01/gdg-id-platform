@@ -353,7 +353,7 @@ const CONTRIBUTORS: TeamType[] = [
     ],
   },
   {
-    group: "Technology Officers",
+    group: "Executive Technology Team",
     textColor: "green",
     members: [
       {
