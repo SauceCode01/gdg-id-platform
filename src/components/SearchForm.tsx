@@ -26,6 +26,21 @@ export default function SearchForm({ className }: SearchFormProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [userResult, setUserResult] = useState<UserResult | null>(null);
   const [loading, setLoading] = useState(false);
+  const [inputWidth, setInputWidth] = useState(0);
+
+  // Update input width when component mounts or window resizes
+  useEffect(() => {
+    const updateInputWidth = () => {
+      if (inputRef.current) {
+        setInputWidth(inputRef.current.offsetWidth);
+      }
+    };
+
+    updateInputWidth();
+    window.addEventListener("resize", updateInputWidth);
+
+    return () => window.removeEventListener("resize", updateInputWidth);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,15 +104,19 @@ export default function SearchForm({ className }: SearchFormProps) {
   return (
     <form
       ref={formRef}
-      className={`w-full px-4 flex max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto relative ${
-        className || ""
-      }`}
+      className={cn(
+        "w-full px-4 flex max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto relative",
+        className
+      )}
       onSubmit={handleSubmit}
     >
       {searchQuery && (
-        <div className="absolute px-4 left-0 top-13 md:top-15 lg:top-17 z-30">
-          <div className="w-[248px] sm:w-[361px] md:w-[497px] lg:w-xl p-5 bg-[#a6a4a5]/25 rounded-[10.14px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_0px_1px_1px_rgba(0,0,0,0.25)] backdrop-blur-[25px] inline-flex flex-col justify-start items-start gap-[18px] overflow-hidden">
-            <div className="text-[#4285f4] text-normal md:text-md lg:text-lg font-bold leading-normal">
+        <div className="absolute left-4 top-13 md:top-15 lg:top-17 z-30">
+          <div
+            className="p-5 bg-[#a6a4a5]/25 rounded-[10.14px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_1px_1px_0px_rgba(0,0,0,0.25),inset_0px_0px_1px_1px_rgba(0,0,0,0.25)] backdrop-blur-[25px] inline-flex flex-col justify-start items-start gap-[18px] overflow-hidden"
+            style={{ width: inputWidth > 0 ? `${inputWidth}px` : "auto" }}
+          >
+            <div className="text-[#4285f4] text-xs sm:text-sm md:text-md lg:text-lg font-bold leading-normal">
               Your Digital ID Result
             </div>
 
@@ -116,15 +135,15 @@ export default function SearchForm({ className }: SearchFormProps) {
                 />
 
                 {loading ? (
-                  <div className="text-zinc-800 text-normal md:text-md lg:text-lg font-medium">
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
                     Loading...
                   </div>
                 ) : userResult ? (
-                  <div className="text-zinc-800 text-normal md:text-md lg:text-lg font-bold leading-normal">
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-bold leading-normal">
                     {userResult.name}
                   </div>
                 ) : (
-                  <div className="text-zinc-800 text-normal md:text-md lg:text-lg font-medium">
+                  <div className="text-zinc-800 text-xs sm:text-sm md:text-md lg:text-lg font-medium">
                     No user found
                   </div>
                 )}
@@ -139,11 +158,16 @@ export default function SearchForm({ className }: SearchFormProps) {
         ref={inputRef}
         required
         placeholder="Enter your email to find your Digital ID"
-        className="w-sm sm:w-md md:w-lg lg:w-xl z-10 py-2 px-4 pl-8 sm:py-2.5 sm:pl-10 md:py-3 md:pl-11 border border-gray-300 bg-white rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.05),inset_0px_2px_4px_0px_rgba(0,0,0,0.25)] text-neutral-500 text-[12px] sm:text-[13px] md:text-[15px] lg:text-lg font-normal leading-[15px] sm:leading-[16px] md:leading-[18px] placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
+        className="flex-1 z-10 py-2 px-4 pl-8 sm:py-2.5 sm:pl-10 md:py-3 md:pl-11 border border-gray-300 bg-white rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.05),inset_0px_2px_4px_0px_rgba(0,0,0,0.25)] text-neutral-500 text-[12px] sm:text-[13px] md:text-[15px] lg:text-lg font-normal leading-[15px] sm:leading-[16px] md:leading-[18px] placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
+        onLoad={() => {
+          if (inputRef.current) {
+            setInputWidth(inputRef.current.offsetWidth);
+          }
+        }}
       />
-      <Button type="submit" className="relative z-10 ml-2">
-        <BsStars />
-        <span className="ml-2 whitespace-nowrap text-[13px] md:text-[15px] lg:text-[17px]">
+      <Button htmlType="submit" className="relative z-10 ml-2 flex-shrink-0">
+        <BsStars size={20} />
+        <span className="ml-2 whitespace-nowrap hidden sm:block text-[13px] md:text-[15px] lg:text-[17px]">
           Search ID
         </span>
       </Button>
