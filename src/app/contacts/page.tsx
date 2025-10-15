@@ -209,7 +209,11 @@ const Form = () => {
         onError: (err) => {
           setTimeout(() => {
             setError(true);
-            setMessage(err.message);
+            if (err.message === "Too many requests. Try again later.") {
+              setMessage("Too many requests. Try again later.");
+            } else {
+              setMessage("Can't send message. Please try again.");
+            }
             setLoading(false);
           }, 1000);
         },
@@ -309,11 +313,7 @@ const Form = () => {
             <span> {loading ? "Sending..." : "Submit"}</span>
           </div>
         </Button>
-        {error && (
-          <div className="w-full text-red-500 ">
-            {"Can't send message. Please try again."}
-          </div>
-        )}
+        {error && <div className="w-full text-red-500 ">{message}</div>}
 
         {success && (
           <>

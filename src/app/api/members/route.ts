@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 
 const rateLimiter = new RateLimiterMemory({
-  points: 2, // 5 requests
-  duration: 60, // per 60 seconds by IP
+  points: 4, // 5 requests
+  duration: 6, // per 6 seconds by IP
 });
 
 function getClientIp(req: NextRequest) {

@@ -8,8 +8,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 
 const rateLimiter = new RateLimiterMemory({
-  points: 2, // 5 requests
-  duration: 60, // per 60 seconds by IP
+  points: 4, // 5 requests
+  duration: 120, // per 60 seconds by IP
 });
 
 function getClientIp(req: NextRequest) {
@@ -19,11 +19,6 @@ function getClientIp(req: NextRequest) {
   }
   return req.headers.get("x-real-ip") || "unknown";
 }
-
-
-
-
-
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
