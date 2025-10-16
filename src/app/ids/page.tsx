@@ -98,9 +98,7 @@ const IDPage = () => {
       // // Course
       // ctx.fillText(`Course: ${member.course || ""}`, 50, 470);
 
-
-
-       // Display name (Arky)
+      // Display name (Arky)
       ctx.font = "bold 32px Arial";
       ctx.fillText(member.displayName || "", canvas.width / 2, 465);
 
@@ -114,33 +112,33 @@ const IDPage = () => {
       ctx.font = "16px Arial";
 
       // Full name
-      ctx.fillText(`Name:`, 70, 590);
+      ctx.fillText(`Name:`, 70, 575);
 
       // Email
-      ctx.fillText(`Email:`, 70, 620);
+      ctx.fillText(`Email:`, 70, 605);
 
       // Course
-      ctx.fillText(`Course:`, 70, 650);
+      ctx.fillText(`Course:`, 70, 635);
 
+      // department
+      ctx.fillText(`Department:`, 70, 665);
 
-
-       // Bottom section
+      // Bottom section
       ctx.textAlign = "left";
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 16px Arial";
 
       // Full name
-      ctx.fillText(`${member.name || ""}`, 140, 590);
+      ctx.fillText(`${member.name || ""}`, 140, 575);
 
       // Email
-      ctx.fillText(`${member.email || ""}`, 140, 620);
+      ctx.fillText(`${member.email || ""}`, 140, 605);
 
       // Course
-      ctx.fillText(`${member.course || ""}`, 140, 650);
+      ctx.fillText(`${member.course || ""}`, 140, 635);
 
-
-
-
+      // department
+      ctx.fillText(`Technology - Web Development`, 170, 665);
 
       // Export preview image
       setImageUrl(canvas.toDataURL("image/png"));
@@ -193,9 +191,11 @@ const IDPage = () => {
                 dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
                 lg:hidden
                 my-8 text-4xl
+
+                flex flex-row flex-wrap justify-center
               "
           >
-            OFFICIAL GDG PUP DIGITAL ID
+            OFFICIAL GDG&nbsp;PUP DIGITAL ID
           </h1>
 
           <div className="flex-1">
@@ -207,17 +207,20 @@ const IDPage = () => {
           <div className="flex flex-1 flex-col items-center px-5 max-w-2xl ">
             <h1
               className="
-                text-7xl font-bold  
+                text-6xl font-bold  
                 text-slate-800 
                 drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
                 dark:text-transparent dark:bg-clip-text
                 dark:bg-[linear-gradient(to_bottom,rgba(147,197,253,1)_0%,rgba(255,255,255,1)_50%,rgba(147,197,253,1)_100%)]
                 dark:drop-shadow-[0_0_20px_rgba(147,197,253,0.8)]
                 hidden lg:flex
+
+                
+                 flex-row flex-wrap justify-center w-full
               "
-              >
-                OFFICIAL GDG PUP DIGITAL ID
-              </h1>
+            >
+              OFFICIAL GDG&nbsp;PUP DIGITAL ID
+            </h1>
 
             {/* GDG Logo (light/dark mode for desktop) */}
             <div className="h-auto w-full max-w-sm scale-140 mx-auto hidden lg:flex">
