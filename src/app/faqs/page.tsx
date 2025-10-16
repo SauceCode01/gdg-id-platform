@@ -78,7 +78,7 @@ export const QuestionRow = ({ question }: { question: Question }) => {
           (isOpen
             ? "bg-gradient-to-b  from-surface  to-[#0D3772] hover:inset-shadow-sm  inset-shadow-white/20"
             : "bg-gradient-to-b from-surface to-background-variant"),
-        isDarkMode && "shadow-[0px_0px_5px_1px_rgba(255,255,255,1)]",
+        isDarkMode && "shadow-[0px_0px_5px_1px_rgba(255,255,255,0.5)]",
         !isDarkMode && "shadow-shadow shadow-lg "
       )}
     >
