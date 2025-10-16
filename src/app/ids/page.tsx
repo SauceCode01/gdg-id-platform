@@ -114,13 +114,16 @@ const IDPage = () => {
       ctx.font = "16px Arial";
 
       // Full name
-      ctx.fillText(`Name:`, 70, 590);
+      ctx.fillText(`Name:`, 70, 575);
 
       // Email
-      ctx.fillText(`Email:`, 70, 620);
+      ctx.fillText(`Email:`, 70, 605);
 
       // Course
-      ctx.fillText(`Course:`, 70, 650);
+      ctx.fillText(`Course:`, 70, 635);
+
+      // department
+      ctx.fillText(`Department:`, 70, 665);
 
 
 
@@ -130,13 +133,16 @@ const IDPage = () => {
       ctx.font = "bold 16px Arial";
 
       // Full name
-      ctx.fillText(`${member.name || ""}`, 140, 590);
+      ctx.fillText(`${member.name || ""}`, 140, 575);
 
       // Email
-      ctx.fillText(`${member.email || ""}`, 140, 620);
+      ctx.fillText(`${member.email || ""}`, 140, 605);
 
       // Course
-      ctx.fillText(`${member.course || ""}`, 140, 650);
+      ctx.fillText(`${member.course || ""}`, 140, 635);
+
+      // department
+      ctx.fillText(`Technology - Web Development`, 170, 665);
 
 
 
