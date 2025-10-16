@@ -225,15 +225,18 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 .element-with-gradient-border {
-  border-width: 4px; /* Set your desired border thickness */
+  border-width: 4px;
+  /* Set your desired border thickness */
   border-style: solid;
-  border-image: linear-gradient(to right, #ff0000, #0000ff) 1; /* Define your gradient and slice value */
+  border-image: linear-gradient(to right, #ff0000, #0000ff) 1;
+  /* Define your gradient and slice value */
   /* Note: border-image is not compatible with border-radius */
 }
 
@@ -373,4 +376,23 @@
 
 .blue-cursor::after {
   color: #4285f4 !important;
+}
+
+/* For loading skeeleton */
+@keyframes zoomPulse {
+  0% {
+    transform: scale(0.95);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.95);
+  }
+}
+
+.animate-zoomPulse {
+  animation: zoomPulse 1.8s ease-in-out infinite;
 }
