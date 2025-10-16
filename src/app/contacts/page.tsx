@@ -406,7 +406,7 @@ const SOCIALS: {
     link: "https://www.tiktok.com/@gdg.pupmnl",
   }, 
   {
-    image: "/sites/footer/f-github.svg",
+    image: "/sites/contacts/github.svg",
     link: "https://github.com/gdgpupmnl",
   },
 ];
