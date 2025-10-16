@@ -54,6 +54,7 @@ export default function SearchForm({ className }: SearchFormProps) {
     if (!email) return;
     setSearchQuery(email);
     setLoading(true);
+    setErrorMessage("");
 
     try {
       // User found, set the result
