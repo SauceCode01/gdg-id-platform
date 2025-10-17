@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import GlowBlobs from "@/components/GlowBlobs";
 import { Suspense, useEffect, useRef, useState } from "react";
 import jsPDF from "jspdf";
-import { getMember } from "@/lib/api/endpoints/membersEndpoints";
+import { getMember } from "@/lib/client/apiEndpoints/memberEndpoints";
 import { Member } from "@/types/member";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import { Card } from "@/components/ui/card";

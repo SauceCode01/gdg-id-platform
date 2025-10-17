@@ -1,6 +1,8 @@
+"use server"
+
 import { google } from "googleapis";
 
-export const gmailAuth = () => {
+export const gmailAuth = async () => {
   const oAuth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET

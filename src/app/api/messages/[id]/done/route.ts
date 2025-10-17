@@ -1,26 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase/firebaseAdmin";
-import { isAdmin } from "@/lib/serverUtils";
+import { getUserData } from "@/lib/server/serverUtils";
 
 export async function PUT(
   req: NextRequest,
   context: { params: Promise<{ id: string }> } // 👈 updated type
 ) {
   try {
-    const authorized = await isAdmin(req);
-
-    if (!authorized) {
+    // Check if user is admin
+    const userData = await getUserData(req);
+    if (!userData)
+      return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+    if (!userData.roles.includes("admin"))
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
 
-    // ✅ await the params first
+    // Read query params
     const { id } = await context.params;
 
     // Update Firestore doc
     await adminDb.collection("messages").doc(id).update({
       done: true,
       doneAt: Date.now(),
-      doneBy: authorized.uid,
+      doneBy: userData.uid,
     });
 
     return NextResponse.json(
