@@ -22,15 +22,32 @@ export const CardImage = ({
         setTimeout(() => {
           setShowTrue(true);
           console.log("done showing true");
-        }, 1000);
+        }, 2000);
       };
       stuff();
     }
   }, [isLoading]);
 
+  const [rotation, setRotation] = useState(0);
+
+  const handleMouseEnter = () => {
+    const randomDeg = (Math.random() * 1 + 2) * (Math.random() > 0.5 ? 1 : -1);
+    setRotation(randomDeg);
+    console.log("hovering");
+  };
+
+  const handleMouseLeave = () => {
+    setRotation(0); // reset when hover ends
+    console.log("not hovering");
+  };
+
   return (
     <>
-      <div className="relative flex items-center overflow-visible z-0 w-full">
+      <div
+        className="relative flex items-center overflow-visible z-0 w-full"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <div className="relative w-full overflow-visible">
           {!isLoading && isError && (
             <div className="flex flex-col items-center justify-center text-center space-y-6">
@@ -81,30 +98,42 @@ export const CardImage = ({
                   className="w-full h-auto opacity-0"
                 />
                 {true && (
-                  <img
-                    src="/cards/front_empty_skeleton.png"
-                    alt="GDG ID Front Skeleton"
-                    className={cn(
-                      "w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+                  <div className="w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <img
+                      src="/cards/front_empty_skeleton.png"
+                      alt="GDG ID Front Skeleton"
+                      className={cn(
+                        "w-full h-auto  ",
+                        !showTrue && "animate-wiggle",
 
-                      "transition-all duration-800",
-                      showTrue && "opacity-0",
-                      !showTrue && "opacity-100"
-                    )}
-                  />
+                        "transition-all duration-800",
+                        showTrue && "opacity-0",
+                        !showTrue && "opacity-100"
+                      )}
+                    />
+                  </div>
                 )}
                 {true && (
-                  <img
-                    src={imageUrl!}
-                    alt="Generated GDG ID"
+                  <div
                     className={cn(
-                      "w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-
-                      "transition-all duration-400",
-                      !showTrue && "opacity-0",
-                      showTrue && "opacity-100"
+                      "w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200" 
                     )}
-                  />
+                    style={{
+                      transform: `rotate(${rotation}deg)`,
+                    }}
+                  >
+                    <img
+                      src={imageUrl!}
+                      alt="Generated GDG ID"
+                      className={cn(
+                        "w-full h-auto ",
+
+                        "transition-all duration-400",
+                        !showTrue && "opacity-0",
+                        showTrue && "opacity-100"
+                      )}
+                    />
+                  </div>
                 )}
               </div>
             </>
