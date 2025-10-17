@@ -267,32 +267,68 @@ const CardImage = ({
 }) => {
   return (
     <>
-      {imageUrl && (
+      {imageUrl || loading || error ? (
         <div className="relative flex items-center overflow-visible z-0 w-full">
           <div className="relative w-full overflow-visible">
             {loading ? (
-              <div className="w-[950px] h-[950px] bg-gray-200 animate-pulse rounded-lg" />
+              // uses animate-zoomPulse from globalcss
+              <div className="relative w-full animate-zoomPulse">
+                {/* BACK CARD */}
+                <img
+                  src="/backcard.png"
+                  alt="GDG ID Back"
+                  className="absolute top-1/2 left-1/2 
+                             -translate-x-1/2 -translate-y-1/2 
+                             scale-110 -z-10"
+                />
+                {/* FRONT SKELETON */}
+                <img
+                  src="/cards/front_empty_skeleton.png"
+                  alt="GDG ID Front Skeleton"
+                  className="w-full h-auto"
+                />
+              </div>
             ) : error ? (
-              <p className="text-red-500 italic">{error}</p>
+              <div className="flex flex-col items-center justify-center text-center space-y-6">
+                <img
+                  src="/sites/comingsoon/restingSparky.svg"
+                  alt="Error Illustration"
+                  className="w-64 h-auto opacity-90"
+                />
+                <p
+                  className="
+                    text-3xl font-bold  
+                  text-red-600
+                    drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
+                    dark:text-transparent dark:bg-clip-text
+                    dark:bg-[linear-gradient(to_bottom,rgba(239,68,68,1)_0%,rgba(252,165,165,1)_50%,rgba(239,68,68,1)_100%)]
+                    dark:drop-shadow-[0_0_20px_rgba(239,68,68,0.8)]
+                    "
+                >
+                  {error}
+                </p>
+              </div>
             ) : (
               <>
                 {/* BACK IMAGE */}
                 <img
                   src="/backcard.png"
                   alt="GDG ID Back"
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-110 -z-10"
+                  className="absolute top-1/2 left-1/2 
+                             -translate-x-1/2 -translate-y-1/2 
+                             scale-110 -z-10"
                 />
-                {/* FRONT (GENERATED) IMAGE */}
+                {/* FRONT GENERATED IMAGE */}
                 <img
-                  src={imageUrl}
+                  src={imageUrl ?? undefined}
                   alt="Generated GDG ID"
-                  className="w-full h-auto "
+                  className="w-full h-auto"
                 />
               </>
             )}
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
