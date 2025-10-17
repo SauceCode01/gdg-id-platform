@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 import { BsStars } from "react-icons/bs";
 import Button from "./Button";
 import { cn } from "@/lib/utils";
-import { getMember } from "@/lib/api/endpoints/membersEndpoints";
+import { getMember } from "@/lib/client/apiEndpoints/memberEndpoints";
 import { error } from "console";
 
 interface SearchFormProps {

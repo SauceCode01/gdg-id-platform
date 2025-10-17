@@ -8,8 +8,8 @@ import Grid from "@/components/GridBackground";
 import { cn } from "@/lib/utils";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import GlowBlobs from "@/components/GlowBlobs";
-import { useBreakpoint } from "@/lib/clientUtils";
-import { useCreateMessageMutation } from "@/lib/api/queries/messageQueries";
+import { useBreakpoint } from "@/lib/client/utils";
+import { useCreateMessageMutation } from "@/lib/client/apiQueries/messageQueries";
 import { Message } from "@/types/message";
 import { useState } from "react";
 

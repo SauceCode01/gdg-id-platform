@@ -1,45 +1,39 @@
-import { NextRequest, NextResponse } from "next/server";
-import { adminAuth, adminDb } from "@/lib/firebase/firebaseAdmin";
-import { User } from "@/types/user";
-import { extractUid, getUserData, getUserDataWithUid } from "@/lib/serverUtils";
+import { NextRequest, NextResponse } from "next/server";  
+import { getUserData, getUserDataWithUid } from "@/lib/server/serverUtils";
 
 import { RateLimiterMemory } from "rate-limiter-flexible";
+import { consumeLimiter } from "@/lib/server/rateLimiter";
 
 const rateLimiter = new RateLimiterMemory({
   points: 10, // 5 requests
   duration: 60, // per 60 seconds by IP
 });
 
-function getClientIp(req: NextRequest) {
-  const forwardedFor = req.headers.get("x-forwarded-for");
-  if (forwardedFor) {
-    return forwardedFor.split(",")[0]?.trim(); // first IP in list
-  }
-  return req.headers.get("x-real-ip") || "unknown";
-}
-
 export async function GET(
   req: NextRequest,
   context: { params: Promise<{ uid: string }> }
 ) {
-  const ip = getClientIp(req);
-
   try {
-    await rateLimiter.consume(ip);
-  } catch {
-    return NextResponse.json(
-      { error: "Too many requests. Try again later. (api/users/[uid])" },
-      { status: 429 }
-    );
-  }
+    // RATE LIMITER
+    const limitResult = await consumeLimiter(rateLimiter, req);
+    if (limitResult) return limitResult;
 
-  try {
+    // check authorization
+    const requestingUserData = await getUserData(req);
+    if (!requestingUserData)
+      return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+    if (!requestingUserData.roles.includes("admin"))
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    // get the requested user datap
     const { uid } = await context.params;
     const userData = await getUserDataWithUid(uid);
 
     return NextResponse.json(userData, { status: 200 });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: err }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to get user data" },
+      { status: 500 }
+    );
   }
 }

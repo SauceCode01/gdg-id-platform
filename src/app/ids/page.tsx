@@ -8,11 +8,13 @@ import { useSearchParams } from "next/navigation";
 import GlowBlobs from "@/components/GlowBlobs";
 import { Suspense, useEffect, useRef, useState } from "react";
 import jsPDF from "jspdf";
-import { getMember } from "@/lib/api/endpoints/membersEndpoints";
+import { getMember } from "@/lib/client/apiEndpoints/memberEndpoints";
 import { Member } from "@/types/member";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useMemberQuery } from "@/lib/client/apiQueries/memberQueries";
+import { CardImage } from "./_components/CardImage";
 
 export default function TrueIdPageWithSuspenseBoundary() {
   return (
@@ -23,35 +25,17 @@ export default function TrueIdPageWithSuspenseBoundary() {
 }
 
 const IDPage = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [member, setMember] = useState<Member | null>(null);
   const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState<string | undefined>(undefined);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { member, isLoading, isError, error } = useMemberQuery(email);
+
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   // Fetch member data
   useEffect(() => {
-    const fetchMember = async () => {
-      const email = searchParams.get("email");
-      if (!email) {
-        setError("No email provided.");
-        setLoading(false);
-        return;
-      }
-      try {
-        setLoading(true);
-        const fetchedMember = (await getMember(email)) as Member;
-        if (!fetchedMember) throw new Error("Member not found");
-        setMember(fetchedMember);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load member data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMember();
+    const email = searchParams.get("email") || undefined;
+    if (email) setEmail(email);
   }, [searchParams]);
 
   // Draw ID on canvas (client-side)
@@ -200,7 +184,11 @@ const IDPage = () => {
 
           <div className="flex-1">
             <div className="w-[17rem] xs:w-sm sm:w-md xl:w-lg ">
-              <CardImage imageUrl={imageUrl} loading={loading} error={error} />
+              <CardImage
+                imageUrl={imageUrl}
+                isLoading={isLoading}
+                isError={isError}
+              />
             </div>
           </div>
 
@@ -253,46 +241,5 @@ const IDPage = () => {
         <canvas ref={canvasRef} className="hidden" />
       </section>
     </div>
-  );
-};
-
-const CardImage = ({
-  imageUrl,
-  loading,
-  error,
-}: {
-  imageUrl?: string | null;
-  loading?: boolean;
-  error?: string | null;
-}) => {
-  return (
-    <>
-      {imageUrl && (
-        <div className="relative flex items-center overflow-visible z-0 w-full">
-          <div className="relative w-full overflow-visible">
-            {loading ? (
-              <div className="w-[950px] h-[950px] bg-gray-200 animate-pulse rounded-lg" />
-            ) : error ? (
-              <p className="text-red-500 italic">{error}</p>
-            ) : (
-              <>
-                {/* BACK IMAGE */}
-                <img
-                  src="/backcard.png"
-                  alt="GDG ID Back"
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-110 -z-10"
-                />
-                {/* FRONT (GENERATED) IMAGE */}
-                <img
-                  src={imageUrl}
-                  alt="Generated GDG ID"
-                  className="w-full h-auto "
-                />
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </>
   );
 };

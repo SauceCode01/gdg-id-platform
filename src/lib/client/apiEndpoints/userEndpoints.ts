@@ -1,4 +1,4 @@
-import { wrappedFetch } from "@/lib/utils";
+import { wrappedFetch } from "@/lib/client/utils";
 import { User } from "@/types/user";
 
 export const getUser = async (uid: string) : Promise<User> => {

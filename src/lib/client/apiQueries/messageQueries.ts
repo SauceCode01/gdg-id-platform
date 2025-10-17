@@ -1,5 +1,9 @@
-import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createMessage, getMessages } from "../endpoints/messageEndpoints";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { createMessage, getMessages } from "../apiEndpoints/messageEndpoints";
 import { Message } from "@/types/message";
 import { useMemo } from "react";
 
@@ -17,10 +21,6 @@ export function useCreateMessageMutation() {
   });
 }
 
-
-
-
-
 export function useInfiniteMessageQuery() {
   const { data, ...rest } = useInfiniteQuery<Message[], Error>({
     queryKey: ["messages"],
@@ -30,7 +30,7 @@ export function useInfiniteMessageQuery() {
     initialPageParam: null,
     getNextPageParam: (lastPage): string | undefined => {
       if (!lastPage || lastPage.length === 0) return undefined;
-      console.log(lastPage[lastPage.length - 1].id)
+      console.log(lastPage[lastPage.length - 1].id);
       return lastPage[lastPage.length - 1].id;
     },
   });
