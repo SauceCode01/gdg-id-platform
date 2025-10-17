@@ -19,7 +19,7 @@ export async function PUT(
 
     // Update Firestore doc
     await adminDb.collection("messages").doc(id).update({
-      done: true,
+      done: false,
       doneAt: Date.now(),
       doneBy: userData.uid,
     });

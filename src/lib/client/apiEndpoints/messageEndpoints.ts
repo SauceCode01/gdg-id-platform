@@ -49,3 +49,33 @@ export const doneMessage = async (id: string): Promise<null> => {
 
   return null;
 };
+
+export const deleteMessage = async (id: string): Promise<null> => {
+  const res = await wrappedFetch(`/api/messages/${id}/delete`, {
+    method: "DELETE",
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
+
+  return null;
+};
+
+export const notDoneMessage = async (id: string): Promise<null> => {
+  const res = await wrappedFetch(`/api/messages/${id}/notDone`, {
+    method: "PUT",
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
+
+  return null;
+};
