@@ -1,8 +1,6 @@
- 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"; 
-import { User } from "@/types/user"; 
-import { getUser } from "../endpoints/users";
-
+import { useQuery } from "@tanstack/react-query";
+import { User } from "@/types/user";
+import { getUser } from "../apiEndpoints/userEndpoints";
 
 export function useUserQuery(uid?: string) {
   const { data: user, ...rest } = useQuery<User>({

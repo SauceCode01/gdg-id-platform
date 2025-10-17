@@ -1,5 +1,5 @@
 "use client";
-import { useBreakpoint } from "@/lib/clientUtils";
+import { useBreakpoint } from "@/lib/client/utils";
 import { useEffect, useState } from "react";
 
 export default function Grid() {

@@ -8,11 +8,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-} from "firebase/auth";
-import { auth } from "@/lib/firebase/firebase";
+} from "firebase/auth"; 
 import { getAuthErrorMessage } from "@/lib/firebase/firebaseErrors";
-import { User as UserData } from "@/types/user";
-import { getUser } from "@/lib/api/endpoints/users";
+import { User as UserData } from "@/types/user"; 
+import { auth } from "@/lib/firebase/firebaseClient";
+import { getUser } from "@/lib/client/apiEndpoints/userEndpoints";
 
 type AuthState = "checking" | "unauthenticated" | "authenticated";
 

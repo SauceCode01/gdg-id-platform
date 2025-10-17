@@ -1,3 +1,4 @@
+import { consumeLimiter } from "@/lib/server/rateLimiter";
 import { NextRequest, NextResponse } from "next/server";
 
 import { RateLimiterMemory } from "rate-limiter-flexible";
@@ -6,28 +7,13 @@ const rateLimiter = new RateLimiterMemory({
   points: 4, // 5 requests
   duration: 6, // per 6 seconds by IP
 });
+export async function GET(req: NextRequest) {
+  // RATE LIMITER
+  const limitResult = await consumeLimiter(rateLimiter, req);
+  if (limitResult) return limitResult;
 
-function getClientIp(req: NextRequest) {
-  const forwardedFor = req.headers.get("x-forwarded-for");
-  if (forwardedFor) {
-    return forwardedFor.split(",")[0]?.trim(); // first IP in list
-  }
-  return req.headers.get("x-real-ip") || "unknown";
-}
-
-export async function GET(request: NextRequest) {
-  const ip = getClientIp(request);
-
-  try {
-    await rateLimiter.consume(ip);
-  } catch {
-    return NextResponse.json(
-      { error: "Too many requests. Try again later." },
-      { status: 429 }
-    );
-  }
-
-  const { searchParams } = new URL(request.url);
+  // retrieving requested member
+  const { searchParams } = new URL(req.url);
   const email = searchParams.get("email");
   if (!email)
     return NextResponse.json({ error: "Email required" }, { status: 400 });
