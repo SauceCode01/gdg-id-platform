@@ -1,4 +1,4 @@
-import { wrappedFetch } from "@/lib/utils";
+import { wrappedFetch } from "@/lib/client/utils";
 import { Message } from "@/types/message";
 
 export const createMessage = async (message: Message): Promise<Message> => {

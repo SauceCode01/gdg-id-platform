@@ -1,6 +1,6 @@
 import { adminDb } from "@/lib/firebase/firebaseAdmin";
 import { sendEmail } from "@/lib/server/gcpApi";
-import { generateId, getUserData, isAdmin, isRole } from "@/lib/serverUtils";
+import { generateId, getUserData, isAdmin, isRole } from "@/lib/server/serverUtils";
 import { Message } from "@/types/message";
 import { User } from "@/types/user";
 import { FieldValue } from "firebase-admin/firestore";
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
 
     // onSuccess, post the message to gdg gmail inbox
     sendEmail(
-      "daguinotaserwin5@gmail.com",
+      "sauce.code.01@gmail.com",
       `GDG ID Platform - New Message from ${message.name}`,
       `Name: ${message.name}<br><br>Email: ${message.email}<br><br>Subject: ${message.subject}<br><br>Message: ${message.message}<br><br><a href="https://gdg-id-platform.vercel.app/admin">View on Platform</a>`
     );
