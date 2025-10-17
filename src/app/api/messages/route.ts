@@ -1,4 +1,5 @@
 import { adminDb } from "@/lib/firebase/firebaseAdmin";
+import { sendEmail } from "@/lib/server/gcpApi";
 import { generateId, getUserData, isAdmin, isRole } from "@/lib/serverUtils";
 import { Message } from "@/types/message";
 import { User } from "@/types/user";
@@ -34,6 +35,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // posting message on the database
     const message: Message = await req.json();
 
     const messageId = generateId();
@@ -44,6 +46,13 @@ export async function POST(req: NextRequest) {
       createdAt: Date.now(),
     };
     await adminDb.collection("messages").doc(messageId).set(completeMessage);
+
+    // onSuccess, post the message to gdg gmail inbox
+    sendEmail(
+      "daguinotaserwin5@gmail.com",
+      `GDG ID Platform - New Message from ${message.name}`,
+      `Name: ${message.name}<br><br>Email: ${message.email}<br><br>Subject: ${message.subject}<br><br>Message: ${message.message}<br><br><a href="https://gdg-id-platform.vercel.app/admin">View on Platform</a>`
+    );
 
     return NextResponse.json(completeMessage, { status: 200 });
   } catch (err) {
