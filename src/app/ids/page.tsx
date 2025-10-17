@@ -13,6 +13,8 @@ import { Member } from "@/types/member";
 import { useGlobalContext } from "@/providers/GlobalContextProvider";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useMemberQuery } from "@/lib/client/apiQueries/memberQueries";
+import { CardImage } from "./_components/CardImage";
 
 export default function TrueIdPageWithSuspenseBoundary() {
   return (
@@ -23,35 +25,17 @@ export default function TrueIdPageWithSuspenseBoundary() {
 }
 
 const IDPage = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [member, setMember] = useState<Member | null>(null);
   const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState<string | undefined>(undefined);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { member, isLoading, isError, error } = useMemberQuery(email);
+
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   // Fetch member data
   useEffect(() => {
-    const fetchMember = async () => {
-      const email = searchParams.get("email");
-      if (!email) {
-        setError("No email provided.");
-        setLoading(false);
-        return;
-      }
-      try {
-        setLoading(true);
-        const fetchedMember = (await getMember(email)) as Member;
-        if (!fetchedMember) throw new Error("Member not found");
-        setMember(fetchedMember);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load member data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMember();
+    const email = searchParams.get("email") || undefined;
+    if (email) setEmail(email);
   }, [searchParams]);
 
   // Draw ID on canvas (client-side)
@@ -200,7 +184,11 @@ const IDPage = () => {
 
           <div className="flex-1">
             <div className="w-[17rem] xs:w-sm sm:w-md xl:w-lg ">
-              <CardImage imageUrl={imageUrl} loading={loading} error={error} />
+              <CardImage
+                imageUrl={imageUrl}
+                isLoading={isLoading}
+                isError={isError}
+              />
             </div>
           </div>
 
@@ -253,82 +241,5 @@ const IDPage = () => {
         <canvas ref={canvasRef} className="hidden" />
       </section>
     </div>
-  );
-};
-
-const CardImage = ({
-  imageUrl,
-  loading,
-  error,
-}: {
-  imageUrl?: string | null;
-  loading?: boolean;
-  error?: string | null;
-}) => {
-  return (
-    <>
-      {imageUrl || loading || error ? (
-        <div className="relative flex items-center overflow-visible z-0 w-full">
-          <div className="relative w-full overflow-visible">
-            {loading ? (
-              // uses animate-zoomPulse from globalcss
-              <div className="relative w-full animate-zoomPulse">
-                {/* BACK CARD */}
-                <img
-                  src="/backcard.png"
-                  alt="GDG ID Back"
-                  className="absolute top-1/2 left-1/2 
-                             -translate-x-1/2 -translate-y-1/2 
-                             scale-110 -z-10"
-                />
-                {/* FRONT SKELETON */}
-                <img
-                  src="/cards/front_empty_skeleton.png"
-                  alt="GDG ID Front Skeleton"
-                  className="w-full h-auto"
-                />
-              </div>
-            ) : error ? (
-              <div className="flex flex-col items-center justify-center text-center space-y-6">
-                <img
-                  src="/sites/comingsoon/restingSparky.svg"
-                  alt="Error Illustration"
-                  className="w-64 h-auto opacity-90"
-                />
-                <p
-                  className="
-                    text-3xl font-bold  
-                  text-red-600
-                    drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]
-                    dark:text-transparent dark:bg-clip-text
-                    dark:bg-[linear-gradient(to_bottom,rgba(239,68,68,1)_0%,rgba(252,165,165,1)_50%,rgba(239,68,68,1)_100%)]
-                    dark:drop-shadow-[0_0_20px_rgba(239,68,68,0.8)]
-                    "
-                >
-                  {error}
-                </p>
-              </div>
-            ) : (
-              <>
-                {/* BACK IMAGE */}
-                <img
-                  src="/backcard.png"
-                  alt="GDG ID Back"
-                  className="absolute top-1/2 left-1/2 
-                             -translate-x-1/2 -translate-y-1/2 
-                             scale-110 -z-10"
-                />
-                {/* FRONT GENERATED IMAGE */}
-                <img
-                  src={imageUrl ?? undefined}
-                  alt="Generated GDG ID"
-                  className="w-full h-auto"
-                />
-              </>
-            )}
-          </div>
-        </div>
-      ) : null}
-    </>
   );
 };
