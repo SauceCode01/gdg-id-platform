@@ -78,6 +78,7 @@
 
 
   /* custom breakpoints */
+  --breakpoint-2xs: 20rem;
   --breakpoint-xs: 30rem;
 
   /* shadcn animations */
