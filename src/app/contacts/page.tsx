@@ -36,20 +36,23 @@ const ContactsPage = () => {
         />
 
         {/* heading part */}
-        <div className="flex flex-row justify-center items-center w-full mx-auto  relative max-w-lg my-8 group gap-4">
+        <div className="flex flex-col xs:flex-row justify-center items-center w-full mx-auto  relative max-w-lg my-8 group gap-4">
           {/* sparky image */}
           <img
             src="/sites/contacts/sparky.svg"
             alt="sparky "
             className="w-20 xl:w-25 group-hover:rotate-3 transition-all duration-200 max-w-50 aspect-auto group-hover:scale-110"
           />
+
+          {/* title part */}
           <div className="flex flex-col gap-2 items-center">
             <h1
               className={cn(
                 "text-4xl xl:text-5xl font-bold leading-none pb-2", // ← add pb-1
                 "bg-gradient-to-br from-gdg-orange-light to-gdg-orange-dark bg-clip-text text-transparent",
                 "drop-shadow-[0_0_5px_var(--color-gdg-orange-light)]",
-                "group-hover:tracking-wide transition-all duration-200"
+                "group-hover:tracking-wide transition-all duration-200",
+                "text-center"
               )}
             >
               Stay Connected
@@ -58,7 +61,8 @@ const ContactsPage = () => {
             <p
               className={cn(
                 " text-base xl:text-xl -translate-y-3",
-                "group-hover:tracking-wide transition-all duration-200"
+                "group-hover:tracking-wide transition-all duration-200",
+                "text-center"
               )}
             >
               Got a question? Let Sparky help.
@@ -81,7 +85,7 @@ const ContactsPage = () => {
             roundedSides={isXl ? "right" : "top"}
             className={cn("xl:flex-1")}
             innerDivClassName={cn(
-              "w-full p-8 flex flex-col gap-2 ",
+              "w-full p-8 px-4 xs:px-8 flex flex-col gap-2 ",
               "bg-gradient-to-b from-surface-high to-surface",
               "xl:flex-1 h-full"
             )}
@@ -114,7 +118,7 @@ const ContactsPage = () => {
           {/* form */}
           <div
             className={cn(
-              "w-full  p-8 flex flex-col gap-4",
+              "w-full p-8 px-4 xs:px-8  flex flex-col gap-4",
               " rounded-b-4xl ",
               isDarkMode && "border-2 border-t-0 border-outline bg-surface-low",
               "xl:flex-2 xl:rounded-b-none xl:rounded-tl-4xl xl:rounded-bl-4xl  ",
@@ -155,7 +159,7 @@ const Informations = () => {
       </div>
       <div className="w-full flex flex-col gap-4 mt-4">
         {DETAILS.map((detail, index) => (
-          <div key={index} className="flex flex-row items-start group ">
+          <div key={index} className="flex flex-col xs:flex-row items-start group ">
             <div className="font-bold group-hover:text-gdg-orange-light transition-all duration-200 flex flex-row items-center gap-2">
               <div className="w-5 aspect-square">
                 <img
@@ -166,7 +170,7 @@ const Informations = () => {
               </div>
               <span>{detail.title}:</span>
             </div>
-            <div className="ml-2">{detail.description}</div>
+            <div className="max-xs:ml-7 ml-2">{detail.description}</div>
           </div>
         ))}
       </div>
@@ -235,7 +239,7 @@ const Form = () => {
         onSubmit={handleSubmit}
       >
         {/* Row 1: Name and Email side by side */}
-        <div className="flex flex-row gap-4 w-full">
+        <div className="flex flex-col xs:flex-row gap-4 w-full">
           <div className="flex flex-col w-full gap-2">
             <label className="text-text  text-sm ml-2">NAME</label>
             <input
