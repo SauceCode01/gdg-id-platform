@@ -37,7 +37,12 @@ export const sendEmail = async (
 };
 
 export const sendEmailToAdmin = async (message: Message) => {
-  const adminEmail = "sauce.code.01@gmail.com";
+  const adminEmail = process.env.ADMIN_EMAIL;
+
+  if (!adminEmail) {
+    throw new Error("Admin email is not configured.");
+  }
+
   const platformLink = "https://gdg-id-platform.vercel.app/admin";
 
   const subject = `GDG ID Platform - New Message from ${message.name}`;
@@ -46,6 +51,7 @@ export const sendEmailToAdmin = async (message: Message) => {
   <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     <h2 style="margin-bottom: 10px;">New Message Received</h2>
 
+    <p><strong>Message ID:</strong> ${message.id}</p>
     <p><strong>Name:</strong> ${message.name}</p>
     <p><strong>Email:</strong> ${message.email}</p>
     <p><strong>Subject:</strong> ${message.subject}</p>
