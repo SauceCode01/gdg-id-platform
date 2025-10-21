@@ -70,23 +70,10 @@ export default function Home() {
 
           {/* subheading/description */}
           <div className="w-full text-center my-4 text-[14px] sm:text-[16px] md:text-[17px] lg:text-xl text-zinc-400 dark:text-zinc-400 leading-tight">
-            <div className="flex flex-col md:hidden gap-1">
-              <div className="inline-block">
-                GDG PUP helps student developers grow through real
-              </div>
-              <div className="inline-block">
-                projects, events, and mentorship connecting classroom
-              </div>
-              <div className="inline-block">learning to industry practice.</div>
-            </div>
-
-            <div className="hidden md:flex flex-col gap-1">
-              <div className="inline-block">
+            <div className="flex flex-col md:max-w-2xl gap-1 mx-auto px-4">
+             <div className="inline-block leading-snug">
                 GDG PUP helps student developers grow through real projects,
-                events, and mentorship
-              </div>
-              <div className="inline-block">
-                connecting classroom learning to industry practice.
+                events, and mentorship connecting classroom learning to industry practice.
               </div>
             </div>
           </div>
@@ -95,7 +82,11 @@ export default function Home() {
           <SearchForm />
 
           {/* sparky image */}
-          <img src="/sites/landing/SparkyPose.svg" alt="sparky" className="mx-auto aspect-auto mt-4 mb-[100px] z-20" />
+          <img
+            src="/sites/landing/SparkyPose.svg"
+            alt="sparky"
+            className="mx-auto aspect-auto mt-4 mb-[100px] z-20"
+          />
         </div>
       </div>
     </>
