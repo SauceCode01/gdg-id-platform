@@ -23,12 +23,12 @@ const FAQsPage = () => {
           <img
             src="/sites/faqs/SittingSparky.png"
             alt="sparky "
-            className="w-[40%] group-hover:rotate-3 transition-all duration-200 max-w-50 aspect-auto "
+            className="w-[30%] xs:w-[20%] md:w-[30%] lg:w-[40%] group-hover:rotate-3 transition-all duration-200 max-w-50 aspect-auto "
           />
           <div className="flex flex-col gap-2">
             <h1
               className={cn(
-                "text-8xl  md:text-9xl font-bold leading-none",
+                "text-6xl 2xs:text-7xl xs:text-8xl md:text-9xl font-bold leading-none",
                 // gradient text
                 "bg-gradient-to-br from-gdg-green-light to-gdg-green-dark bg-clip-text text-transparent",
                 // glow effect using drop-shadow
