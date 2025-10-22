@@ -67,9 +67,13 @@ const IDPage = () => {
 
         // Enable high-quality rendering
         context.imageSmoothingEnabled = true;
-        // @ts-ignore
-        if ((context as any).imageSmoothingQuality)
-          (context as any).imageSmoothingQuality = "high";
+
+        // Extend the CanvasRenderingContext2D type safely
+        const extendedCtx = context as CanvasRenderingContext2D & {
+          imageSmoothingQuality: "low" | "medium" | "high";
+        };
+
+        extendedCtx.imageSmoothingQuality = "high";
 
         // --- Draw texts (all coordinates in CSS pixels) ---
         context.textAlign = "center";
