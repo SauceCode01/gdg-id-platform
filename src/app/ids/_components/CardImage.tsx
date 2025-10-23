@@ -93,14 +93,14 @@ export const CardImage = ({
                 )}
               >
                 <img
-                  src="/cards/front_empty_skeleton.png"
+                  src="/cards/front_empty_skeleton_updated.svg"
                   alt="GDG ID Front Skeleton"
                   className="w-full h-auto opacity-0"
                 />
                 {true && (
                   <div className="w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <img
-                      src="/cards/front_empty_skeleton.png"
+                      src="/cards/front_empty_skeleton_updated.svg"
                       alt="GDG ID Front Skeleton"
                       className={cn(
                         "w-full h-auto  ",
@@ -116,7 +116,7 @@ export const CardImage = ({
                 {true && (
                   <div
                     className={cn(
-                      "w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200" 
+                      "w-full h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200"
                     )}
                     style={{
                       transform: `rotate(${rotation}deg)`,
@@ -127,11 +127,14 @@ export const CardImage = ({
                       alt="Generated GDG ID"
                       className={cn(
                         "w-full h-auto ",
-
+                        "image-rendering-crisp-edges", // Prevent browser from blurring when scaling
                         "transition-all duration-400",
                         !showTrue && "opacity-0",
                         showTrue && "opacity-100"
                       )}
+                      style={{
+                        imageRendering: "crisp-edges",
+                      }}
                     />
                   </div>
                 )}

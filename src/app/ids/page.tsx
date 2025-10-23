@@ -47,85 +47,90 @@ const IDPage = () => {
     if (!ctx) return;
 
     const template = new window.Image();
-    template.src = "/cards/front_empty.png"; // your base template image
+    template.src = "/cards/front_empty_skeleton_updated.svg"; // your base template image
     template.onload = () => {
-      canvas.width = template.width;
-      canvas.height = template.height;
+      // High-resolution multiplier for crisp downloads
+      const downloadScale = 2;
 
-      // Draw base template
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(template, 0, 0);
+      // CSS/logical dimensions
+      const cssWidth = template.width;
+      const cssHeight = template.height;
 
-      // --- Draw texts ---
-      ctx.textAlign = "center";
-      ctx.fillStyle = "#1a1a1a";
+      // Helper function to draw ID card content
+      const drawCard = (context: CanvasRenderingContext2D, scale: number) => {
+        const width = cssWidth;
+        const height = cssHeight;
 
-      // // Display name (Arky)
-      // ctx.font = "bold 26px Arial";
-      // ctx.fillText(member.displayName || "", canvas.width / 2, 330);
+        // Clear and draw template
+        context.clearRect(0, 0, width, height);
+        context.drawImage(template, 0, 0, width, height);
 
-      // // GDG ID
-      // ctx.font = "12px Arial";
-      // ctx.fillText(member.gdgId || "", canvas.width / 2, 350);
+        // Enable high-quality rendering
+        context.imageSmoothingEnabled = true;
 
-      // // Bottom section
-      // ctx.textAlign = "left";
-      // ctx.fillStyle = "#ffffff";
-      // ctx.font = "12px Arial";
+        // Extend the CanvasRenderingContext2D type safely
+        const extendedCtx = context as CanvasRenderingContext2D & {
+          imageSmoothingQuality: "low" | "medium" | "high";
+        };
 
-      // // Full name
-      // ctx.fillText(`Name: ${member.name || ""}`, 50, 410);
+        extendedCtx.imageSmoothingQuality = "high";
 
-      // // Email
-      // ctx.fillText(`Email: ${member.email || ""}`, 50, 440);
+        // --- Draw texts (all coordinates in CSS pixels) ---
+        context.textAlign = "center";
+        context.fillStyle = "#1a1a1a";
 
-      // // Course
-      // ctx.fillText(`Course: ${member.course || ""}`, 50, 470);
+        // Display name
+        context.font = "bold 32px Arial";
+        context.fillText(member.displayName || "", width / 2, 465);
 
-      // Display name (Arky)
-      ctx.font = "bold 32px Arial";
-      ctx.fillText(member.displayName || "", canvas.width / 2, 465);
+        // GDG ID
+        context.font = "20px Arial";
+        context.fillText(member.gdgId || "", width / 2, 495);
 
-      // GDG ID
-      ctx.font = "20px Arial";
-      ctx.fillText(member.gdgId || "", canvas.width / 2, 495);
+        // Bottom section labels
+        context.textAlign = "left";
+        context.fillStyle = "#ffffff";
+        context.font = "16px Arial";
 
-      // Bottom section
-      ctx.textAlign = "left";
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "16px Arial";
+        context.fillText(`Name:`, 70, 575);
+        context.fillText(`Email:`, 70, 605);
+        context.fillText(`Course:`, 70, 635);
+        context.fillText(`Department:`, 70, 665);
 
-      // Full name
-      ctx.fillText(`Name:`, 70, 575);
+        // Bottom section values
+        context.font = "bold 16px Arial";
+        context.fillText(`${member.name || ""}`, 140, 575);
+        context.fillText(`${member.email || ""}`, 140, 605);
+        context.fillText(`${member.course || ""}`, 140, 635);
+        context.fillText(`Technology - Web Development`, 170, 665);
+      };
 
-      // Email
-      ctx.fillText(`Email:`, 70, 605);
+      // Render high-res canvas for downloads (hidden, 4x resolution)
+      canvas.width = cssWidth * downloadScale;
+      canvas.height = cssHeight * downloadScale;
+      canvas.style.width = cssWidth + "px";
+      canvas.style.height = cssHeight + "px";
 
-      // Course
-      ctx.fillText(`Course:`, 70, 635);
+      ctx.scale(downloadScale, downloadScale);
+      drawCard(ctx, downloadScale);
 
-      // department
-      ctx.fillText(`Department:`, 70, 665);
+      // Create a preview canvas at 2-3x resolution for sharp display even when CSS scales
+      const previewScale = 3; // Higher resolution preview to stay sharp when CSS scales it
+      const previewCanvas = document.createElement("canvas");
+      previewCanvas.width = cssWidth * previewScale;
+      previewCanvas.height = cssHeight * previewScale;
 
-      // Bottom section
-      ctx.textAlign = "left";
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 16px Arial";
+      const previewCtx = previewCanvas.getContext("2d");
+      if (previewCtx) {
+        previewCtx.scale(previewScale, previewScale);
+        drawCard(previewCtx, previewScale);
 
-      // Full name
-      ctx.fillText(`${member.name || ""}`, 140, 575);
-
-      // Email
-      ctx.fillText(`${member.email || ""}`, 140, 605);
-
-      // Course
-      ctx.fillText(`${member.course || ""}`, 140, 635);
-
-      // department
-      ctx.fillText(`Technology - Web Development`, 170, 665);
-
-      // Export preview image
-      setImageUrl(canvas.toDataURL("image/png"));
+        // Use preview canvas for the image URL - CSS will scale but image has headroom
+        setImageUrl(previewCanvas.toDataURL("image/png"));
+      } else {
+        // Fallback to main canvas
+        setImageUrl(canvas.toDataURL("image/png"));
+      }
     };
   }, [member]);
 
