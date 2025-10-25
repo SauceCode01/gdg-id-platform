@@ -87,22 +87,36 @@ const IDPage = () => {
         context.font = "20px Arial";
         context.fillText(member.gdgId || "", width / 2, 495);
 
-        // Bottom section labels
+        // Bottom section - Two column layout for better alignment
+        // Left column: Labels
         context.textAlign = "left";
         context.fillStyle = "#ffffff";
         context.font = "16px Arial";
 
-        context.fillText(`Name:`, 70, 575);
-        context.fillText(`Email:`, 70, 605);
-        context.fillText(`Course:`, 70, 635);
-        context.fillText(`Department:`, 70, 665);
+        const labelX = 70;
+        const labelSpacing = 30;
+        let currentY = 575;
 
-        // Bottom section values
+        context.fillText(`Name:`, labelX, currentY);
+        currentY += labelSpacing;
+        context.fillText(`Email:`, labelX, currentY);
+        currentY += labelSpacing;
+        context.fillText(`Course:`, labelX, currentY);
+        currentY += labelSpacing;
+        context.fillText(`Department:`, labelX, currentY);
+
+        // Right column: Values
         context.font = "bold 16px Arial";
-        context.fillText(`${member.name || ""}`, 140, 575);
-        context.fillText(`${member.email || ""}`, 140, 605);
-        context.fillText(`${member.course || ""}`, 140, 635);
-        context.fillText(`Technology - Web Development`, 170, 665);
+        const valueX = 180; // Increased gap for better alignment
+        currentY = 575;
+
+        context.fillText(`${member.name || ""}`, valueX, currentY);
+        currentY += labelSpacing;
+        context.fillText(`${member.email || ""}`, valueX, currentY);
+        currentY += labelSpacing;
+        context.fillText(`${member.course || ""}`, valueX, currentY);
+        currentY += labelSpacing;
+        context.fillText(`Technology - Web Development`, valueX, currentY);
       };
 
       // Render high-res canvas for downloads (hidden, 4x resolution)
@@ -169,7 +183,7 @@ const IDPage = () => {
         {/* MOBILE VIEW */}
 
         {/* DESKTOP VIEW */}
-        <div className=" flex flex-col lg:flex-row relative z-10 text-center items-center px-8">
+        <div className=" flex flex-col lg:flex-row relative z-10 text-center items-center p-8">
           <h1
             className="
                 font-bold  
